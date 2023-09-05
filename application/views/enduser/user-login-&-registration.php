@@ -7,6 +7,8 @@
     <title><?php echo $title ?></title>
     <link rel="stylesheet" href= " <?php echo base_url("assets\css\bootstrap.min.css");?>">
     <script src= " <?php echo base_url("assets\js\bootstrap.min.js") ?>"></script>
+
+    <!-- CSS -->
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap');
 
@@ -86,7 +88,7 @@
         }
 
         .logo img{
-            width: 40px;
+            width: 28px;
             margin: 0.3rem;
         }
 
@@ -111,15 +113,11 @@
         }
 
         .toggle{
-            color: #151111;
+            color: #2d7af7;
             text-decoration: none;
             font-size: 0.75rem;
             font-weight: 500;
             transition: 0.3s;
-        }
-
-        .toggle:hover{
-            color: #2d7af7;
         }
 
         .input-wrap{
@@ -163,7 +161,7 @@
             color: #2d7af7;
         }
 
-        .login-btn{
+        .submit-btn{
             display: inline-block;
             width: 100%;
             height: 43px;
@@ -176,7 +174,7 @@
             margin-bottom: 2rem;
         }
 
-        .login-btn:hover{
+        .submit-btn:hover{
             background-color: #2d7af7;
         }
 
@@ -187,12 +185,8 @@
         }
 
         .text a{
-            color: #151111;
-            transition: 0.3s;
-        }
-
-        .text a:hover{
             color: #2d7af7;
+            transition: 0.3s;
         }
 
         main.user-register-mode form.user-login{
@@ -372,6 +366,10 @@
             .text-group h2{
                 font-size: 1.3rem;
             }
+
+            .submit-btn{
+                background-color: #2d7af7;
+            }
         }
 
         /*Mobile phone screen size*/
@@ -404,20 +402,24 @@
             form{
                 padding: 1rem 2rem 1.5rem;
             }
+
+            .submit-btn{
+                background-color: #2d7af7;
+            }
         }
 
     </style>
 
 </head>
 <body>
-    <main>
+<main>
         <div class="box">
             <div class="inner-box">
                 <div class="forms-wrap">
                     <!--User Login Form-->
                     <form action="#" autocomplete="off" class="user-login">
                         <div class="logo">
-                            <img src="resource/logo.png" alt="CAS">
+                            <img src="https://drive.google.com/uc?export=download&id=1mRGaXARtGoqOz2oEx4_PPFjX2nthUQcA" alt="CAS">
                             <h4>Customer Service Assistant</h4>
                         </div>
                         <div class="heading">
@@ -458,7 +460,7 @@
                     <!--User Registration Form-->
                     <form action="#" autocomplete="off" class="user-register">
                         <div class="logo">
-                            <img src="resource/logo.png" alt="CAS">
+                            <img src="https://drive.google.com/uc?export=download&id=1mRGaXARtGoqOz2oEx4_PPFjX2nthUQcA" alt="CAS">
                             <h4>Customer Service Assistant</h4>
                         </div>
                         <div class="heading">
@@ -523,9 +525,9 @@
                 <!--Image Slider-->
                 <div class="carousel">
                     <div class="images-wrapper">
-                        <img src="resource/image 1.png" class="image img-1 show" alt="">
-                        <img src="resource/image 2.png" class="image img-2" alt="">
-                        <img src="resource/image 3.png" class="image img-3" alt="">
+                        <img src="https://drive.google.com/uc?export=download&id=149HbcutXZAqIzrdowu4TSGZpvvbC16-F" class="image img-1 show" alt="">
+                        <img src="https://drive.google.com/uc?export=download&id=14LisIWJ8_5--j3x2M4_wc9OWwUV8x7Uo" class="image img-2" alt="">
+                        <img src="https://drive.google.com/uc?export=download&id=1BZLDE4f9ouF-tc3KGvtf_boLyhEJC94e" class="image img-3" alt="">
                     </div>
 
                     <div class="text-slider">
@@ -548,8 +550,7 @@
         </div>
     </main>
 
-    <!-- JavaScript file -->
-
+    <!-- JavaScript -->
     <script>
         const inputs = document.querySelectorAll(".input-field");
         const toggle_btn = document.querySelectorAll(".toggle");

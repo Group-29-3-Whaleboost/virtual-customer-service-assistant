@@ -8,8 +8,8 @@
         }
 
         public function login_registration(){
-            $data['title'] = 'Login & registration | CAS';
-            $this->load->view('enduser/user-login-&-registration/user-login-&-registration',$data);
+            $data['title'] = 'Login & Registration | CAS';
+            $this->load->view('enduser/user-login-&-registration',$data);
            
         }
         
