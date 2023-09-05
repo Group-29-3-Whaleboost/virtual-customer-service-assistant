@@ -517,7 +517,6 @@
 </head>
 
 <body id="page-top">
-
     <!-- included the navbar -->
     <?php include(APPPATH . 'views/includes/navbar.php'); ?>
 
