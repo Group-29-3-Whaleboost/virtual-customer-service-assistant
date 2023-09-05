@@ -419,7 +419,7 @@
                     <!--User Login Form-->
                     <form action="#" autocomplete="off" class="user-login">
                         <div class="logo">
-                            <img src="https://drive.google.com/uc?export=download&id=1mRGaXARtGoqOz2oEx4_PPFjX2nthUQcA" alt="CAS">
+                            <img src="<?php base_url() ?> assets\images\logo.png" alt="CAS">
                             <h4>Customer Service Assistant</h4>
                         </div>
                         <div class="heading">
@@ -460,7 +460,7 @@
                     <!--User Registration Form-->
                     <form action="#" autocomplete="off" class="user-register">
                         <div class="logo">
-                            <img src="https://drive.google.com/uc?export=download&id=1mRGaXARtGoqOz2oEx4_PPFjX2nthUQcA" alt="CAS">
+                            <img src="<?php base_url() ?> assets\images\logo.png" alt="CAS">
                             <h4>Customer Service Assistant</h4>
                         </div>
                         <div class="heading">
@@ -525,9 +525,9 @@
                 <!--Image Slider-->
                 <div class="carousel">
                     <div class="images-wrapper">
-                        <img src="https://drive.google.com/uc?export=download&id=149HbcutXZAqIzrdowu4TSGZpvvbC16-F" class="image img-1 show" alt="">
-                        <img src="https://drive.google.com/uc?export=download&id=14LisIWJ8_5--j3x2M4_wc9OWwUV8x7Uo" class="image img-2" alt="">
-                        <img src="https://drive.google.com/uc?export=download&id=1BZLDE4f9ouF-tc3KGvtf_boLyhEJC94e" class="image img-3" alt="">
+                        <img src="<?php base_url() ?> assets\images\auth-image-1.png" class="image img-1 show" alt="">
+                        <img src="<?php base_url() ?> assets\images\auth-image-2.png" class="image img-2" alt="">
+                        <img src="<?php base_url() ?> assets\images\auth-image-3.png" class="image img-3" alt="">
                     </div>
 
                     <div class="text-slider">
