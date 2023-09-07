@@ -1,20 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-
-    <title>Dashboard</title>
-
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
-
-
-
-    <!-- <link rel="stylesheet" href="style.css"> -->
-
-    <style>
+<!-- included the header -->
+<?php include(APPPATH . 'views/includes/header.php'); ?>
+<style>
+        #content-wrapper > div > a.card.search-card{
+            text-decoration: none; 
+        }
+        #content-wrapper > div > a.card.checkout-card{
+            text-decoration: none; 
+        }
         html {
             position: relative;
             min-height: 100%;
@@ -514,14 +507,10 @@
             text-decoration: none;
         }
     </style>
-</head>
 
 <body id="page-top">
     <!-- included the navbar -->
     <?php include(APPPATH . 'views/includes/navbar.php'); ?>
-
-
-
 
     <div id="wrapper">
 
@@ -529,8 +518,6 @@
         <?php include(APPPATH . 'views/includes/menu.php'); ?>
 
         <div id="content-wrapper">
-
-
 
             <div class="dashboard">
                 <h1>Welcome Again</h1>
@@ -544,21 +531,12 @@
                 </a>
             </div>
 
-
-            <footer class="sticky-footer">
-                <div class="container my-auto">
-                    <div class="copyright text-center my-auto">
-                        <span>Copyright © <a href="#" target="_blank">Whaleboost</a> 2023</span>
-                    </div>
-                </div>
-            </footer>
+            <!-- included the footer -->
+            <?php include(APPPATH . 'views/includes/footer.php'); ?>
         </div>
 
 
     </div>
-
-
-
 
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
