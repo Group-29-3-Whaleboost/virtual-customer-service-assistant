@@ -26,10 +26,14 @@
 <ul class="navbar-nav ml-auto ml-md-0">
 
     <li class="nav-item dropdown no-arrow">
-        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
-            aria-haspopup="trueSS" aria-expanded="false">
-            <i class="fas fa-user-circle fa-fw"></i>
-        </a>
+        <div class="d-flex align-items-center">
+    <i class="fas fa-shopping-basket fa-fw myicon" id="cartIcon"></i>(<span class="total-count" style="color: white;"></span>)
+    <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
+       aria-haspopup="trueSS" aria-expanded="false">
+       <i class="fas fa-user-circle fa-fw"></i>
+    </a>
+
+
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
             <a class="dropdown-item" href="#">Profile</a>
             <div class="dropdown-divider"></div>
