@@ -17,6 +17,12 @@
     color:rgba(255, 255, 255, 0.74);
 }
 
+@media (max-width: 1365px) {
+    .productTitile{
+        font-size: 10px !important;
+    }
+}
+
 :root {
     --bs-blue: #0d6efd;
     --bs-indigo: #6610f2;
