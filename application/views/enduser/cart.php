@@ -506,30 +506,20 @@
             <!-- included the footer -->
             <?php include(APPPATH . 'views/includes/footer.php'); ?>
             <?php include(APPPATH . 'views/includes/cart-component.php'); ?>
-
-
-        </div>
-
-
+    </div>
     </div>
 
     <script>
-        // var myModal;
-        var myModal = new bootstrap.Modal(document.getElementById('exampleModal'));
-document.getElementById('cartIcon').addEventListener('click', function() {
-  myModal.show();
-});
+            // var myModal;
+            var myModal = new bootstrap.Modal(document.getElementById('exampleModal'));
+            document.getElementById('cartIcon').addEventListener('click', function() {
+                myModal.show();
+            });
 
-document.getElementById('close').addEventListener('click', function() {
-    myModal.hide();
-});
-
-
-document.querySelector('.btn-close').addEventListener('click', function () {
-  
-
-});
-</script>
+            document.getElementById('close').addEventListener('click', function() {
+                myModal.hide();
+            });
+    </script>
 
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
