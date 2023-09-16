@@ -16,20 +16,18 @@
 
 <body>
 
-  <h1>Please consider that this Cart and Clear Cart Buttons should be in the nav bar after User logged in to the system
-  </h1>
   <main>
 
-    <div class="row">
+    <!-- <div class="row">
       <div class="col">
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
           Cart (<span class="total-count"></span>)</button>
         <button class="clear-cart btn btn-danger">Clear Cart</button>
       </div>
-    </div>
+    </div> -->
 
     <div class="container">
-      <div class="row">
+      <div class="row" style="margin-top: 20px;">
         <div class="col col-md-4">
           <div class="card" style="width: 20rem;">
             <img class="card-img-top" src="<?php base_url() ?> assets\images\bananas.jpg" alt="Card image cap">
@@ -69,7 +67,7 @@
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="exampleModalLabel">Cart</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="close"></button>
           </div>
           <div class="modal-body">
             <table class="table" style="margin-bottom: 10px;">
@@ -87,14 +85,14 @@
             <div>Total price: LKR<span class="total-cart"></span></div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button class="clear-cart btn btn-danger">Clear Cart</button>
             <button type="button" class="btn btn-primary">Proceed</button>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="modal fade" id="cart" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    <!-- <div class="modal fade" id="cart" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
       aria-hidden="true">
       <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
@@ -118,7 +116,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
   </main>
 
 
