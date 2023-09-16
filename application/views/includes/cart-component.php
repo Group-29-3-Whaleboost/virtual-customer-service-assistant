@@ -1,7 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<?php include(APPPATH . 'views/includes/header.php'); ?>
 <style>
   .card-img-top {
     width: 200px;
@@ -121,7 +117,17 @@
 
 
 
+  <script>
+            // var myModal;
+            var myModal = new bootstrap.Modal(document.getElementById('exampleModal'));
+            document.getElementById('cartIcon').addEventListener('click', function() {
+                myModal.show();
+            });
 
+            document.getElementById('close').addEventListener('click', function() {
+                myModal.hide();
+            });
+    </script>
 
   <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
