@@ -1,0 +1,89 @@
+body{
+
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+back{
+    width: 100%;
+    min-height: 90vh;
+    overflow: hidden;
+    background-color: #2d7af7;
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+til{
+
+    position: absolute;
+    margin-top:20px;
+    width: 1585px;
+    height: 45px;
+    padding: 0;
+    background-color: white;
+}
+img {
+    margin-left: 10px;
+    height: 40px;
+}
+
+h1{
+
+    text-align: center;
+    font-size: 45px;
+}
+.up-bar{
+
+    width: 950px;
+    height: 400px;
+    margin: auto;
+    border-radius: 5px;
+    background: white;
+    padding: 20px;
+
+}
+select{
+
+    margin-left: 280px;
+    width: 400px;
+    height: 45px;
+    font-size: 30px;
+    border: #2d7af7 solid 3px;
+
+}
+.first_btn{
+
+    width: 180px;
+    height: 40px;
+    cursor: pointer;
+    margin-left: 150px;
+    margin-top: 130px;
+    font-size: 25px;
+    color: black;
+    border: #2d7af7 solid  3px;
+    border-radius: 3px;   
+}
+.second_btn{
+
+    width: 180px;
+    height: 40px;
+    cursor: pointer;
+    margin-left: 250px;
+    margin-top: 130px;
+    font-size: 25px;
+    color: black;
+    border: #2d7af7 solid  3px;
+    border-radius: 3px;   
+}
+.first_btn:hover{
+
+    color: white;
+    background-color: #2d7af7;
+}
+.second_btn:hover{
+
+    color: white;
+    background-color: #2d7af7;
+}
