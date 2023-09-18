@@ -22,41 +22,7 @@
       </div>
     </div> -->
 
-    <div class="container">
-      <div class="row" style="margin-top: 20px;">
-        <div class="col col-md-4">
-          <div class="card" style="width: 20rem;">
-            <img class="card-img-top" src="<?php base_url() ?> assets\images\bananas.jpg" alt="Card image cap">
-            <div class="card-block">
-              <h4 class="card-title">Banana</h4>
-              <p class="card-text">Price: LKR100</p>
-              <a href="#" data-name="Banana" data-price="100" class="add-to-cart btn btn-primary">Add to cart</a>
-            </div>
-          </div>
-        </div>
-        <div class="col col-md-4">
-          <div class="card" style="width: 20rem;">
-            <img class="card-img-top" src="<?php base_url() ?> assets\images\orange.jpg" alt="Card image cap">
-            <div class="card-block">
-              <h4 class="card-title">Orange</h4>
-              <p class="card-text">Price: LKR200</p>
-              <a href="#" data-name="Orange" data-price="200" class="add-to-cart btn btn-primary">Add to cart</a>
-            </div>
-          </div>
-        </div>
-        <div class="col col-md-4">
-          <div class="card" style="width: 20rem;">
-            <img class="card-img-top" src="<?php base_url() ?> assets\images\lemon.jpg" alt="Card image cap">
-            <div class="card-block">
-              <h4 class="card-title">Lemon</h4>
-              <p class="card-text">Price: LKR300</p>
-              <a href="#" data-name="Lemon" data-price="300" class="add-to-cart btn btn-primary text-white">Add to
-                cart</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    
 
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog">
