@@ -539,7 +539,7 @@ a:hover {
                         if(isset($_GET['search']))
                         {
                             $filtervalues = $_GET['search'];
-                            $query = "SELECT item.item_name,item.offer,item.image,item.price,store_item.availability,store_item.branch_id FROM item JOIN store_item 
+                            $query = "SELECT item.item_id,item.item_name,item.category_name,item.description,item.offer,item.image,item.price,store_item.availability,store_item.branch_id FROM item JOIN store_item 
                                         ON item.item_id = store_item.item_id WHERE CONCAT(item_name,category_name) LIKE '%$filtervalues%' ";
                             $query_run = mysqli_query($con, $query);
 
@@ -548,8 +548,11 @@ a:hover {
                                 foreach($query_run as $items)
                                 {
                                     ?>
+
+
                         <div class="col col-md-3">
-                            <div class="card" style="width: 18rem; height: 30rem;">
+                            <div class="card" style="width: 18rem; height: 30rem;" data-bs-toggle="modal"
+                                data-bs-target="#staticBackdrop">
                                 <img class="card-img-top" src="<?= $items['image']; ?>" alt="Card image cap">
                                 <div class="card-body">
                                     <h5 class="card-title text-center"><?= $items['item_name']; ?></h5>
@@ -573,6 +576,50 @@ a:hover {
                                 </div>
                             </div>
                         </div>
+
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
+                            tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="staticBackdropLabel"><?= $items['item_name']; ?>
+                                        </h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <img class="card-img-top" src="<?= $items['image']; ?>" alt="Card image cap">
+                                        <p class="card-text text-center">Category : <?= $items['category_name']; ?></p>
+                                        <p class="card-text text-center"><?= $items['description']; ?></p>
+                                        <p class="card-text text-center">Offer : LKR <?= $items['offer']; ?></p>
+                                        <p class="card-text text-center">Price : LKR <?= $items['price']; ?></p>
+                                        <p class="card-text text-center">
+                                            <?php
+                                            $checkAvailability = $items['availability'];
+
+                                            if ($checkAvailability == "In Stock") { 
+                                        ?>
+                                            <span class="badge bg-primary"><?= $items['availability']; ?></span>
+                                            <?php
+                                            } else {
+                                                ?>
+                                            <span class="badge bg-danger"><?= $items['availability']; ?></span>
+                                            <?php
+                                            }
+                                        ?>
+                                        </p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-danger"
+                                            data-bs-dismiss="modal">Cancel</button>
+                                        <button type="button" class="btn btn-primary">Add to Cart</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
 
                         <?php
                                 }
