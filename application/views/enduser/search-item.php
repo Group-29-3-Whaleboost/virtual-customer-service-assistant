@@ -438,6 +438,10 @@ h2 {
     color: #333;
 }
 
+.hide {
+    display: none;
+}
+
 .card:hover {
     transform: scale(1.05);
 }
@@ -513,125 +517,144 @@ a:hover {
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-7">
-                                    <form action="" method="GET">
-                                        <div class="input-group mb-3">
-                                            <input type="text" name="search"
-                                                value="<?php if(isset($_GET['search'])){echo $_GET['search']; } ?>"
-                                                class="form-control" placeholder="Search here">
-                                            <button type="submit" class="btn btn-primary">
-                                                <ion-icon name="search-sharp"></ion-icon>
-                                            </button>
-                                        </div>
-                                    </form>
+                                    <div class="input-group mb-3">
+                                        <ion-icon name="search-sharp" class="btn btn-primary h-auto"></ion-icon>
+                                        <input name="search" class="form-control" placeholder="Search here" item-search>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-
                     </div>
 
-                    <div class="row">
+                    <div>
                         <?php 
-                        $con = mysqli_connect("localhost","root","","customer_service_assistant");
+                        // connect the database
+                        $connectDB = mysqli_connect("localhost","root","","customer_service_assistant");
 
                         // sample branch id = 1
                         $branchId = 1;
 
-                        if(isset($_GET['search']))
-                        {
-                            $filtervalues = $_GET['search'];
-                            $query = "SELECT item.item_id,item.item_name,item.category_name,item.description,item.offer,item.image,item.price,store_item.availability,store_item.branch_id FROM item JOIN store_item 
-                                        ON item.item_id = store_item.item_id WHERE CONCAT(item_name,category_name) LIKE '%$filtervalues%' ";
-                            $query_run = mysqli_query($con, $query);
+                        
+                            // take all the data from item table
+                            $query = "SELECT item.item_id,item.item_name,item.category_name,item.description,item.offer,item.image,item.price,store_item.availability,store_item.branch_id,store_item.quantity FROM item JOIN store_item 
+                                        ON item.item_id = store_item.item_id";
 
-                            if(mysqli_num_rows($query_run) > 0)
+                            //take results into result vaiable
+                            $result = mysqli_query($connectDB, $query);
+
+                            //create an item array
+                            $itemArray = array();
+
+                            //fetch from result variable into row variable and store in itemArray
+                            while($row =mysqli_fetch_assoc($result))
                             {
-                                foreach($query_run as $items)
-                                {
-                                    ?>
+                                $itemArray[] = $row;
+                            }
+                        
+                        ?>
 
+                        <!-- cards -->
+                        <div class="row row-md-3" data-item-cards-container></div>
 
-                        <div class="col col-md-3">
-                            <div class="card" style="width: 18rem; height: 30rem;" data-bs-toggle="modal"
-                                data-bs-target="#staticBackdrop">
-                                <img class="card-img-top" src="<?= $items['image']; ?>" alt="Card image cap">
+                        <!-- cards template -->
+                        <template data-item-template>
+                            <div class="card" style="width: 18rem; height: 35rem;">
+                                <p class="card-header text-center" item-category-name></p>
+                                <img class="card-img-top" alt="Card image cap" item-image>
                                 <div class="card-body">
-                                    <h5 class="card-title text-center"><?= $items['item_name']; ?></h5>
-                                    <p class="card-text text-center">Offer : LKR <?= $items['offer']; ?></p>
-                                    <p class="card-text text-center">Price : LKR <?= $items['price']; ?></p>
+                                    <h5 class="card-title text-center" item-name></h5>
+                                    <p class="card-text text-center text-secondary" item-description></p>
+                                    <p class="card-text text-center" item-offer></p>
+                                    <p class="card-text text-center" item-price></p>
                                     <p class="card-text text-center">
-                                        <?php
-                                            $checkAvailability = $items['availability'];
 
-                                            if ($checkAvailability == "In Stock") { 
-                                        ?>
-                                        <span class="badge bg-primary"><?= $items['availability']; ?></span>
-                                        <?php
-                                            } else {
-                                                ?>
-                                        <span class="badge bg-danger"><?= $items['availability']; ?></span>
-                                        <?php
-                                            }
-                                        ?>
+                                        <span class="badge bg-primary" item-availability-true></span>
+
+                                        <span class="badge bg-danger" item-availability-false></span>
+
                                     </p>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <!-- Modal -->
-                        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
-                            tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="staticBackdropLabel"><?= $items['item_name']; ?>
-                                        </h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                            aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <img class="card-img-top" src="<?= $items['image']; ?>" alt="Card image cap">
-                                        <p class="card-text text-center">Category : <?= $items['category_name']; ?></p>
-                                        <p class="card-text text-center"><?= $items['description']; ?></p>
-                                        <p class="card-text text-center">Offer : LKR <?= $items['offer']; ?></p>
-                                        <p class="card-text text-center">Price : LKR <?= $items['price']; ?></p>
-                                        <p class="card-text text-center">
-                                            <?php
-                                            $checkAvailability = $items['availability'];
-
-                                            if ($checkAvailability == "In Stock") { 
-                                        ?>
-                                            <span class="badge bg-primary"><?= $items['availability']; ?></span>
-                                            <?php
-                                            } else {
-                                                ?>
-                                            <span class="badge bg-danger"><?= $items['availability']; ?></span>
-                                            <?php
-                                            }
-                                        ?>
-                                        </p>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-danger"
-                                            data-bs-dismiss="modal">Cancel</button>
+                                    <div class="card-footer text-center ">
                                         <button type="button" class="btn btn-primary">Add to Cart</button>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+
+                        </template>
 
 
-                        <?php
-                                }
+
+                        <script>
+                        //get itemArray into item json format
+                        const items = <?php echo json_encode($itemArray); ?>;
+                        //item-cards-tamplate DOM
+                        const itemCardTemplate = document.querySelector("[data-item-template]");
+                        //item-cards-container DOM
+                        const itemCardContainer = document.querySelector("[data-item-cards-container]");
+                        // item-search DOM
+                        const searchInput = document.querySelector("[item-search]");
+
+
+
+                        let dataItems = [];
+                        //search function
+                        searchInput.addEventListener("input", (e) => {
+                            const value = e.target.value.toLowerCase();
+
+                            //display searched items
+                            dataItems.forEach(item => {
+                                const isVisible = item.item_name.toLowerCase().includes(value) || item
+                                    .category_name.toLowerCase().includes(value);
+
+                                // not match card will be hide
+                                item.element.classList.toggle("hide", !isVisible);
+
+                            })
+
+                        });
+
+                        // taking each item objects from items 
+                        dataItems = items.map(item => {
+
+                            //for card
+                            const card = itemCardTemplate.content.cloneNode(true).children[0]
+                            const itemCategoryName = card.querySelector("[item-category-name]");
+                            const itemImage = card.querySelector("[item-image]");
+                            const itemName = card.querySelector("[item-name]");
+                            const itemDescription = card.querySelector("[item-description]");
+                            const itemOffer = card.querySelector("[item-offer]");
+                            const itemPrice = card.querySelector("[item-price]");
+                            const itemAvailabilityTrue = card.querySelector("[item-availability-true]");
+                            const itemAvailabilityFalse = card.querySelector("[item-availability-false]");
+
+                            // text content for card
+                            itemCategoryName.textContent = item.category_name;
+                            itemImage.src = item.image;
+                            itemName.textContent = item.item_name;
+                            itemDescription.textContent = item.description;
+                            if (item.offer != 0) {
+                                itemOffer.textContent = "Offer : " + item.offer + "%";
                             }
-                            else
-                            {
-                                ?>
-                        <p class="card-text text-center">No Item Found</p>
-                        <?php
+
+                            itemPrice.textContent = "Price : LKR " + item.price;
+
+                            if (item.availability == "In Stock") {
+                                itemAvailabilityTrue.textContent = item.availability + " # " + item.quantity;
+                            } else {
+                                itemAvailabilityFalse.textContent = item.availability;
                             }
-                        }
-                    ?>
+
+                            // put data into the card container
+                            itemCardContainer.append(card);
+                            console.log(item);
+
+                            return {
+                                item_name: item.item_name,
+                                category_name: item.category_name,
+                                element: card
+                            }
+
+                        })
+                        </script>
                     </div>
                 </div>
             </div>
