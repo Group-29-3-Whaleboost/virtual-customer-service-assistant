@@ -516,15 +516,43 @@ a:hover {
                     <div class="col-md-12">
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-md-7">
-                                    <div class="input-group mb-3">
-                                        <ion-icon name="search-sharp" class="btn btn-primary h-auto"></ion-icon>
-                                        <input name="search" class="form-control" placeholder="Search here" item-search>
+                                <div class="d-flex justify-content-center">
+                                    <div class="col-md-8">
+                                        <div class="input-group">
+                                            <input name="search" class="form-control" placeholder="Search here"
+                                                item-search>
+                                            <ion-icon name="search-sharp" class="btn btn-primary h-auto"></ion-icon>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+
+                    <!-- Filter Items by Category name using buttons -->
+                    <div class="d-flex justify-content-center">
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <!-- vegetables, meat & fish & eggs, grocery, bakery -->
+                                <a href="#" class="btn btn-primary mx-1 my-1" onclick="filterItemsByCategory('all')">All
+                                    Categories <img src="https://www.pngmart.com/files/7/Cart-PNG-Clipart.png" width="24px"></a>
+                                <a href="#" class="btn btn-success mx-1 my-1"
+                                    onclick="filterItemsByCategory('vegetables')">Vegetables <img
+                                        src="https://www.freeiconspng.com/thumbs/vegetable-icon-png/vegetable-icon-png-12.png" width="24px"></a>
+                                <a href="#" class="btn btn-danger mx-1 my-1"
+                                    onclick="filterItemsByCategory('meat, fish & eggs')">Meat, fish & eggs <img
+                                        src="https://pngimg.com/d/pork_PNG2.png" width="32px"></a>
+                                <a href="#" class="btn btn-secondary mx-1 my-1"
+                                    onclick="filterItemsByCategory('grocery')">Grocery <img
+                                        src="https://www.creativefabrica.com/wp-content/uploads/2021/11/18/Sugar-bag-PNG-File-Cute-Clip-Art-Graphics-20390263-1-580x387.png" width="35px"></a>
+                                <a href="#" class="btn btn-warning mx-1 my-1" style="color: white;"
+                                    onclick="filterItemsByCategory('bakery')">Bakery <img
+                                        src="https://static.vecteezy.com/system/resources/previews/009/391/372/non_2x/bakery-and-pastry-product-clipart-design-illustration-free-png.png"
+                                        width="32px"></a>
+                            </div>
+                        </div>
+                    </div>
+
 
                     <div>
                         <?php 
@@ -553,33 +581,41 @@ a:hover {
                         
                         ?>
 
-                        <!-- cards -->
-                        <div class="row row-md-3" data-item-cards-container></div>
 
-                        <!-- cards template -->
-                        <template data-item-template>
-                            <div class="card" style="width: 18rem; height: 35rem;">
-                                <p class="card-header text-center" item-category-name></p>
-                                <img class="card-img-top" alt="Card image cap" item-image>
-                                <div class="card-body">
-                                    <h5 class="card-title text-center" item-name></h5>
-                                    <p class="card-text text-center text-secondary" item-description></p>
-                                    <p class="card-text text-center" item-offer></p>
-                                    <p class="card-text text-center" item-price></p>
-                                    <p class="card-text text-center">
+                        <div class="col-md-12">
+                            <div class="card-body">
+                                <!-- To display the message -->
+                                <div id="no-items-found" class="hide text-center">No items found</div>
 
-                                        <span class="badge bg-primary" item-availability-true></span>
+                                <!-- cards -->
+                                <div class="row row-md-3" data-item-cards-container></div>
 
-                                        <span class="badge bg-danger" item-availability-false></span>
+                                <!-- cards template -->
+                                <template data-item-template>
+                                    <div class="card" style="width: 18rem; height: 35rem;">
+                                        <p class="card-header text-center" item-category-name></p>
+                                        <img class="card-img-top" alt="Card image cap" item-image>
+                                        <div class="card-body">
+                                            <h5 class="card-title text-center" item-name></h5>
+                                            <p class="card-text text-center text-secondary" item-description></p>
+                                            <p class="card-text text-center" item-offer></p>
+                                            <p class="card-text text-center" item-price></p>
+                                            <p class="card-text text-center">
 
-                                    </p>
-                                    <div class="card-footer text-center ">
-                                        <button type="button" class="btn btn-primary">Add to Cart</button>
+                                                <span class="badge bg-primary" item-availability-true></span>
+
+                                                <span class="badge bg-danger" item-availability-false></span>
+
+                                            </p>
+                                            <div class="card-footer text-center ">
+                                                <button type="button" class="btn btn-primary">Add to Cart</button>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
 
-                        </template>
+                                </template>
+                            </div>
+                        </div>
 
 
 
@@ -600,7 +636,8 @@ a:hover {
                         searchInput.addEventListener("input", (e) => {
                             const value = e.target.value.toLowerCase();
 
-                            //display searched items
+                            let foundItems = 0; // counter for found items
+
                             dataItems.forEach(item => {
                                 const isVisible = item.item_name.toLowerCase().includes(value) || item
                                     .category_name.toLowerCase().includes(value);
@@ -608,9 +645,40 @@ a:hover {
                                 // not match card will be hide
                                 item.element.classList.toggle("hide", !isVisible);
 
-                            })
+                                // increment the counter if the item is visible
+                                if (isVisible) {
+                                    foundItems++;
+                                }
+                            });
 
+                            // toggle the visibility of the "No items found" message
+                            const noItemsFoundMessage = document.getElementById("no-items-found");
+                            noItemsFoundMessage.classList.toggle("hide", foundItems > 0);
                         });
+
+                        //filter Items by Category name
+                        function filterItemsByCategory(category) {
+                            let foundItems = 0; // counter for found items
+
+                            dataItems.forEach(item => {
+                                const isVisible = category === 'all' || item.category_name.toLowerCase() ===
+                                    category;
+                                item.element.classList.toggle("hide", !isVisible);
+
+                                // not match card will be hide
+                                item.element.classList.toggle("hide", !isVisible);
+
+                                // increment the counter if the item is visible
+                                if (isVisible) {
+                                    foundItems++;
+                                }
+                            });
+                            // toggle the visibility of the "No items found" message
+                            const noItemsFoundMessage = document.getElementById("no-items-found");
+                            noItemsFoundMessage.classList.toggle("hide", foundItems > 0);
+                        }
+
+
 
                         // taking each item objects from items 
                         dataItems = items.map(item => {
