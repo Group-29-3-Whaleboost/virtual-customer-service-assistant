@@ -535,19 +535,22 @@ a:hover {
                             <div class="card-body">
                                 <!-- vegetables, meat & fish & eggs, grocery, bakery -->
                                 <a href="#" class="btn btn-primary mx-1 my-1" onclick="filterItemsByCategory('all')">All
-                                    Categories <img src="https://www.pngmart.com/files/7/Cart-PNG-Clipart.png" width="24px"></a>
+                                    Categories <img src="<?php base_url() ?> assets\images\search-items-all.png"
+                                        width="24px"></a>
                                 <a href="#" class="btn btn-success mx-1 my-1"
                                     onclick="filterItemsByCategory('vegetables')">Vegetables <img
-                                        src="https://www.freeiconspng.com/thumbs/vegetable-icon-png/vegetable-icon-png-12.png" width="24px"></a>
+                                        src="<?php base_url() ?> assets\images\search-items-vegetables.png"
+                                        width="24px"></a>
                                 <a href="#" class="btn btn-danger mx-1 my-1"
                                     onclick="filterItemsByCategory('meat, fish & eggs')">Meat, fish & eggs <img
-                                        src="https://pngimg.com/d/pork_PNG2.png" width="32px"></a>
+                                        src="<?php base_url() ?> assets\images\search-items-meat.png" width="32px"></a>
                                 <a href="#" class="btn btn-secondary mx-1 my-1"
                                     onclick="filterItemsByCategory('grocery')">Grocery <img
-                                        src="https://www.creativefabrica.com/wp-content/uploads/2021/11/18/Sugar-bag-PNG-File-Cute-Clip-Art-Graphics-20390263-1-580x387.png" width="35px"></a>
+                                        src="<?php base_url() ?> assets\images\search-items-grocery.png"
+                                        width="35px"></a>
                                 <a href="#" class="btn btn-warning mx-1 my-1" style="color: white;"
                                     onclick="filterItemsByCategory('bakery')">Bakery <img
-                                        src="https://static.vecteezy.com/system/resources/previews/009/391/372/non_2x/bakery-and-pastry-product-clipart-design-illustration-free-png.png"
+                                        src="<?php base_url() ?> assets\images\search-items-bakery.png"
                                         width="32px"></a>
                             </div>
                         </div>
