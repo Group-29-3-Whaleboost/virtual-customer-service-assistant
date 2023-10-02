@@ -33,7 +33,7 @@
 }
 
 .card-body {
-    background-color: rgba(0, 200, 0, 0.2);
+    background-color: rgba(5, 82, 237, 0.2);
 
 }
 
@@ -121,8 +121,8 @@
 
 
     <div class="d-grid gap-4 container-fluid" style="padding: 5%;">
-        <button type="button" class="btn btn-success btn-lg ">SIGN IN</button>
-        <button type="button" class="btn btn-success btn-lg">SIGN UP</button>
+        <button type="button" class="btn btn-primary btn-lg ">SIGN IN</button>
+        <button type="button" class="btn btn-primary btn-lg">SIGN UP</button>
     </div>
 
     <h3 id="features" class="text-success legend" style="padding: 5px;">This Web Application Provide You Below Features:
@@ -262,7 +262,7 @@
                     <h5>Sign In to Our Application</h5>
                     <p>The best virtual customer service is provided</p>
                     <div class="d-flex flex-column flex-sm-row w-100 gap-2">
-                        <button class="btn btn-success" type="button">Sign In/ Up</button>
+                        <button class="btn btn-primary" type="button">Sign In/ Up</button>
                     </div>
 
                 </div>
