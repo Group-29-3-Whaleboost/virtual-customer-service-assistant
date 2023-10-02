@@ -507,6 +507,7 @@
             <?php include(APPPATH . 'views/includes/footer.php'); ?>
             <?php include(APPPATH . 'views/includes/cart-component.php'); ?>
             <?php include(APPPATH . 'views/includes/notification-component.php'); ?>
+            
     </div>
     </div>
 
