@@ -95,7 +95,7 @@
             width: 100%;
         }
 
-        .navbar-nav .nav-item.active .nav-link {
+        .navbar-nav .nav-item.active-1 .nav-link {
             color: #fff;
         }
 

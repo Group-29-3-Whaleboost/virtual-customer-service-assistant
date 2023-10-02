@@ -22,5 +22,4 @@ class Welcome extends CI_Controller {
 	{
 		$data['title'] = 'Main Home Page | CAS';
 		$this->load->view('enduser/main-page',$data);
-	}
 }
