@@ -504,6 +504,7 @@ a:hover {
         <!-- included the menu -->
         <?php include(APPPATH . 'views/includes/menu.php'); ?>
 
+<<<<<<< HEAD
         <div class="container">
             <div class="row" style="margin-top: 20px;">
                 <div class="col col-md-4">
@@ -551,6 +552,13 @@ a:hover {
         <?php include(APPPATH . 'views/includes/footer.php'); ?>
         <?php include(APPPATH . 'views/includes/cart-component.php'); ?>
         <?php include(APPPATH . 'views/includes/notification-component.php'); ?>
+=======
+            <!-- included the footer -->
+            <?php include(APPPATH . 'views/includes/footer.php'); ?>
+            <?php include(APPPATH . 'views/includes/cart-component.php'); ?>
+            <?php include(APPPATH . 'views/includes/notification-component.php'); ?>
+            
+>>>>>>> 7d9c18dbafa2b175147d380cf390e6a5e468cc89
     </div>
     </div>
 
