@@ -531,9 +531,9 @@ a:hover {
 
                     <!-- Filter Items by Category name using buttons -->
                     <div class="d-flex justify-content-center">
-                        <div class="col-md-8">
+                        <div class="col-md-9">
                             <div class="card-body">
-                                <!-- vegetables, meat & fish & eggs, grocery, bakery -->
+                                <!-- vegetables, fruits, meat & fish & eggs, grocery, bakery -->
                                 <a href="#" class="btn btn-primary mx-1 my-1" onclick="filterItemsByCategory('all')">All
                                     Categories <img src="<?php base_url() ?> assets\images\search-items-all.png"
                                         width="24px"></a>
@@ -541,9 +541,13 @@ a:hover {
                                     onclick="filterItemsByCategory('vegetables')">Vegetables <img
                                         src="<?php base_url() ?> assets\images\search-items-vegetables.png"
                                         width="24px"></a>
+                                <a href="#" class="btn btn-info mx-1 my-1" style="color: white;"
+                                    onclick="filterItemsByCategory('fruits')">Fruits <img
+                                        src="<?php base_url() ?> assets\images\search-items-fruits.png"
+                                        width="24px"></a>
                                 <a href="#" class="btn btn-danger mx-1 my-1"
                                     onclick="filterItemsByCategory('meat, fish & eggs')">Meat, fish & eggs <img
-                                        src="<?php base_url() ?> assets\images\search-items-meat.png" width="32px"></a>
+                                        src="<?php base_url() ?> assets\images\search-items-meat.png" width="34px"></a>
                                 <a href="#" class="btn btn-secondary mx-1 my-1"
                                     onclick="filterItemsByCategory('grocery')">Grocery <img
                                         src="<?php base_url() ?> assets\images\search-items-grocery.png"
@@ -680,7 +684,6 @@ a:hover {
                             const noItemsFoundMessage = document.getElementById("no-items-found");
                             noItemsFoundMessage.classList.toggle("hide", foundItems > 0);
                         }
-
 
 
                         // taking each item objects from items 
