@@ -1,5 +1,9 @@
 <!-- included the header -->
 <?php include(APPPATH . 'views/includes/header.php'); ?>
+
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+</head>
 <style>
 #content-wrapper>div>a.card.search-card {
     text-decoration: none;
@@ -521,7 +525,8 @@ a:hover {
                                         <div class="input-group">
                                             <input name="search" class="form-control" placeholder="Search here"
                                                 item-search>
-                                            <ion-icon name="search-sharp" class="btn btn-primary h-auto"></ion-icon>
+                                            <button class="btn btn-primary h-auto"><i
+                                                    class="fa-solid fa-magnifying-glass fa-beat"></i></button>
                                         </div>
                                     </div>
                                 </div>
@@ -566,13 +571,13 @@ a:hover {
                         // connect the database
                         $connectDB = mysqli_connect("localhost","root","","customer_service_assistant");
 
-                        // sample branch id = 1
+                        // Replace with the actual branch ID you want to display
                         $branchId = 1;
 
                         
                             // take all the data from item table
                             $query = "SELECT item.item_id,item.item_name,item.category_name,item.description,item.offer,item.image,item.price,store_item.availability,store_item.branch_id,store_item.quantity FROM item JOIN store_item 
-                                        ON item.item_id = store_item.item_id";
+                                        ON item.item_id = store_item.item_id WHERE store_item.branch_id = $branchId";
 
                             //take results into result vaiable
                             $result = mysqli_query($connectDB, $query);
@@ -591,8 +596,13 @@ a:hover {
 
                         <div class="col-md-12">
                             <div class="card-body">
+                                
+                                <!-- To display the message img -->
+                                <div id="no-items-found-img" class="hide text-center"><img
+                                        src="<?php base_url() ?> assets\images\no-items-found-prawn.gif" width="200px"></div>
                                 <!-- To display the message -->
-                                <div id="no-items-found" class="hide text-center">No items found</div>
+                                <div id="no-items-found" class="hide text-center"><h2>Sorry! No items found</h2></div>
+
 
                                 <!-- cards -->
                                 <div class="row row-md-3" data-item-cards-container></div>
@@ -661,6 +671,9 @@ a:hover {
                             // toggle the visibility of the "No items found" message
                             const noItemsFoundMessage = document.getElementById("no-items-found");
                             noItemsFoundMessage.classList.toggle("hide", foundItems > 0);
+                            // toggle the visibility of the image
+                            const noItemsFoundImg = document.getElementById("no-items-found-img");
+                            noItemsFoundImg.classList.toggle("hide", foundItems > 0);
                         });
 
                         //filter Items by Category name
@@ -683,6 +696,9 @@ a:hover {
                             // toggle the visibility of the "No items found" message
                             const noItemsFoundMessage = document.getElementById("no-items-found");
                             noItemsFoundMessage.classList.toggle("hide", foundItems > 0);
+                            // toggle the visibility of the image
+                            const noItemsFoundImg = document.getElementById("no-items-found-img");
+                            noItemsFoundImg.classList.toggle("hide", foundItems > 0);
                         }
 
 
