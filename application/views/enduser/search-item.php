@@ -718,7 +718,7 @@ a:hover {
 
                             // text content for card
                             itemCategoryName.textContent = item.category_name;
-                            itemImage.src = item.image;
+                            itemImage.src = "<?php base_url() ?> assets/images/" + item.image;
                             itemName.textContent = item.item_name;
                             itemDescription.textContent = item.description;
                             if (item.offer != 0) {
