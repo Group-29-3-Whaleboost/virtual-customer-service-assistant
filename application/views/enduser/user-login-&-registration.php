@@ -581,31 +581,39 @@
         $role = "Customer";
         $confirmPW = $_POST['confirmPW'];
 
-        if ($password == $confirmPW) {
-            try {
-                // Create a PDO connection to your database
-                $pdo = new PDO("mysql:host=localhost;dbname=customer_service_assistant", "root", "");
+        try {
+            // Create a PDO connection to your database
+            $pdo = new PDO("mysql:host=localhost;dbname=customer_service_assistant", "root", "");
 
+            // Check if the email already exists
+            $checkEmailStmt = $pdo->prepare("SELECT COUNT(*) FROM user WHERE email = ?");
+            $checkEmailStmt->execute([$email]);
+            $emailExists = $checkEmailStmt->fetchColumn();
+
+            if ($emailExists) {
+                $registrationErrorMessage = "This email is already registered, Please use a different email!!!";
+            } elseif ($password == $confirmPW) {
                 // Prepare an SQL INSERT statement
-                $stmt = $pdo->prepare("INSERT INTO user (name, email, password, role) VALUES (?, ?, ?, ?)");
+                $insertStmt = $pdo->prepare("INSERT INTO user (name, email, password, role) VALUES (?, ?, ?, ?)");
 
                 // Bind parameters and execute the query
-                $stmt->execute([$name, $email, $password, $role]);
+                $insertStmt->execute([$name, $email, $password, $role]);
 
                 // Check for successful insertion
-                if ($stmt->rowCount() > 0) {
+                if ($insertStmt->rowCount() > 0) {
                     $registrationSuccessMessage = "Your account has been created successfully!!!";
                 } else {
                     $registrationErrorMessage = "Failed to create your account!!!";
                 }
-            } catch (PDOException $e) {
-                $registrationErrorMessage = "Error: " . $e->getMessage();
+            } else {
+                $registrationErrorMessage = "Passwords do not match, please try again!!!";
             }
-        } else {
-            $registrationErrorMessage = "Passwords do not match, please try again!!!";
+        } catch (PDOException $e) {
+            $registrationErrorMessage = "Error: " . $e->getMessage();
         }
     }
     ?>
+
 
 
     <!-- Display Success or Error Messages for Login and Registration -->
