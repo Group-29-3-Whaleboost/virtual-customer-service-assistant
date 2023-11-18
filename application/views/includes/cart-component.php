@@ -27,7 +27,7 @@
 
 =======
 >>>>>>> 7d9c18dbafa2b175147d380cf390e6a5e468cc89
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
@@ -51,7 +51,36 @@
           </div>
           <div class="modal-footer">
             <button class="clear-cart btn btn-danger">Clear Cart</button>
-            <button type="button" class="btn btn-primary">Proceed</button>
+            <button type="button" class="btn btn-primary" onclick='ProceedCart()'>Proceed</button>
+          </div>
+        </div>
+      </div>
+    </div> -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Cart</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="close"></button>
+          </div>
+          <div class="modal-body">
+            <table class="table" style="margin-bottom: 10px;">
+              <thead>
+                <td>Item</td>
+                <td>Price</td>
+                <td>Quentity</td>
+                <td></td>
+                <td>Total</td>
+              </thead>
+              <tbody class="show-cart">
+
+              </tbody>
+            </table>
+            <div>Total price: LKR<span class="total-cart" id='total-cart'></span></div>
+          </div>
+          <div class="modal-footer">
+            <button class="clear-cart btn btn-danger">Clear Cart</button>
+            <button type="button" class="btn btn-primary" onclick='ProceedCart()'>Proceed</button>
           </div>
         </div>
       </div>
@@ -276,6 +305,12 @@
     });
 
     displayCart();
+
+    function ProceedCart(){
+      cart.push({total:document.querySelector("#total-cart").innerHTML});
+      console.log(JSON.stringify(cart));
+      window.location.replace("Payment?cart="+JSON.stringify(cart));
+    }
   </script>
 
 </body>

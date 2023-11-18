@@ -162,8 +162,7 @@
     function myFunction() {
       console.log('working');
       event.preventDefault();
-      // var name = $(this).data('name');
-      // var price = Number($(this).data('price'));
+
 
       var name = document.querySelector("#title").innerText;
       var price = parseFloat(document.querySelector("#price").innerText);
