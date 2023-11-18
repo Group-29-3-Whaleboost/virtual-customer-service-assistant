@@ -9,7 +9,7 @@
     <li class="nav-item active-2">
         <a class="nav-link" href="#">
             <i class="fas fa-fw fa-search"></i>
-            <span>Search item</span></a>
+            <a href="<?php echo site_url('Checkout');?>"><span>Search item</span></a>
     </li>
 
     <li class="nav-item active-3">
