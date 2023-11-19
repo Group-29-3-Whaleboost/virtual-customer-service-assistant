@@ -1,9 +1,5 @@
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<?php
-  print_r($managers);
-  print_r($this->User_model->get_user($this->session->userdata('user_id'))->role);
-  print_r($user->name);
-?>
+
 <style>
     @import url(https://fonts.googleapis.com/css?family=Lato:400,700);
  *, *:before, *:after {
@@ -213,124 +209,6 @@ li{
     <i class="fa fa-search"></i>
   </div>
    <ul class="list" id="<?php if($this->User_model->get_user($this->session->userdata('user_id'))->role=='user'){echo 'manager-list';}else{echo 'user-list';}?>">
-  <!--  <li class="clearfix">
-      <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_01.jpg" alt="avatar" />
-      <div class="about">
-        <div class="name">Vincent Porter</div>
-        <div class="status">
-           
-        </div>
-      </div>
-    </li>
-    
-    <li class="clearfix">
-      <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_02.jpg" alt="avatar" />
-      <div class="about">
-        <div class="name">Aiden Chavez</div>
-        <div class="status">
-        </div>
-      </div>
-    </li>
-    
-    <li class="clearfix">
-      <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_03.jpg" alt="avatar" />
-      <div class="about">
-        <div class="name">Mike Thomas</div>
-        <div class="status">
-           
-        </div>
-      </div>
-    </li>
-    
-    <li class="clearfix">
-      <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_04.jpg" alt="avatar" />
-      <div class="about">
-        <div class="name">Erica Hughes</div>
-        <div class="status">
-           
-        </div>
-      </div>
-    </li>
-    
-    <li class="clearfix">
-      <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_05.jpg" alt="avatar" />
-      <div class="about">
-        <div class="name">Ginger Johnston</div>
-        <div class="status">
-           
-        </div>
-      </div>
-    </li>
-    
-    <li class="clearfix">
-      <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_06.jpg" alt="avatar" />
-      <div class="about">
-        <div class="name">Tracy Carpenter</div>
-        <div class="status">
-        </div>
-      </div>
-    </li>
-    
-    <li class="clearfix">
-      <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_07.jpg" alt="avatar" />
-      <div class="about">
-        <div class="name">Christian Kelly</div>
-        <div class="status">
-        </div>
-      </div>
-    </li>
-    
-    <li class="clearfix">
-      <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_08.jpg" alt="avatar" />
-      <div class="about">
-        <div class="name">Monica Ward</div>
-        <div class="status">
-           
-        </div>
-      </div>
-    </li>
-    
-    <li class="clearfix">
-      <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_09.jpg" alt="avatar" />
-      <div class="about">
-        <div class="name">Dean Henry</div>
-        <div class="status">
-        </div>
-      </div>
-    </li>
-    
-    <li class="clearfix">
-      <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_10.jpg" alt="avatar" />
-      <div class="about">
-        <div class="name">Peyton Mckinney</div>
-        <div class="status">
-           
-        </div>
-      </div>
-    </li>-->
-    <?php
-//   foreach ($managers as $manager) {
-//     echo '<li class="clearfix">';
-//     echo '    <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_02.jpg" alt="avatar" />';
-//     echo '    <div class="about">';
-//     echo '        <div class="name">' . htmlspecialchars($manager->manager) . '</div>';
-//     echo '        <div class="status">';
-//     echo '        </div>';
-//     echo '    </div>';
-//     echo '</li>';
-// }
-?>
-  </ul>
-
-</div>
-
-    <!-- <ul id="manager-list">
-        The list of managers will be displayed here
-    </ul> -->
-
-    <!-- <div id="messageContainer">
-        Messages will be displayed here
-    </div> -->
    
 <div class="chat">
   <div class="chat-header clearfix">
@@ -340,63 +218,14 @@ li{
       <div class="chat-with">Chat with <span id="chat-name">Vincent Porter</span></div>
     </div>
     <i class="fa fa-star"></i>
-  </div> <!-- end chat-header -->
+  </div> 
   
   <div class="chat-history" id="chat-history">
     <ul id="messageContainer">
-      <!-- <li class="clearfix">
-        <div class="message-data align-right">
-          <span class="message-data-time" >10:10 AM, Today</span> &nbsp; &nbsp;
-          
-        </div>
-        <div class="message other-message float-right">
-          Hi Vincent, how are you? How is the project coming along?
-        </div>
-      </li>
-      
-      <li>
-        <div class="message-data">
-          <span class="message-data-name"></span>
-          <span class="message-data-time">10:12 AM, Today</span>
-        </div>
-        <div class="message my-message">
-          Are we meeting today? Project has been already finished and I have results to show you.
-        </div>
-      </li>
-      
-      <li class="clearfix">
-        <div class="message-data align-right">
-          <span class="message-data-time" >10:14 AM, Today</span> &nbsp; &nbsp;
-          
-        </div>
-        <div class="message other-message float-right">
-          Well I am not sure. The rest of the team is not here yet. Maybe in an hour or so? Have you faced any problems at the last phase of the project?
-        </div>
-      </li>
-      
-      <li>
-        <div class="message-data">
-          <span class="message-data-name"></span>
-          <span class="message-data-time">10:20 AM, Today</span>
-        </div>
-        <div class="message my-message">
-          Actually everything was fine. I'm very excited to show this to our team.
-        </div>
-      </li>
-      
-      <li>
-        <div class="message-data">
-          <span class="message-data-name"></span>
-          <span class="message-data-time">10:31 AM, Today</span>
-        </div>
-        
-        <i class="fa fa-circle " style="color: #AED2A6"></i>
-        <i class="fa fa-circle " style="color:#DAE9DA"></i>
-      </li> -->
       
     </ul>
     
-  </div> <!-- end chat-history -->
+  </div> 
   
   <div class="chat-message clearfix">
     <textarea name="message-to-send" id="message-to-send" placeholder ="Type your message" rows="3"></textarea>
@@ -406,127 +235,14 @@ li{
     
     <button onclick='send()'>Send</button>
 
-  </div> <!-- end chat-message -->
+  </div> 
   
-</div> <!-- end chat -->
+</div> 
 
-</div> <!-- end container -->
-
-<!-- <script id="message-template" type="text/x-handlebars-template">
-<li class="clearfix">
-<div class="message-data align-right">
-  <span class="message-data-time" >{{time}}, Today</span> &nbsp; &nbsp;
-  <span class="message-data-name" >Olia</span> <i class="fa fa-circle me"></i>
-</div>
-<div class="message other-message float-right">
-  {{messageOutput}}
-</div>
-</li>
-</script>
-
-<script id="message-response-template" type="text/x-handlebars-template">
-<li>
-<div class="message-data">
-  <span class="message-data-name"> Vincent</span>
-  <span class="message-data-time">{{time}}, Today</span>
-</div>
-<div class="message my-message">
-  {{response}}
-</div>
-</li>
-</script> -->
-
-
-<!-- <script>
-    (function(){
-  
-  var chat = {
-    messageToSend: '',
-    messageResponses: [
-      'Why did the web developer leave the restaurant? Because of the table layout.',
-      'How do you comfort a JavaScript bug? You console it.',
-      'An SQL query enters a bar, approaches two tables and asks: "May I join you?"',
-      'What is the most used language in programming? Profanity.',
-      'What is the object-oriented way to become wealthy? Inheritance.',
-      'An SEO expert walks into a bar, bars, pub, tavern, public house, Irish pub, drinks, beer, alcohol'
-    ],
-    init: function() {
-      this.cacheDOM();
-      this.bindEvents();
-      this.render();
-    },
-    cacheDOM: function() {
-      this.$chatHistory = $('.chat-history');
-      this.$button = $('button');
-      this.$textarea = $('#message-to-send');
-      this.$chatHistoryList =  this.$chatHistory.find('ul');
-    },
-    bindEvents: function() {
-      this.$button.on('click', this.addMessage.bind(this));
-      this.$textarea.on('keyup', this.addMessageEnter.bind(this));
-    },
-    render: function() {
-      this.scrollToBottom();
-      if (this.messageToSend.trim() !== '') {
-        var template = Handlebars.compile( $("#message-template").html());
-        var context = { 
-          messageOutput: this.messageToSend,
-          time: this.getCurrentTime()
-        };
-
-        this.$chatHistoryList.append(template(context));
-        this.scrollToBottom();
-        this.$textarea.val('');
-        
-        // responses
-        var templateResponse = Handlebars.compile( $("#message-response-template").html());
-        var contextResponse = { 
-          response: this.getRandomItem(this.messageResponses),
-          time: this.getCurrentTime()
-        };
-        
-        setTimeout(function() {
-          this.$chatHistoryList.append(templateResponse(contextResponse));
-          this.scrollToBottom();
-        }.bind(this), 1500);
-        
-      }
-      
-    },
-    
-    addMessage: function() {
-      this.messageToSend = this.$textarea.val()
-      this.render();         
-    },
-    addMessageEnter: function(event) {
-        // enter was pressed
-        if (event.keyCode === 13) {
-          this.addMessage();
-        }
-    },
-    scrollToBottom: function() {
-       this.$chatHistory.scrollTop(this.$chatHistory[0].scrollHeight);
-    },
-    getCurrentTime: function() {
-      return new Date().toLocaleTimeString().
-              replace(/([\d]+:[\d]{2})(:[\d]{2})(.*)/, "$1$3");
-    },
-    getRandomItem: function(arr) {
-      return arr[Math.floor(Math.random()*arr.length)];
-    }
-    
-  };
-  
-  chat.init();
-  
-  
-
-  
-})();
-
-    </script> -->
+</div> 
 
 <script>
+document.querySelector("body > div > div.chat > div.chat-header.clearfix").style.display="none";
 const chatList = document.querySelector('.list');
 var name;
 
@@ -541,23 +257,13 @@ function getMassages(){
                     },
                     dataType: "json",
                     success: function (data) {
-                      console.log(data);
                       messages=data;
                       var messageContainer = document.getElementById("messageContainer");
 
-                    // Loop through the messages and create HTML elements to display them
+                    
                     messages.forEach(function (message) {
                         var messageDiv = document.createElement("div");
-                        // messageDiv.innerHTML = `
-                        //     <p><strong>Sender:</strong> ${message.sender}</p>
-                        //     <p><strong>Receiver:</strong> ${message.receiver}</p>
-                        //     <p><strong>Message:</strong> ${message.message}</p>
-                        //     <p><strong>Timestamp:</strong> ${message.timestamp}</p>
-                        //     <hr>
-                        // `;
-                        // messageContainer.appendChild(messageDiv);
-                        if (message.sender === "<?php echo $user->name ?>") {
-                            // Render messages from $user->name
+                        if (message.sender === "<?php echo $user->name ?>") {                       
                             messageDiv.innerHTML = `
                                 <li>
                                   <div class="message-data">
@@ -569,8 +275,7 @@ function getMassages(){
                                   </div>
                                 </li>
                             `;
-                        } else {
-                            // Render messages from other senders
+                        } else {                         
                             messageDiv.innerHTML = `
                                 <li class="clearfix">
                                     <div class="message-data align-right">
@@ -588,11 +293,13 @@ function getMassages(){
                     }
                 });
         }
-// Add a click event listener to the <ul> to delegate events for its <li> children
+
 chatList.addEventListener('click', function (event) {
-    // Check if the clicked element is an <li>
+    messageContainer.innerHTML="";
+    document.querySelector("body > div > div.chat > div.chat-header.clearfix").style.display="block";
+    
     if (event.target && event.target.matches('li')) {
-        // Extract name and image source values
+        
         name = event.target.querySelector('.name').textContent;
         const imgSrc = event.target.querySelector('img').getAttribute('src');
         
@@ -602,85 +309,22 @@ chatList.addEventListener('click', function (event) {
         sender='<?php echo $user->name?>';
 
         getMassages();
-                // $.ajax({
-                //     url: "assets/js/chat.php",
-                //     type: "POST",
-                //     data: {
-                //         action: "getMessages",
-                //         sender: sender,
-                //         receiver:name
-                //     },
-                //     dataType: "json",
-                //     success: function (data) {
-                //       console.log(data);
-                //       messages=data;
-                //       var messageContainer = document.getElementById("messageContainer");
-
-                //     // Loop through the messages and create HTML elements to display them
-                //     messages.forEach(function (message) {
-                //         var messageDiv = document.createElement("div");
-                //         // messageDiv.innerHTML = `
-                //         //     <p><strong>Sender:</strong> ${message.sender}</p>
-                //         //     <p><strong>Receiver:</strong> ${message.receiver}</p>
-                //         //     <p><strong>Message:</strong> ${message.message}</p>
-                //         //     <p><strong>Timestamp:</strong> ${message.timestamp}</p>
-                //         //     <hr>
-                //         // `;
-                //         // messageContainer.appendChild(messageDiv);
-                //         if (message.sender === "<?php echo $user->name ?>") {
-                //             // Render messages from $user->name
-                //             messageDiv.innerHTML = `
-                //                 <li>
-                //                   <div class="message-data">
-                //                     <span class="message-data-name"></span>
-                //                     <span class="message-data-time">${message.timestamp}</span>
-                //                   </div>
-                //                   <div class="message my-message">
-                //                     ${message.message}
-                //                   </div>
-                //                 </li>
-                //             `;
-                //         } else {
-                //             // Render messages from other senders
-                //             messageDiv.innerHTML = `
-                //                 <li class="clearfix">
-                //                     <div class="message-data align-right">
-                //                       <span class="message-data-time">${message.timestamp}</span> &nbsp; &nbsp;
-                //                     </div>
-                //                     <div class="message other-message float-right">
-                //                       ${message.message}
-                //                     </div>
-                //                 </li>
-                //             `;
-                //         }
-                //         messageContainer.appendChild(messageDiv);
-                //       });
-
-                //     }
-                // });
             }
 });
 
-        // Replace this part with inline JavaScript if needed
-        // Sample manager data (replace this with your actual data)
-        const managers = <?php echo json_encode($managers); ?>;
-// Get references to the input and list elements
+        const Assistants = <?php echo json_encode($Assistants); ?>;
 const input = document.getElementById('manager-filter');
 const managerList = document.getElementById('manager-list');
 const userList = document.getElementById('user-list');
 
-// Function to filter and display managers based on user input
 function filterManagers() {
     const searchTerm = input.value.toLowerCase();
 
-    // Clear the previous list of managers
     managerList.innerHTML = '';
 
-    // Filter managers based on the search term
-    const filteredManagers = managers.filter(manager => manager.manager.toLowerCase().includes(searchTerm));
+    const filteredManagers = Assistants.filter(Assistant => Assistant.name.toLowerCase().includes(searchTerm));
 
-    // Display the filtered managers with the specified HTML structure
-    filteredManagers.forEach(manager => {
+    filteredManagers.forEach(Assistant => {
         const listItem = document.createElement('li');
         listItem.className = 'clearfix';
 
@@ -693,7 +337,7 @@ function filterManagers() {
 
         const nameDiv = document.createElement('div');
         nameDiv.className = 'name';
-        nameDiv.textContent = manager.manager;
+        nameDiv.textContent = Assistant.name;
 
         const statusDiv = document.createElement('div');
         statusDiv.className = 'status';
@@ -711,17 +355,13 @@ function filterManagers() {
 function filterUsers(usersJson) {
     const searchTerm = input.value.toLowerCase();
 
-    // Clear the previous list of users
     userList.innerHTML = '';
 
     try {
-        // Attempt to parse the JSON string into an array
         const users = JSON.parse(usersJson);
 
-        // Filter users based on the search term
         const filteredUsers = users.filter(user => user.toLowerCase().includes(searchTerm));
 
-        // Display the filtered users with the specified HTML structure
         filteredUsers.forEach(user => {
             const listItem = document.createElement('li');
             listItem.className = 'clearfix';
@@ -735,7 +375,7 @@ function filterUsers(usersJson) {
 
             const nameDiv = document.createElement('div');
             nameDiv.className = 'name';
-            nameDiv.textContent = user; // Use the user's name
+            nameDiv.textContent = user; 
 
             const statusDiv = document.createElement('div');
             statusDiv.className = 'status';
@@ -753,21 +393,15 @@ function filterUsers(usersJson) {
     }
 }
 
-
-
-// Add an event listener to the input for real-time filtering
 input.addEventListener('input', filterManagers);
 
-// Initial call to populate the list
 
 if (managerList) {
-  // The element exists, so call the function A
   filterManagers();
   
 } else {
   $.ajax({
         url: "<?php echo base_url()?>assets/js/chat.php",
-        // dataType: "json",
         type: "Post",
         async: true,
         data: { 
@@ -787,7 +421,6 @@ function send(){
   console.log(name);
   $.ajax({
         url:"<?php echo base_url()?>assets/js/chat.php",
-        // dataType: "json",
         type: "Post",
         async: true,
         data: { 
@@ -798,19 +431,19 @@ function send(){
         },
         success: function (data) {
           getMassages();
+          const messageTextArea = document.getElementById('message-to-send');
+          messageTextArea.value = '';
+
         },
     }); 
 }
 
 
-// var intervalId = setInterval(getMassages, 2000);
+var intervalId = setInterval(getMassages, 2000);
 
 
-// var intervalId = setInterval(function() {
-//    getMassages();
-
-// }, 2000);
- 
+var intervalId = setInterval(function() {
+}, 2000);
 
     </script>
 
