@@ -85,12 +85,12 @@ class ItemController extends CI_Controller {
             // Create an associative array with the form data
 
             $data = $this->upload->data();
-            $image_path = 'uploads/' . $data['file_name'];
+            $image_path = $data['file_name'];
             $data = array(
                 'item_name' => $item_name,
                 'price' => $price,
                 'description' => $description,
-                'discount' => $discount,
+                'offer' => $discount,
                 'category_name' => $category,
                 'image' => $image_path,
                 'qr_code'=>$qr_code

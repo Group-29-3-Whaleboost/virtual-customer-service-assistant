@@ -34,13 +34,13 @@ class AddItem extends CI_Controller {
 	
 			if ($this->upload->do_upload('userfile')) { 
 				$upload_data = $this->upload->data();
-				$image_path = 'uploads/' . $upload_data['file_name'];
+				$image_path = $upload_data['file_name'];
 	
 				$item_data = array(
 					'item_name' => $this->input->post('item_name'),
 					'price' => $this->input->post('price'),
 					'description' => $this->input->post('description'),
-					'discount' => $this->input->post('discount'),
+					'offer' => $this->input->post('offer'),
 					'image' => $image_path 
 				);
 	

@@ -97,8 +97,8 @@
             <td><?= $item->item_name ?></td>
             <td><?= $item->price ?></td>
             <td><?= $item->description ?></td>
-            <td><?= $item->discount ?></td>
-            <td><img src="<?php echo base_url()?><?= $item->image ?>" alt="Item Image" style="width: 100px; height: 100px;"></td>
+            <td><?= $item->offer ?></td>
+            <td><img src="<?php echo base_url()?>uploads/<?= $item->image ?>" alt="Item Image" style="width: 100px; height: 100px;"></td>
             <td>
                 <a href="<?php echo site_url('AddItem/edit/'.$item->item_id); ?>">Edit</a> | 
                 <a href="<?= base_url('AddItem/delete/'.$item->item_id) ?>" onclick="return confirm('Are you sure you want to delete this item?')">Delete</a>

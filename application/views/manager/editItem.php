@@ -10,7 +10,7 @@
         <input type="text" name="item_name" value="<?= $item->item_name ?>" required><br>
         <input type="number" name="price" value="<?= $item->price ?>" required><br>
         <textarea name="description"><?= $item->description ?></textarea><br>
-        <input type="number" name="discount" value="<?= $item->discount ?>"><br>
+        <input type="number" name="offer" value="<?= $item->offer ?>"><br>
         <input type="file" name="userfile" accept="image/*">
         <br>
         <input type="submit" value="Update Item">
