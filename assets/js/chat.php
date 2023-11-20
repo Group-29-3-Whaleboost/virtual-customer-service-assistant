@@ -1,12 +1,12 @@
 <?php
-$mysqli = new mysqli("localhost", "root", "", "virtualassistant");
+$mysqli = new mysqli("localhost", "root", "", "customer_service_assistant");
 
 if ($mysqli->connect_error) {
     die("Connection failed: " . $mysqli->connect_error);
 }
 
 function getMessages($sender, $receiver, $mysqli) {
-    $query = "SELECT * FROM chat WHERE (sender = ? AND receiver = ?) OR (sender = ? AND receiver = ?) ORDER BY timestamp ASC";
+    $query = "SELECT * FROM chattest WHERE (sender = ? AND receiver = ?) OR (sender = ? AND receiver = ?) ORDER BY timestamp ASC";
 $stmt = $mysqli->prepare($query);
 $stmt->bind_param("ssss", $sender, $receiver, $receiver, $sender);
 
@@ -22,7 +22,7 @@ if ($stmt->execute()) {
 }
 
 function sendMessage($sender, $receiver, $message, $mysqli) {
-    $query = "INSERT INTO chat (sender, receiver, message) VALUES (?, ?, ?)";
+    $query = "INSERT INTO chattest (sender, receiver, message) VALUES (?, ?, ?)";
     $stmt = $mysqli->prepare($query);
     $stmt->bind_param("sss", $sender, $receiver, $message);
     $stmt->execute();

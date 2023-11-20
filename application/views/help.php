@@ -201,14 +201,13 @@ li{
 }
  
     </style>
-
 <div class="container clearfix">
 <div class="people-list" id="people-list">
   <div class="search">
     <input type="text" placeholder="search" id="manager-filter" />
     <i class="fa fa-search"></i>
   </div>
-   <ul class="list" id="<?php if($this->User_model->get_user($this->session->userdata('user_id'))->role=='user'){echo 'manager-list';}else{echo 'user-list';}?>">
+   <ul class="list" id="<?php if($this->User_model->get_user($this->session->userdata('user_id'))->role=='Customer'){echo 'manager-list';}else{echo 'user-list';}?>">
    
 <div class="chat">
   <div class="chat-header clearfix">

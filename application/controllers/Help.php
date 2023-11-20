@@ -14,7 +14,7 @@ class Help extends CI_Controller {
 	public function index()
 	{
 		$user =$this->session->userdata('user_id');
-		$branch = $this->User_model->get_branch_by_user_id($user);
+		// $branch = $this->User_model->get_branch_by_user_id($user);
 		$data['Assistants'] = $this->Assistants->get_Assistants();
 		$data['user']=$this->User_model->get_user($user);
 		
