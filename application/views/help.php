@@ -210,7 +210,7 @@ li{
    <ul class="list" id="<?php if($this->User_model->get_user($this->session->userdata('user_id'))->role=='Customer'){echo 'manager-list';}else{echo 'user-list';}?>">
    
 <div class="chat">
-  <div class="chat-header clearfix">
+  <div class="chat-header clearfix" id="chat-header">
     <img id="chat-img" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_01_green.jpg" alt="avatar" />
     
     <div class="chat-about">
@@ -241,7 +241,7 @@ li{
 </div> 
 
 <script>
-document.querySelector("body > div > div.chat > div.chat-header.clearfix").style.display="none";
+document.querySelector("#chat-header").style.display="none";
 const chatList = document.querySelector('.list');
 var name;
 
@@ -257,7 +257,7 @@ function getMassages(){
                     dataType: "json",
                     success: function (data) {
                       messages=data;
-                      var messageContainer = document.getElementById("messageContainer");
+                       messageContainer = document.getElementById("messageContainer");
 
                     
                     messages.forEach(function (message) {
@@ -294,8 +294,9 @@ function getMassages(){
         }
 
 chatList.addEventListener('click', function (event) {
+    messageContainer = document.getElementById("messageContainer");
     messageContainer.innerHTML="";
-    document.querySelector("body > div > div.chat > div.chat-header.clearfix").style.display="block";
+    document.querySelector("#chat-header").style.display="block";
     
     if (event.target && event.target.matches('li')) {
         
@@ -310,7 +311,7 @@ chatList.addEventListener('click', function (event) {
         getMassages();
             }
 });
-
+    
         const Assistants = <?php echo json_encode($Assistants); ?>;
 const input = document.getElementById('manager-filter');
 const managerList = document.getElementById('manager-list');
@@ -396,6 +397,7 @@ input.addEventListener('input', filterManagers);
 
 
 if (managerList) {
+  console.log('dggrg');
   filterManagers();
   
 } else {
@@ -438,7 +440,7 @@ function send(){
 }
 
 
-var intervalId = setInterval(getMassages, 2000);
+// var intervalId = setInterval(getMassages, 2000);
 
 
 var intervalId = setInterval(function() {

@@ -31,7 +31,7 @@ function sendMessage($sender, $receiver, $message, $mysqli) {
 
 function getUsers($manager,$mysqli) {
 
-    $query = "SELECT DISTINCT sender AS user FROM chat WHERE receiver = ?";
+    $query = "SELECT DISTINCT sender AS user FROM chattest WHERE receiver = ?";
     $stmt = $mysqli->prepare($query);
     $stmt->bind_param("s", $manager);
     

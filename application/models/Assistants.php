@@ -7,6 +7,13 @@ class Assistants extends CI_Model {
         return $this->db->get('customer_assistant')->result();
     }
 
+
+    public function getAssistantsByBranch($branchId) {
+        $this->db->where('branch_id', $branchId);
+        $query = $this->db->get('customer_assistant');
+        
+        return $query->result(); // Returns an array of objects representing the assistants
+    }
     // public function get_user($id) {
     //     return $this->db->where('id', $id)->get('users')->row();
     // }
