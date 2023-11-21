@@ -1,7 +1,8 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/webrtc-adapter/3.3.3/adapter.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.10/vue.min.js"></script>
 <script type="text/javascript" src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
+
 <!-- included the header -->
 <?php include(APPPATH . 'views/includes/header.php'); ?>
 <style>
@@ -538,6 +539,7 @@ html, body {
     <div id="wrapper">
 
         <div id="content-wrapper">
+        
         <div class="container">
             <div class="row">
                 <div>
@@ -554,9 +556,11 @@ html, body {
         </div>
 
 
+
+
             <!-- included the footer -->
            
-            <?php include(APPPATH . 'views/includes/cart-component.php'); ?>
+          
         </div>
 
         
@@ -570,6 +574,9 @@ html, body {
         integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
         crossorigin="anonymous"></script>
 
+
+
+        
         <script>
             let scanner = new Instascan.Scanner({ video: document.getElementById('preview') });
 
@@ -598,6 +605,9 @@ html, body {
                 document.getElementById('item').innerHTML = ' <div class="container mt-5"><div class="card"><img src="uploads/'+itemData.image+'" class="card-img-top" alt="Item Image"><div class="card-body"><h5 class="card-title" id="title">'+itemData.item_name+'</h5><p class="card-text">'+itemData.description+'</p><p class="card-text" id="price">'+itemData.price+'</p><p class="card-text" id="discount">'+itemData.discount+'</p><p class="card-text">Category: '+itemData.category+'</p></div></div></div><button class="add-to-cart" onclick="myFunction()">Add to cart</button>';
             });
         </script>
+       <!-- Bootstrap CSS via CDN -->
+
+
     <script>
         !function (t) {
             "use strict";
@@ -642,7 +652,31 @@ html, body {
         }(jQuery);
 
     </script>
+    
 <?php include(APPPATH . 'views/includes/notification-component.php'); ?>
+<script>
+  window.onload = function() {
+    var myModal = new bootstrap.Modal(document.getElementById('exampleModal'));
+    document.getElementById('cartIcon').addEventListener('click', function() {
+      console.log('dgsrgr');
+      myModal.show();
+    });
+
+    document.getElementById('close').addEventListener('click', function() {
+      myModal.hide();
+    });
+  };
+</script>
+
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Open Cart Modal
+</button>
+
+<?php include(APPPATH . 'views/includes/cart-component-javascript.php'); ?>
+
+
+
+
 </body>
 
 </html>

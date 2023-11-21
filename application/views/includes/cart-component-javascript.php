@@ -28,7 +28,18 @@
       </div>
     </div>
 
-    
+      <!-- <script>
+            // var myModal;
+            var myModal = new bootstrap.Modal(document.getElementById('exampleModal'));
+            document.getElementById('cartIcon').addEventListener('click', function() {
+              console.log('dgsrgr');
+                myModal.show();
+            });
+
+            document.getElementById('close').addEventListener('click', function() {
+                myModal.hide();
+            });
+    </script> -->
   
 
   <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'></script>

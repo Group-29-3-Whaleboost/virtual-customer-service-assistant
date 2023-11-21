@@ -90,7 +90,7 @@ var nmodel = new bootstrap.Modal(document.getElementById('NotificationModel'));
                 nmodel.show();
             });
 
-            document.getElementById('closen').addEventListener('click', function() {
-                nmodel.hide();
-            });
+            // document.getElementById('closen').addEventListener('click', function() {
+            //     nmodel.hide();
+            // });
     </script>
