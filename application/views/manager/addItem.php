@@ -18,22 +18,37 @@
 	<div class="row">
 		<div class="col-sm-3 col-sm-offset-3">
 		<form action="" method="POST" enctype="multipart/form-data" id='addItems'>
-        
+        <!-- Item Name -->
         <label for="item_name">Item Name:</label>
         <input type="text" id="item_name" name="item_name" ><br><br>
 
+        <!-- Price -->
         <label for="price">Price:</label>
         <input type="number" id="price" name="price" step="0.01" ><br><br>
 
+        <!-- Description -->
         <label for="description">Description:</label><br>
         <textarea id="description" name="description" rows="4" cols="50" ></textarea><br><br>
 
+        <!-- Discount -->
         <label for="discount">Discount (%):</label>
         <input type="number" id="discount" name="discount" min="0" max="100"><br><br>
 
+        <!-- Category -->
+        <label for="category" style="display: none;">Category:</label>
+        <select id="category" name="category" style="display: none;">
+            <option value="Electronics">Electronics</option>
+            <option value="Clothing">Clothing</option>
+            <option value="Books">Books</option>
+            <!-- Add more categories as needed -->
+        </select><br><br>
+
+        <!-- Image Upload -->
         <label for="image">Image:</label>
         <input type="file" id="image" name="image" accept="image/*"><br><br>
 
+        <!-- Submit Button -->
+        <!-- <input type="submit" value="Submit" name="generate"> -->
         <button type="submit" name="generate">Generate</button>
         <button type="submit" name="submit" id="saveButton" disabled>Save data</button>
     </form>
@@ -46,16 +61,24 @@
 					$price = $_POST['price'];
 					$description = $_POST['description'];
 					$discount = $_POST['discount'];
+					$category = $_POST['category'];
+					// Assuming you're storing the uploaded image on the server
+					// You can handle image uploads and file paths as needed
+					// $image_path = 'path/to/uploaded/image.jpg'; // Replace with the actual path
+					
+           			// $image_path = 'uploads/' . $data['file_name'];
+					// Create an associative array with the form data
 					$image_path=$_FILES['image']['name'];
 					$data = array(
 						'item_name' => $item_name,
 						'price' => $price,
 						'description' => $description,
 						'discount' => $discount,
+						'category' => $category,
 						'image' => $image_path
 					);
 
-					$json_data = json_encode($data);
+                    $json_data = json_encode($data);
 
 					echo "
 				// 		<img src='https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl=$json_data&choe=UTF-8'>
@@ -69,6 +92,7 @@
 				document.querySelector('#price').value='".$price."';
 				document.querySelector('#description').value='".$description."';
 				document.querySelector('#discount').value='".$discount."';
+				document.querySelector('#category').value='".$category."';
 				alert('please add the image again');
                 </script>";
 
