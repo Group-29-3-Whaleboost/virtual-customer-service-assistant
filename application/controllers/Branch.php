@@ -9,3 +9,5 @@ class Branch extends CI_Controller {
 		$this->load->view('super-admin/branch',$data);
 	}
 }
+
+?>

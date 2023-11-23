@@ -1,14 +1,22 @@
 <?php
 
-require 'dbcon.php';
+$con = mysqli_connect("localhost","root","","customer_service_assistant");
+
+if(!$con){
+    die('Connection Failed'. mysqli_connect_error());
+}
+
+
 
 if(isset($_POST['save_branch']))
 {
     $branch_name = mysqli_real_escape_string($con, $_POST['branch_name']);
     $address = mysqli_real_escape_string($con, $_POST['address']);
     $phone_no = mysqli_real_escape_string($con, $_POST['phone_no']);
+    $latitude = mysqli_real_escape_string($con, $_POST['latitude']);
+    $longitude = mysqli_real_escape_string($con, $_POST['longitude']);
 
-    if($branch_name == NULL || $address == NULL || $phone_no == NULL)
+    if($branch_name == NULL || $address == NULL || $phone_no == NULL || $latitude == NULL || $longitude == NULL)
     {
         $res = [
             'status' => 422,
@@ -18,7 +26,7 @@ if(isset($_POST['save_branch']))
         return;
     }
 
-    $query = "INSERT INTO branch (branch_name,address,phone_no) VALUES ('$branch_name','$address','$phone_no')";
+    $query = "INSERT INTO branch (branch_name,address,phone_no,latitude,longitude) VALUES ('$branch_name','$address','$phone_no','$latitude','$longitude')";
     $query_run = mysqli_query($con, $query);
 
     if($query_run)
@@ -49,8 +57,10 @@ if(isset($_POST['update_branch']))
     $branch_name = mysqli_real_escape_string($con, $_POST['branch_name']);
     $address = mysqli_real_escape_string($con, $_POST['address']);
     $phone_no = mysqli_real_escape_string($con, $_POST['phone_no']);
+    $latitude = mysqli_real_escape_string($con, $_POST['latitude']);
+    $longitude = mysqli_real_escape_string($con, $_POST['longitude']);
 
-    if($branch_name == NULL || $address == NULL || $phone_no == NULL)
+    if($branch_name == NULL || $address == NULL || $phone_no == NULL || $latitude == NULL || $longitude == NULL)
     {
         $res = [
             'status' => 422,
@@ -60,7 +70,7 @@ if(isset($_POST['update_branch']))
         return;
     }
 
-    $query = "UPDATE branch SET branch_name='$branch_name', address='$address', phone_no='$phone_no' 
+    $query = "UPDATE branch SET branch_name='$branch_name', address='$address', phone_no='$phone_no', latitude='$latitude', longitude='$longitude' 
                 WHERE branch_id='$branch_id'";
     $query_run = mysqli_query($con, $query);
 

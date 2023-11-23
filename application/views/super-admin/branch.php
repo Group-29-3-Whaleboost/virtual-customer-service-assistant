@@ -549,15 +549,28 @@ a:hover {
 
                                 <div class="mb-3">
                                     <label for="">Branch Name</label>
-                                    <input type="text" name="branch_name" class="form-control" />
+                                    <input type="text" name="branch_name" class="form-control"
+                                        placeholder="Enter the branch name" />
                                 </div>
                                 <div class="mb-3">
                                     <label for="">Address</label>
-                                    <input type="text" name="address" class="form-control" />
+                                    <input type="text" name="address" class="form-control"
+                                        placeholder="Enter the branch address" />
                                 </div>
                                 <div class="mb-3">
                                     <label for="">Phone No</label>
-                                    <input type="text" name="phone_no" class="form-control" />
+                                    <input type="number" name="phone_no" class="form-control"
+                                        placeholder="Enter the branch phone number" />
+                                </div>
+                                <div class="mb-3">
+                                    <label for="">Latitude</label>
+                                    <input type="text" name="latitude" class="form-control"
+                                        placeholder="Enter the branch latitude" />
+                                </div>
+                                <div class="mb-3">
+                                    <label for="">Longitude</label>
+                                    <input type="text" name="longitude" class="form-control"
+                                        placeholder="Enter the branch longitude" />
                                 </div>
                             </div>
                             <div class="modal-footer">
@@ -587,15 +600,28 @@ a:hover {
 
                                 <div class="mb-3">
                                     <label for="">Branch Name</label>
-                                    <input type="text" name="branch_name" id="branch_name" class="form-control" />
+                                    <input type="text" name="branch_name" id="branch_name" class="form-control"
+                                        placeholder="Enter the branch name" />
                                 </div>
                                 <div class="mb-3">
                                     <label for="">Address</label>
-                                    <input type="text" name="address" id="address" class="form-control" />
+                                    <input type="text" name="address" id="address" class="form-control"
+                                        placeholder="Enter the branch address" />
                                 </div>
                                 <div class="mb-3">
                                     <label for="">Phone No</label>
-                                    <input type="text" name="phone_no" id="phone_no" class="form-control" />
+                                    <input type="number" name="phone_no" id="phone_no" class="form-control"
+                                        placeholder="Enter the branch phone number" />
+                                </div>
+                                <div class="mb-3">
+                                    <label for="">Latitude</label>
+                                    <input type="text" name="latitude" id="latitude" class="form-control"
+                                        placeholder="Enter the branch latitude" />
+                                </div>
+                                <div class="mb-3">
+                                    <label for="">Longitude</label>
+                                    <input type="text" name="longitude" id="longitude" class="form-control"
+                                        placeholder="Enter the branch longitude" />
                                 </div>
                             </div>
                             <div class="modal-footer">
@@ -629,6 +655,14 @@ a:hover {
                                 <label for="">Phone No</label>
                                 <p id="view_phone_no" class="form-control"></p>
                             </div>
+                            <div class="mb-3">
+                                <label for="">Latitude</label>
+                                <p id="view_latitude" class="form-control"></p>
+                            </div>
+                            <div class="mb-3">
+                                <label for="">Longitude</label>
+                                <p id="view_longitude" class="form-control"></p>
+                            </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -649,18 +683,25 @@ a:hover {
                                 </button>
                             </h4>
                         </div>
-                        <table id="myTable" class="table table-bordered table-striped">
+                        <table id="myTable" class="table">
                             <thead>
                                 <tr class="text-center">
                                     <th>Branch Name</th>
                                     <th>Address</th>
                                     <th>Phone No</th>
+                                    <th>Latitude</th>
+                                    <th>Longitude</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php
-                                require 'dbcon.php';
+
+                                $con = mysqli_connect("localhost","root","","customer_service_assistant");
+
+                                if(!$con){
+                                    die('Connection Failed'. mysqli_connect_error());
+                                }
 
                                 $query = "SELECT * FROM branch";
                                 $query_run = mysqli_query($con, $query);
@@ -674,8 +715,10 @@ a:hover {
                                     <td><?= $branch['branch_name'] ?></td>
                                     <td><?= $branch['address'] ?></td>
                                     <td><?= $branch['phone_no'] ?></td>
+                                    <td><?= $branch['latitude'] ?></td>
+                                    <td><?= $branch['longitude'] ?></td>
 
-                                    <td class="text-center">
+                                    <td>
                                         <button type="button" value="<?=$branch['branch_id'];?>"
                                             class="viewBranchBtn btn btn-info btn-sm"><i
                                                 class="fa-solid fa-eye fa-beat"></i></button>
@@ -712,7 +755,7 @@ a:hover {
 
                 $.ajax({
                     type: "POST",
-                    url: "branch-code.php",
+                    url: "<?php base_url() ?> /virtual-customer-service-assistant/assets/js/branch-code.php",
                     data: formData,
                     processData: false,
                     contentType: false,
@@ -748,7 +791,8 @@ a:hover {
 
                 $.ajax({
                     type: "GET",
-                    url: "branch-code.php?branch_id=" + branch_id,
+                    url: "<?php base_url() ?> /virtual-customer-service-assistant/assets/js/branch-code.php?branch_id=" +
+                        branch_id,
                     success: function(response) {
 
                         var res = jQuery.parseJSON(response);
@@ -761,6 +805,8 @@ a:hover {
                             $('#branch_name').val(res.data.branch_name);
                             $('#address').val(res.data.address);
                             $('#phone_no').val(res.data.phone_no);
+                            $('#latitude').val(res.data.latitude);
+                            $('#longitude').val(res.data.longitude);
 
                             $('#branchEditModal').modal('show');
                         }
@@ -778,7 +824,7 @@ a:hover {
 
                 $.ajax({
                     type: "POST",
-                    url: "branch-code.php",
+                    url: "<?php base_url() ?> /virtual-customer-service-assistant/assets/js/branch-code.php",
                     data: formData,
                     processData: false,
                     contentType: false,
@@ -814,7 +860,8 @@ a:hover {
                 var branch_id = $(this).val();
                 $.ajax({
                     type: "GET",
-                    url: "branch-code.php?branch_id=" + branch_id,
+                    url: "<?php base_url() ?> /virtual-customer-service-assistant/assets/js/branch-code.php?branch_id=" +
+                        branch_id,
                     success: function(response) {
 
                         var res = jQuery.parseJSON(response);
@@ -826,6 +873,8 @@ a:hover {
                             $('#view_branch_name').text(res.data.branch_name);
                             $('#view_address').text(res.data.address);
                             $('#view_phone_no').text(res.data.phone_no);
+                            $('#view_latitude').text(res.data.latitude);
+                            $('#view_longitude').text(res.data.longitude);
 
                             $('#branchViewModal').modal('show');
                         }
@@ -840,7 +889,7 @@ a:hover {
                     var branch_id = $(this).val();
                     $.ajax({
                         type: "POST",
-                        url: "branch-code.php",
+                        url: "<?php base_url() ?> /virtual-customer-service-assistant/assets/js/branch-code.php",
                         data: {
                             'delete_branch': true,
                             'branch_id': branch_id
@@ -867,8 +916,14 @@ a:hover {
 
 
 
-            <!-- included the footer -->
-            <?php include(APPPATH . 'views/includes/footer.php'); ?>
+            <!-- Footer area -->
+            <footer class="sticky-footer">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright © <a href="#" target="_blank">Whaleboost</a> 2023</span>
+                    </div>
+                </div>
+            </footer>
         </div>
 
 
@@ -881,6 +936,7 @@ a:hover {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous">
     </script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 
 </body>
