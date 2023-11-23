@@ -172,7 +172,7 @@
     // Show road path of the target location
     function getDirection(endLocation) {
         try {
-            var uri = "https://www.google.com/maps/dir//" + endLocation;
+            var uri = "https://www.google.com/maps/dir//" +"'"+ endLocation.lat+","+endLocation.lng+"'";
             window.open(uri);
 
         }catch (e){
