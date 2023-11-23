@@ -3,7 +3,7 @@
 <a class="navbar-brand mr-1" href="#">
     <div class="logo">
         <img style="width: 30px;" src="<?php base_url() ?> assets\images\logo.png" alt="CAS">
-        <h4>Customer Service Assistant</h4>
+        <h4 class="productTitile">Customer Service Assistant</h4>
         <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
             <i class="fas fa-bars"></i>
         </button>
