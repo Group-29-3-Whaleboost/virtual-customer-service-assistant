@@ -525,9 +525,9 @@ a:hover {
 
 .first-btn {
 
-    width: 320px;
+    width: 250px;
     height: 200px;
-    margin-top: 20%;
+    margin-top: 10%;
     font-size: 25px;
     margin-left: 20px;
     background-color: bisque;
@@ -537,9 +537,9 @@ a:hover {
 
 .second-btn {
 
-    width: 340px;
+    width: 250px;
     height: 200px;
-    margin-top: 20%;
+    margin-top: 10%;
     font-size: 25px;
     margin-left: 20px;
     background-color: rgb(234, 186, 113);
@@ -559,23 +559,24 @@ a:hover {
     font-size: 30px;
 }
 
-h1{
-    margin-left:520px;
+h1 {
+    /* margin-left: 33%;
     position: absolute;
-    margin-top:8%;
-    font-size:60px;
+    font-size: 60px; */
+    margin-top: 5%;
+    font-size: 60px;
 
 }
-
 </style>
 
 <body id="page-top">
     <!-- included the navbar -->
+    <?php include(APPPATH . 'views/includes/admin-navbar.php'); ?>
 
-    <?php include(APPPATH . 'views/includes/navbar.php'); ?>
     <div id="wrapper">
 
-        <?php include(APPPATH . 'views/includes/menu.php'); ?>
+        <!-- included the menu -->
+        <?php include(APPPATH . 'views/includes/admin_menu.php'); ?>
 
 
         <div id="content-wrapper">
@@ -585,46 +586,25 @@ h1{
 
             <div class="second-background">
 
-            <h1>Welcome</h1>
+                <h1>Welcome</h1>
 
-            <a href="">  
+                <a href="<?php echo site_url("Branch") ?>">
 
-                <button class="first-btn">Create a new branch</button>
+                    <button class="first-btn">Create branch</button>
 
-            </a>
+                </a>
 
-            <a href="">
-            
-                <button class="second-btn">Create a new manager</button>
-                
-            </a>
+                <a href="">
+
+                    <button class="second-btn">Create manager</button>
+
+                </a>
 
 
             </div>
 
 
         </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
         <!-- included the footer -->

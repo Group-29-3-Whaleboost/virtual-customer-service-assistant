@@ -38,9 +38,6 @@
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
             <a class="dropdown-item" href="<?php echo site_url("Profile") ?>">Profile</a>
             <div class="dropdown-divider"></div>
-            <!-- <a class="dropdown-item" href="#">Notification</a> -->
-            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#" id='LinkToNotification'>Notification</a>
-            <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="<?php echo site_url("Auth") ?>">Logout</a>
         </div>
     </li>

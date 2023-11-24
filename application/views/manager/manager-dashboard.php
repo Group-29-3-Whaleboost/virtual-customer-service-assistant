@@ -525,9 +525,9 @@ a:hover {
 
 .first-btn {
 
-    width: 290px;
+    width: 250px;
     height: 200px;
-    margin-top: 20%;
+    margin-top: 10%;
     font-size: 25px;
     margin-left: 20px;
     background-color: bisque;
@@ -537,9 +537,9 @@ a:hover {
 
 .second-btn {
 
-    width: 290px;
+    width: 250px;
     height: 200px;
-    margin-top: 20%;
+    margin-top: 10%;
     font-size: 25px;
     margin-left: 20px;
     background-color: rgb(234, 186, 113);
@@ -549,9 +549,9 @@ a:hover {
 
 .third-btn {
 
-    width: 290px;
+    width: 250px;
     height: 200px;
-    margin-top: 10px;
+    margin-top: 10%;
     font-size: 25px;
     margin-left: 20px;
     background-color: brown;
@@ -578,9 +578,9 @@ a:hover {
 }
 
 h1{
-    margin-left:520px;
-    position: absolute;
-    margin-top:8%;
+    /* margin-left:520px;
+    position: absolute; */
+    margin-top:5%;
     font-size:60px;
 
 }
@@ -590,10 +590,10 @@ h1{
 <body id="page-top">
     <!-- included the navbar -->
 
-    <?php include(APPPATH . 'views/includes/navbar.php'); ?>
+    <?php include(APPPATH . 'views/includes/manager_navbar.php'); ?>
     <div id="wrapper">
 
-        <?php include(APPPATH . 'views/includes/menu.php'); ?>
+        <?php include(APPPATH . 'views/includes/manager_menu.php'); ?>
 
 
         <div id="content-wrapper">
@@ -607,7 +607,7 @@ h1{
 
             <a href="">  
 
-                <button class="first-btn">Add a Item</button>
+                <button class="first-btn">Add Items</button>
 
             </a>
 
@@ -619,7 +619,7 @@ h1{
 
             <a href="">
 
-                <button class="third-btn">Create an assisstant</button>
+                <button class="third-btn">Create Assisstant</button>
 
             </a>
 
