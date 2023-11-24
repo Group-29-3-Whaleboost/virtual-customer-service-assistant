@@ -525,9 +525,9 @@ a:hover {
 
 .first-btn {
 
-    width: 320px;
+    width: 250px;
     height: 200px;
-    margin-top: 20%;
+    margin-top: 10%;
     font-size: 25px;
     margin-left: 20px;
     background-color:#56a832 ;
@@ -537,9 +537,9 @@ a:hover {
 
 .second-btn {
 
-    width: 340px;
+    width: 250px;
     height: 200px;
-    margin-top: 20%;
+    margin-top: 10%;
     font-size: 25px;
     margin-left: 20px;
     background-color: #43aed9;
@@ -560,9 +560,9 @@ a:hover {
 }
 
 h1{
-    margin-left:520px;
-    position: absolute;
-    margin-top:8%;
+    /* margin-left:520px;
+    position: absolute; */
+    margin-top:5%;
     font-size:60px;
 
 }
@@ -579,10 +579,10 @@ h1{
 <body id="page-top">
     <!-- included the navbar -->
 
-    <?php include(APPPATH . 'views/includes/navbar.php'); ?>
+    <?php include(APPPATH . 'views/includes/assistant_navbar.php'); ?>
     <div id="wrapper">
 
-        <?php include(APPPATH . 'views/includes/menu.php'); ?>
+        <?php include(APPPATH . 'views/includes/assistant_menu.php'); ?>
 
 
         <div id="content-wrapper">

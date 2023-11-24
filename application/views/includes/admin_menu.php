@@ -1,26 +1,20 @@
 <ul class="sidebar navbar-nav">
     <li class="nav-item active-1">
-        <a class="nav-link" href="<?php echo site_url("Dashboard") ?>">
+        <a class="nav-link" href="<?php echo site_url("SuperAdminDashboard") ?>">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span>
         </a>
     </li>
 
-    <li class="nav-item active-2">
-        <a class="nav-link" href="<?php echo site_url("SearchItem") ?>">
-            <i class="fas fa-fw fa-search"></i>
-            <span>Search item</span></a>
-    </li>
-
     <li class="nav-item active-3">
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="<?php echo site_url("Branch") ?>">
             <i class="fas fa-fw fa-camera"></i>
-            <span>Checkout</span></a>
+            <span>Create Branch</span></a>
     </li>
 
     <li class="nav-item active-4">
         <a class="nav-link" href="#">
             <i class="fas fa-fw fa-question-circle"></i>
-            <span>Customer help</span></a>
+            <span>Create Manager</span></a>
     </li>
 </ul>
