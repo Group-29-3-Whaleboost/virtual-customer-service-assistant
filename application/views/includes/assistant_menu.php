@@ -8,13 +8,13 @@
 
     <li class="nav-item active-3">
         <a class="nav-link" href="#">
-            <i class="fas fa-fw fa-camera"></i>
+            <i class="fa-solid fa-qrcode"></i>
             <span>Scan QR</span></a>
     </li>
 
     <li class="nav-item active-4">
         <a class="nav-link" href="#">
-            <i class="fas fa-fw fa-question-circle"></i>
-            <span>Help customer</span></a>
+            <i class="fa-solid fa-headset"></i>
+            <span>Help Customer</span></a>
     </li>
 </ul>

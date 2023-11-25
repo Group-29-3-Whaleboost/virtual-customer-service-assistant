@@ -1,12 +1,20 @@
 <!-- included the header -->
 <?php include(APPPATH . 'views/includes/header.php'); ?>
 
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+</head>
+
 <style>
-#content-wrapper>div>a.card.search-card {
+#content-wrapper>div>a.card.add-items-card {
     text-decoration: none;
 }
 
-#content-wrapper>div>a.card.checkout-card {
+#content-wrapper>div>a.card.push-notification-card {
+    text-decoration: none;
+}
+
+#content-wrapper>div>a.card.create-assistant-card {
     text-decoration: none;
 }
 
@@ -97,7 +105,7 @@ body.fixed-nav.sidebar-toggled #content-wrapper {
     width: 100%;
 }
 
-.navbar-nav .nav-item.active .nav-link {
+.navbar-nav .nav-item.active-1 .nav-link {
     color: #fff;
 }
 
@@ -429,11 +437,15 @@ body {
     display: none;
 }
 
-.search-card {
+.add-items-card {
     background-color: #FFD699;
 }
 
-.checkout-card {
+.push-notification-card {
+    background-color: #6ade89;
+}
+
+.create-assistant-card {
     background-color: #AED9E0;
 }
 
@@ -462,20 +474,6 @@ h2 {
         /* Adjust the margin to create spacing between the cards */
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 .logo {
     display: flex;
@@ -513,78 +511,6 @@ a {
 a:hover {
     text-decoration: none;
 }
-
-/*dashboard creation */
-
-.second-background {
-
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-}
-
-.first-btn {
-
-    width: 250px;
-    height: 200px;
-    margin-top: 10%;
-    font-size: 25px;
-    margin-left: 20px;
-    background-color: bisque;
-    cursor: pointer;
-
-}
-
-.second-btn {
-
-    width: 250px;
-    height: 200px;
-    margin-top: 10%;
-    font-size: 25px;
-    margin-left: 20px;
-    background-color: rgb(234, 186, 113);
-    cursor: pointer;
-
-}
-
-.third-btn {
-
-    width: 250px;
-    height: 200px;
-    margin-top: 10%;
-    font-size: 25px;
-    margin-left: 20px;
-    background-color: brown;
-    cursor: pointer;
-
-}
-
-.first-btn:hover {
-
-    background-color: rgb(222, 227, 75);
-    font-size: 30px;
-}
-
-.second-btn:hover {
-
-    background-color: rgb(189, 161, 25);
-    font-size: 30px;
-}
-
-.third-btn:hover {
-
-    background-color: red;
-    font-size: 30px;
-}
-
-h1{
-    /* margin-left:520px;
-    position: absolute; */
-    margin-top:5%;
-    font-size:60px;
-
-}
-
 </style>
 
 <body id="page-top">
@@ -601,53 +527,24 @@ h1{
 
             <!--dashboard creation-->
 
-            <div class="second-background">
-
-            <h1>Welcome</h1>
-
-            <a href="">  
-
-                <button class="first-btn">Add Items</button>
-
-            </a>
-
-            <a href="">
-            
-                <button class="second-btn">Push Notification</button>
-                
-            </a>
-
-            <a href="">
-
-                <button class="third-btn">Create Assisstant</button>
-
-            </a>
-
+            <div class="dashboard">
+                <h1>Welcome Again</h1>
+                <a href="<?php echo site_url("AddItem") ?>" class="card add-items-card">
+                    <i class="fa-solid fa-carrot fa-2x"></i>
+                    <h2>Add Items</h2>
+                </a>
+                <a href="#" class="card push-notification-card">
+                    <i class="fa-solid fa-envelope fa-2x"></i>
+                    <h2>Push Notification</h2>
+                </a>
+                <a href="#" class="card create-assistant-card">
+                    <i class="fa-solid fa-users fa-2x"></i>
+                    <h2>Create Assistant</h2>
+                </a>
             </div>
 
 
         </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
         <!-- included the footer -->

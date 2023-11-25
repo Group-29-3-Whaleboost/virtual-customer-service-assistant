@@ -535,8 +535,8 @@ a:hover {
                     </div>
 
                     <!-- Filter Items by Category name using buttons -->
-                    <div class="d-flex justify-content-center">
-                        <div class="col-md-9">
+                    <div class="d-flex justify-content-center col-md-12">
+                        <div>
                             <div class="card-body">
                                 <!-- vegetables, fruits, meat & fish & eggs, grocery, bakery -->
                                 <a href="#" class="btn btn-primary mx-1 my-1" onclick="filterItemsByCategory('all')">All
