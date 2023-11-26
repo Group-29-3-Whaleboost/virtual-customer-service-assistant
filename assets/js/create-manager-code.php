@@ -19,6 +19,8 @@ if(isset($_POST['save_manager']))
     $nic = mysqli_real_escape_string($con, $_POST['nic']);
     $selected_branch = mysqli_real_escape_string($con, $_POST['selected_branch']);
 
+    $session_admin = 'SA001';
+
     if($manager_name == NULL || $email == NULL || $phone_no == NULL || $address == NULL || $nic == NULL || $selected_branch == 0)
     {
         $res = [
@@ -29,7 +31,7 @@ if(isset($_POST['save_manager']))
         return;
     }
 
-    $query = "INSERT INTO manager (manager_id,name,email,phone_no,address,nic,branch_id) VALUES ('$manager_id','$manager_name','$email','$phone_no','$address','$nic','$selected_branch')";
+    $query = "INSERT INTO manager (manager_id,name,email,phone_no,address,nic,branch_id,admin_id) VALUES ('$manager_id','$manager_name','$email','$phone_no','$address','$nic','$selected_branch','$session_admin')";
     $query_run = mysqli_query($con, $query);
 
     if($query_run)

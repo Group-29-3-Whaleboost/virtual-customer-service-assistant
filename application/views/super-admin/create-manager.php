@@ -12,6 +12,7 @@
 
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css" />
 </head>
+
 <style>
 #content-wrapper>div>a.card.search-card {
     text-decoration: none;
@@ -108,7 +109,7 @@ body.fixed-nav.sidebar-toggled #content-wrapper {
     width: 100%;
 }
 
-.navbar-nav .nav-item.active-1 .nav-link {
+.navbar-nav .nav-item.active-4 .nav-link {
     color: #fff;
 }
 
@@ -258,20 +259,6 @@ body.fixed-nav.sidebar-toggled #content-wrapper {
         margin: 0;
     }
 
-    .fas.fa-bars {
-        display: none;
-    }
-
-    .dropdown-divider {
-        margin: 0px;
-    }
-
-    #LinkToNotification {
-        display: none;
-        padding: 0px;
-        margin: 0px;
-    }
-
     .sidebar.toggled .nav-item .dropdown-menu.dropup {
         bottom: 0;
         top: auto !important;
@@ -406,11 +393,11 @@ footer.sticky-footer .copyright {
 
 @media (min-width: 768px) {
     footer.sticky-footer {
-        width: 100%;
+        width: calc(100% - 225px);
     }
 }
 
-footer.sticky-footer {
+body.sidebar-toggled footer.sticky-footer {
     width: 100%;
 }
 
@@ -449,6 +436,11 @@ body {
     transition: transform 0.3s ease;
 }
 
+.fa-shopping-basket {
+
+    display: none;
+}
+
 .search-card {
     background-color: #FFD699;
 }
@@ -481,10 +473,6 @@ h2 {
         margin: 5px;
         /* Adjust the margin to create spacing between the cards */
     }
-}
-
-#cartIcon {
-    display: none;
 }
 
 .logo {
@@ -527,16 +515,20 @@ a:hover {
 
 <body id="page-top">
     <!-- included the navbar -->
-    <?php include(APPPATH . 'views/includes/navbar.php'); ?>
+    <?php include(APPPATH . 'views/includes/admin-navbar.php'); ?>
 
     <div id="wrapper">
+
+        <!-- included the menu -->
+        <?php include(APPPATH . 'views/includes/admin_menu.php'); ?>
 
         <div id="content-wrapper">
             <!-- Code of Create Manager page -->
 
-            
+
             <!-- Add Manager Modal -->
-            <div class="modal fade" id="managerAddModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade" id="managerAddModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -569,7 +561,8 @@ a:hover {
                                 </div>
                                 <div class="mb-3">
                                     <label for="">NIC No</label>
-                                    <input type="text" name="nic" class="form-control" placeholder="Enter the manager nic no" />
+                                    <input type="text" name="nic" class="form-control"
+                                        placeholder="Enter the manager nic no" />
                                 </div>
                                 <div class="mb-3">
                                     <label for="">Branch Name</label>
@@ -590,7 +583,8 @@ a:hover {
                                             foreach($query_run as $branch)
                                             {
                                         ?>
-                                        <option value="<?= $branch['branch_id'] ?>"><?= $branch['branch_name'] ?></option>
+                                        <option value="<?= $branch['branch_id'] ?>"><?= $branch['branch_name'] ?>
+                                        </option>
 
                                         <?php
                                             }
@@ -609,7 +603,8 @@ a:hover {
             </div>
 
             <!-- Edit Manager Modal -->
-            <div class="modal fade" id="managerEditModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade" id="managerEditModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -665,7 +660,8 @@ a:hover {
                                             foreach($query_run as $branch)
                                             {
                                         ?>
-                                        <option value="<?= $branch['branch_id'] ?>"><?= $branch['branch_name'] ?></option>
+                                        <option value="<?= $branch['branch_id'] ?>"><?= $branch['branch_name'] ?>
+                                        </option>
 
                                         <?php
                                             }
@@ -685,7 +681,8 @@ a:hover {
             </div>
 
             <!-- View Manager Modal -->
-            <div class="modal fade" id="managerViewModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade" id="managerViewModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -726,7 +723,7 @@ a:hover {
             </div>
 
             <!-- Table -->
-            <div class="container mt-4">
+            <div class="container p-4">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="mb-4">
@@ -815,7 +812,7 @@ a:hover {
 
                 $.ajax({
                     type: "POST",
-                    url: "<?php base_url() ?> /virtual-customer-service-assistant/assets/js/create-manager-code.php",
+                    url: "<?php base_url() ?> assets/js/create-manager-code.php",
                     data: formData,
                     processData: false,
                     contentType: false,
@@ -851,7 +848,7 @@ a:hover {
 
                 $.ajax({
                     type: "GET",
-                    url: "<?php base_url() ?> /virtual-customer-service-assistant/assets/js/create-manager-code.php?manager_id=" +
+                    url: "<?php base_url() ?> assets/js/create-manager-code.php?manager_id=" +
                         manager_id,
                     success: function(response) {
 
@@ -889,7 +886,7 @@ a:hover {
 
                 $.ajax({
                     type: "POST",
-                    url: "<?php base_url() ?> /virtual-customer-service-assistant/assets/js/create-manager-code.php",
+                    url: "<?php base_url() ?> assets/js/create-manager-code.php",
                     data: formData,
                     processData: false,
                     contentType: false,
@@ -925,7 +922,7 @@ a:hover {
                 var manager_id = $(this).val();
                 $.ajax({
                     type: "GET",
-                    url: "<?php base_url() ?> /virtual-customer-service-assistant/assets/js/create-manager-code.php?manager_id=" +
+                    url: "<?php base_url() ?> assets/js/create-manager-code.php?manager_id=" +
                         manager_id,
                     success: function(response) {
 
@@ -955,7 +952,7 @@ a:hover {
                     var manager_id = $(this).val();
                     $.ajax({
                         type: "POST",
-                        url: "<?php base_url() ?> /virtual-customer-service-assistant/assets/js/create-manager-code.php",
+                        url: "<?php base_url() ?> assets/js/create-manager-code.php",
                         data: {
                             'delete_manager': true,
                             'manager_id': manager_id
@@ -1002,6 +999,49 @@ a:hover {
         integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous">
     </script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+    ! function(t) {
+        "use strict";
+
+
+        t("#sidebarToggle").click(function(e) {
+            e.preventDefault();
+            t("body").toggleClass("sidebar-toggled");
+            t(".sidebar").toggleClass("toggled");
+        });
+
+
+        t("body.fixed-nav .sidebar").on("mousewheel DOMMouseScroll wheel", function(e) {
+            if (768 < t(window).width()) {
+                var o = e.originalEvent;
+                var delta = o.wheelDelta || -o.detail;
+                this.scrollTop += 30 * (delta < 0 ? 1 : -1);
+                e.preventDefault();
+            }
+        });
+
+
+        t(document).scroll(function() {
+            if (100 < t(this).scrollTop()) {
+                t(".scroll-to-top").fadeIn();
+            } else {
+                t(".scroll-to-top").fadeOut();
+            }
+        });
+
+        t(document).on("click", "a.scroll-to-top", function(e) {
+            var target = t(this);
+            t("html, body").stop().animate({
+                    scrollTop: t(target.attr("href")).offset().top
+                },
+                1000,
+                "easeInOutExpo"
+            );
+            e.preventDefault();
+        });
+    }(jQuery);
+    </script>
 
 
 </body>

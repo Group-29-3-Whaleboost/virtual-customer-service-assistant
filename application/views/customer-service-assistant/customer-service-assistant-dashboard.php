@@ -1,12 +1,16 @@
 <!-- included the header -->
 <?php include(APPPATH . 'views/includes/header.php'); ?>
 
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+</head>
+
 <style>
-#content-wrapper>div>a.card.search-card {
+#content-wrapper>div>a.card.scan-qr-card {
     text-decoration: none;
 }
 
-#content-wrapper>div>a.card.checkout-card {
+#content-wrapper>div>a.card.help-customer-card {
     text-decoration: none;
 }
 
@@ -97,7 +101,7 @@ body.fixed-nav.sidebar-toggled #content-wrapper {
     width: 100%;
 }
 
-.navbar-nav .nav-item.active .nav-link {
+.navbar-nav .nav-item.active-1 .nav-link {
     color: #fff;
 }
 
@@ -429,11 +433,11 @@ body {
     display: none;
 }
 
-.search-card {
+.scan-qr-card {
     background-color: #FFD699;
 }
 
-.checkout-card {
+.help-customer-card {
     background-color: #AED9E0;
 }
 
@@ -462,20 +466,6 @@ h2 {
         /* Adjust the margin to create spacing between the cards */
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 .logo {
     display: flex;
@@ -514,63 +504,10 @@ a:hover {
     text-decoration: none;
 }
 
-/*dashboard creation */
-
-.second-background {
-
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-}
-
-.first-btn {
-
-    width: 250px;
-    height: 200px;
-    margin-top: 10%;
-    font-size: 25px;
-    margin-left: 20px;
-    background-color:#56a832 ;
-    cursor: pointer;
-
-}
-
-.second-btn {
-
-    width: 250px;
-    height: 200px;
-    margin-top: 10%;
-    font-size: 25px;
-    margin-left: 20px;
-    background-color: #43aed9;
-    cursor: pointer;
-
-}
-
-.first-btn:hover {
-
-    background-color: #73e643;
-    font-size: 30px;
-}
-
-.second-btn:hover {
-
-    background-color: #93ddfa;
-    font-size: 30px;
-}
-
-h1{
-    /* margin-left:520px;
-    position: absolute; */
-    margin-top:5%;
-    font-size:60px;
-
-}
-
 @media (max-width: 600px) {
     div {
         flex-wrap: wrap;
-        
+
     }
 
 }
@@ -591,48 +528,20 @@ h1{
             <!--dashboard creation-->
 
 
-            <div class="second-background">
-
-            <h1>Welcome</h1>
-
-            <a href="">  
-
-                <button class="first-btn">Scan QR</button>
-
-            </a>
-
-            <a href="">
-            
-                <button class="second-btn">Help customer</button>
-                
-            </a>
-
-
+            <div class="dashboard">
+                <h1>Welcome Again</h1>
+                <a href="#" class="card scan-qr-card">
+                    <i class="fa-solid fa-qrcode fa-2x"></i>
+                    <h2>Scan QR</h2>
+                </a>
+                <a href="#" class="card help-customer-card">
+                    <i class="fa-solid fa-headset fa-2x"></i>
+                    <h2>Help Customer</h2>
+                </a>
             </div>
 
 
         </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
         <!-- included the footer -->

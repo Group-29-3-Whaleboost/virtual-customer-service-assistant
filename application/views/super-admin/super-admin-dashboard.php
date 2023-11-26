@@ -1,12 +1,16 @@
 <!-- included the header -->
 <?php include(APPPATH . 'views/includes/header.php'); ?>
 
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+</head>
+
 <style>
-#content-wrapper>div>a.card.search-card {
+#content-wrapper>div>a.card.create-branch-card {
     text-decoration: none;
 }
 
-#content-wrapper>div>a.card.checkout-card {
+#content-wrapper>div>a.card.create-manager-card {
     text-decoration: none;
 }
 
@@ -97,7 +101,7 @@ body.fixed-nav.sidebar-toggled #content-wrapper {
     width: 100%;
 }
 
-.navbar-nav .nav-item.active .nav-link {
+.navbar-nav .nav-item.active-1 .nav-link {
     color: #fff;
 }
 
@@ -429,11 +433,11 @@ body {
     display: none;
 }
 
-.search-card {
+.create-branch-card {
     background-color: #FFD699;
 }
 
-.checkout-card {
+.create-manager-card {
     background-color: #AED9E0;
 }
 
@@ -462,20 +466,6 @@ h2 {
         /* Adjust the margin to create spacing between the cards */
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 .logo {
     display: flex;
@@ -513,60 +503,6 @@ a {
 a:hover {
     text-decoration: none;
 }
-
-/*dashboard creation */
-
-.second-background {
-
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-}
-
-.first-btn {
-
-    width: 250px;
-    height: 200px;
-    margin-top: 10%;
-    font-size: 25px;
-    margin-left: 20px;
-    background-color: bisque;
-    cursor: pointer;
-
-}
-
-.second-btn {
-
-    width: 250px;
-    height: 200px;
-    margin-top: 10%;
-    font-size: 25px;
-    margin-left: 20px;
-    background-color: rgb(234, 186, 113);
-    cursor: pointer;
-
-}
-
-.first-btn:hover {
-
-    background-color: rgb(222, 227, 75);
-    font-size: 30px;
-}
-
-.second-btn:hover {
-
-    background-color: rgb(189, 161, 25);
-    font-size: 30px;
-}
-
-h1 {
-    /* margin-left: 33%;
-    position: absolute;
-    font-size: 60px; */
-    margin-top: 5%;
-    font-size: 60px;
-
-}
 </style>
 
 <body id="page-top">
@@ -584,23 +520,16 @@ h1 {
 
             <!--dashboard creation-->
 
-            <div class="second-background">
-
-                <h1>Welcome</h1>
-
-                <a href="<?php echo site_url("Branch") ?>">
-
-                    <button class="first-btn">Create branch</button>
-
+            <div class="dashboard">
+                <h1>Welcome Again</h1>
+                <a href="<?php echo site_url("Branch") ?>" class="card create-branch-card">
+                    <i class="fa-solid fa-store fa-2x"></i>
+                    <h2>Create Branch</h2>
                 </a>
-
-                <a href="">
-
-                    <button class="second-btn">Create manager</button>
-
+                <a href="<?php echo site_url("CreateManager") ?>" class="card create-manager-card">
+                    <i class="fa-solid fa-user-tie fa-2x"></i>
+                    <h2>Create Manager</h2>
                 </a>
-
-
             </div>
 
 
