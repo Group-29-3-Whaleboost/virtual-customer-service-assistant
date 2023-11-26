@@ -13,7 +13,7 @@
     </li>
 
     <li class="nav-item active-3">
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="<?php echo site_url("PushNotification") ?>">
             <i class="fa-solid fa-envelope"></i>
             <span>Push Notification</span></a>
     </li>
