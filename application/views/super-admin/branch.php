@@ -702,7 +702,7 @@ a:hover {
                                     foreach($query_run as $branch)
                                     {
                                         ?>
-                                <tr>
+                                <tr class="text-center">
                                     <td><?= $branch['branch_name'] ?></td>
                                     <td><?= $branch['address'] ?></td>
                                     <td><?= $branch['phone_no'] ?></td>

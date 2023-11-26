@@ -20,7 +20,7 @@ class SuperAdminDashboard extends CI_Controller {
 	 */
 	public function index()
 	{
-		$data['title'] = 'Super-Admin-Dashboard | CAS';
+		$data['title'] = 'Admin Dashboard | CAS';
 		$this->load->view('super-admin/Super-Admin-Dashboard',$data);
 	}
 }

@@ -19,7 +19,7 @@
     </li>
 
     <li class="nav-item active-4">
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="<?php echo site_url("CreateAssistant") ?>">
             <i class="fa-solid fa-users"></i>
             <span>Create Assistant</span></a>
     </li>

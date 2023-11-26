@@ -20,7 +20,7 @@ class CustomerServiceAssistantDashboard extends CI_Controller {
 	 */
 	public function index()
 	{
-		$data['title'] = 'customer-service-assistant-dashboard | CAS';
+		$data['title'] = 'Assistant Dashboard | CAS';
 		$this->load->view('customer-service-assistant/customer-service-assistant-dashboard',$data);
 	}
 }
