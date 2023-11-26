@@ -19,8 +19,14 @@
     </li>
 
     <li class="nav-item active-4">
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="<?php echo site_url("Help") ?>">
             <i class="fa-solid fa-circle-info"></i>
             <span>Customer Help</span></a>
+    </li>
+
+    <li class="nav-item active-5">
+        <a class="nav-link" href="<?php echo site_url("SelectBranch") ?>">
+            <i class="fas fa-building-circle-arrow-right"></i>
+            <span>Change Branch</span></a>
     </li>
 </ul>
