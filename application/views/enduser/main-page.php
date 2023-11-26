@@ -64,7 +64,7 @@
                         <a class="nav-link active" aria-current="page" href="#navigation-bar">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#aboutus">About Us</a>
+                        <a class="nav-link" href="#features">About Us</a>
                     </li>
 
                     <li class="nav-item">
@@ -72,7 +72,7 @@
                     </li>
                 </ul>
                 <div class="d-flex" role="button">
-                    <a class="btn btn-outline-success" role="button" href="#">Sign In/ Sign Up</a>
+                    <a class="btn btn-outline-success" role="button" href="<?php base_url() ?> Auth">Sign In/ Sign Up</a>
                 </div>
             </div>
         </div>
@@ -121,8 +121,7 @@
 
 
     <div class="d-grid gap-4 container-fluid" style="padding: 5%;">
-        <button type="button" class="btn btn-primary btn-lg ">SIGN IN</button>
-        <button type="button" class="btn btn-primary btn-lg">SIGN UP</button>
+        <a href="<?php base_url() ?> Auth" class="btn btn-primary btn-lg ">SIGN IN/ SIGN UP</a>
     </div>
 
     <h3 id="features" class="text-success legend" style="padding: 5px;">This Web Application Provide You Below Features:
@@ -262,7 +261,7 @@
                     <h5>Sign In to Our Application</h5>
                     <p>The best virtual customer service is provided</p>
                     <div class="d-flex flex-column flex-sm-row w-100 gap-2">
-                        <button class="btn btn-primary" type="button">Sign In/ Up</button>
+                        <a href ="<?php base_url() ?> Auth" class="btn btn-primary">Sign In/ Up</a>
                     </div>
 
                 </div>

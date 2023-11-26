@@ -583,7 +583,7 @@ a:hover {
                                             src="<?php base_url() ?> assets\images\user-image\<?php echo $profile_image; ?>"
                                             class="profile-img mt-5">
                                         <!-- A button that triggers the file input -->
-                                        <button id="uploadBtn" class="file-input-button"
+                                        <button type="button" id="uploadBtn" class="file-input-button"
                                             onclick="document.getElementById('fileInput').click()">
                                             <i class="fa-solid fa-camera"></i>
                                         </button>
@@ -660,24 +660,82 @@ a:hover {
                                                 value="<?php echo $address; ?>" placeholder="Your Address">
                                         </div>
                                     </div>
-                                    <div class="row justify-content-center">
+                                    <div id="editInputPW" class="row justify-content-center" hidden>
                                         <div class="col-sm-5 mt-0 m-4">
                                             <p class="text-center mb-2 text-muted">Password</p>
                                             <input type="password" minlength="8" class="form-control" id="password"
-                                                name="password" placeholder="Enter Your New Password" required>
+                                                value="<?php echo $password; ?>" name="password"
+                                                placeholder="Enter Your New Password" required disabled>
                                         </div>
                                         <div class="col-sm-5 mt-0 m-4">
                                             <p class="text-center mb-2 text-muted">Confirm Password</p>
                                             <input type="password" class="form-control" id="confirmPW" name="confirmPW"
-                                                placeholder="Confirm Your Password" required>
+                                                value="<?php echo $password; ?>" placeholder="Confirm Your Password"
+                                                required disabled>
                                         </div>
                                     </div>
                                     <div class="row justify-content-center">
-                                        <div class="mt-4 mb-4 text-center">
-                                            <button name="submit" type="submit" class="btn btn-primary">Update
+                                        <div class="col-sm-3 mt-4 mb-4 text-center">
+                                            <button id="changePwBtn" name="changePwBtn" type="button"
+                                                class="btn btn-dark" style="width : 130px;"
+                                                onclick="togglePassword()">Edit
+                                                Password</button>
+                                        </div>
+                                        <div class="col-sm-3 mt-4 mb-4 text-center">
+                                            <button name="submit" type="submit" class="btn btn-primary"
+                                                style="width : 130px;" onclick="enablePassword()">Update
                                                 Profile</button>
                                         </div>
                                     </div>
+
+                                    <!-- Enable Password -->
+                                    <script>
+                                    function togglePassword() {
+                                        var passwordInput = document.getElementById("password");
+                                        var btn = document.getElementById("changePwBtn");
+                                        var confirmPWField = document.getElementById('confirmPW');
+                                        var editInputPW = document.getElementById('editInputPW');
+
+                                        // Toggle the disabled attribute of the password input field
+                                        passwordInput.disabled = !passwordInput.disabled;
+                                        confirmPWField.disabled = !confirmPWField.disabled;
+                                        editInputPW.hidden = !editInputPW.hidden;
+
+                                        // Clear the value when enabling the input field
+                                        if (!passwordInput.disabled && !confirmPWField.disabled) {
+                                            passwordInput.value = "";
+                                            confirmPWField.value = "";
+                                            editInputPW.removeAttribute('hidden');
+                                        } else {
+                                            passwordInput.value = "<?php echo $password; ?>";
+                                            confirmPWField.value = "<?php echo $password; ?>";
+                                        }
+
+                                        // Change button text and color
+                                        if (passwordInput.disabled) {
+                                            btn.innerHTML = "Edit Password";
+                                            btn.classList.remove("btn-secondary");
+                                            btn.classList.add("btn-dark");
+                                            btn.classList.addAttribute('required');
+                                        } else {
+                                            btn.innerHTML = "Cancel";
+                                            btn.classList.remove("btn-dark");
+                                            btn.classList.add("btn-secondary");
+                                        }
+                                    }
+
+                                    function enablePassword() {
+                                        var passwordField = document.getElementById('password');
+                                        var confirmPWField = document.getElementById('confirmPW');
+
+                                        if ((confirmPWField.value == passwordField.value) || (confirmPWField.value !=
+                                                null)) {
+                                            passwordField.removeAttribute('disabled');
+                                            confirmPWField.removeAttribute('disabled');
+                                        }
+
+                                    }
+                                    </script>
                                 </div>
                             </div>
                         </form>
@@ -722,6 +780,8 @@ a:hover {
                                         // Check for successful update
                                         if ($stmt->rowCount() > 0) {
                                             $successMessage = "Account details updated successfully!!!";
+                                            header("Location: profile");
+                                            exit();
                 
                                         } else {
                                             $errorMessage = "Failed to update account details!!!";
@@ -755,6 +815,8 @@ a:hover {
                                 // Check for successful update
                                 if ($stmt->rowCount() > 0) {
                                     $successMessage = "Account details updated successfully!!!";
+                                    header("Location: profile");
+                                    exit();
         
                                 } else {
                                     $errorMessage = "Failed to update account details!!!";

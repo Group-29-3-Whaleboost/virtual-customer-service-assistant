@@ -1,11 +1,16 @@
 <!-- included the header -->
 <?php include(APPPATH . 'views/includes/header.php'); ?>
+
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+</head>
+
 <style>
-#content-wrapper>div>a.card.search-card {
+#content-wrapper>div>a.card.scan-qr-card {
     text-decoration: none;
 }
 
-#content-wrapper>div>a.card.checkout-card {
+#content-wrapper>div>a.card.help-customer-card {
     text-decoration: none;
 }
 
@@ -96,7 +101,7 @@ body.fixed-nav.sidebar-toggled #content-wrapper {
     width: 100%;
 }
 
-.navbar-nav .nav-item.active .nav-link {
+.navbar-nav .nav-item.active-1 .nav-link {
     color: #fff;
 }
 
@@ -428,11 +433,11 @@ body {
     display: none;
 }
 
-.search-card {
+.scan-qr-card {
     background-color: #FFD699;
 }
 
-.checkout-card {
+.help-customer-card {
     background-color: #AED9E0;
 }
 
@@ -461,20 +466,6 @@ h2 {
         /* Adjust the margin to create spacing between the cards */
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 .logo {
     display: flex;
@@ -513,155 +504,49 @@ a:hover {
     text-decoration: none;
 }
 
+@media (max-width: 600px) {
+    div {
+        flex-wrap: wrap;
 
-/*stylesheet of select branch*/
+    }
 
-
-.back {
-    width: 100%;
-    min-height: 90vh;
-    margin: 0;
-    padding: 0;
-    overflow: auto;
-    background-color: #2d7af7;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-h1 {
-
-    text-align: center;
-
-}
-
-.up-bar {
-
-    width: 100%;
-    height: 400px;
-    margin: auto;
-    border-radius: 5px;
-    background: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-}
-
-select {
-
-    margin: auto;
-    width: 100%;
-    height: 45px;
-    font-size: 100%;
-    border: #2d7af7 solid 3px;
-
-}
-
-
-
-.button01 {
-    display: flex;
-    justify-content: space-around;
-    margin-top: 10%;
-    flex-wrap: wrap;
-
-}
-
-.button01 div button {
-
-    width: 150px;
-    margin-bottom: 10px;
 }
 </style>
 
 <body id="page-top">
     <!-- included the navbar -->
 
-    <?php include(APPPATH . 'views/includes/navbar.php'); ?>
+    <?php include(APPPATH . 'views/includes/assistant_navbar.php'); ?>
     <div id="wrapper">
 
-        <?php include(APPPATH . 'views/includes/menu.php'); ?>
+        <?php include(APPPATH . 'views/includes/assistant_menu.php'); ?>
 
 
         <div id="content-wrapper">
 
-            <!--your code is here -->
 
-            <div class="back">
+            <!--dashboard creation-->
 
-                <div class="up">
-                    <div class="up-bar px-5">
 
-                        <h1>Select the Branch</h1>
-
-                        <form>
-
-                            <select name="branch">
-                                <option value="" disabled selected>Select Your Branch </option>
-                                <option value="colombo">Colombo</option>
-                                <option value="kandy">Kandy</option>
-                                <option value="Galle">Galle</option>
-                                <option value="panadura">Panadura</option>
-                            </select>
-
-                            <div class="button01 mx-auto">
-                                <div>
-                                    <button type="submit" class=" btn btn-outline-primary" id="button1">Navigate
-                                        Me</button>
-                                </div>
-                                <div>
-                                    <button type="submit" class=" btn btn-outline-primary">Let's Shop</button>
-                                </div>
-
-                            </div>
-                        </form>
-
-                    </div>
-                </div>
+            <div class="dashboard">
+                <h1>Welcome Again</h1>
+                <a href="#" class="card scan-qr-card">
+                    <i class="fa-solid fa-qrcode fa-2x"></i>
+                    <h2>Scan QR</h2>
+                </a>
+                <a href="#" class="card help-customer-card">
+                    <i class="fa-solid fa-headset fa-2x"></i>
+                    <h2>Help Customer</h2>
+                </a>
             </div>
 
 
-            <!-- 
-
-    This is used to insert button navigation
-    
-<       script>
-
-                
-            const button1 = document.getElementById("button1");
-            //    const button2 = document.getElementById("button2");
-
-
-            button1.addEventListener("click", function() {
-
-                window.location.href = "navigate-map.php";
-            });
-
-            /  button2.addEventListener("click", function() {
-
-            //    window.location.href = "page2.html";
-
-            //  });
-
-            
-
-            </script>
-
-            -->
-
-
-
-
-
-
-
-
-
-
-            <!-- included the footer -->
-            <?php include(APPPATH . 'views/includes/footer.php'); ?>
         </div>
+
+
+        <!-- included the footer -->
+        <?php include(APPPATH . 'views/includes/footer.php'); ?>
+    </div>
 
 
     </div>

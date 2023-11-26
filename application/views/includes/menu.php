@@ -1,15 +1,15 @@
 <ul class="sidebar navbar-nav">
     <li class="nav-item active-1">
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="<?php echo site_url("Dashboard") ?>">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span>
         </a>
     </li>
 
     <li class="nav-item active-2">
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="<?php echo site_url("SearchItem") ?>">
             <i class="fas fa-fw fa-search"></i>
-            <span>Search item</span></a>
+            <span>Search Item</span></a>
     </li>
 
     <li class="nav-item active-3">
@@ -20,7 +20,7 @@
 
     <li class="nav-item active-4">
         <a class="nav-link" href="#">
-            <i class="fas fa-fw fa-question-circle"></i>
-            <span>Customer help</span></a>
+            <i class="fa-solid fa-circle-info"></i>
+            <span>Customer Help</span></a>
     </li>
 </ul>

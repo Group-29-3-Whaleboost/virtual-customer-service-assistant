@@ -23,7 +23,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'http://localhost/designproject';
+
+$config['base_url'] = 'http://localhost/virtual-customer-service-assistant/';
+
 
 /*
 |--------------------------------------------------------------------------
