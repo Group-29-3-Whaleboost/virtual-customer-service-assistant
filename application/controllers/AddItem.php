@@ -10,12 +10,13 @@ class AddItem extends CI_Controller {
 
 	public function index()
 	{
-		$data['title'] = 'addItem | CAS';
+		$data['title'] = 'Manupulate Items | CAS';
 		$data['items'] = $this->Item_model->get_all_items();
         $this->load->view('manager/addItem', $data);
 	}
 
 	public function edit($id) {
+		$data['title'] = 'Edit Item | CAS';
         $data['item'] = $this->Item_model->get_item_by_id($id);
         if ($data['item']) {
             $this->load->view('manager/editItem', $data);

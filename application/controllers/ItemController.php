@@ -6,7 +6,7 @@ class ItemController extends CI_Controller {
     }
 
     public function save_item() {
-
+        $base_url = base_url();
         	// if(isset($_POST['generate'])){
 			// 		// Get all the values from the form
 			// 		$item_name = $_POST['item_name'];
@@ -99,7 +99,8 @@ class ItemController extends CI_Controller {
             // Insert the data into the database
             if ($this->Item_model->insert_item($data)) {
                 echo "Item saved successfully!";
-                header("Location:/designproject/AddItem?saved=success");
+                $location = $base_url."AddItem";
+                header("Location:$location?saved=success");
             } else {
                 echo "Item could not be saved.";
             }
