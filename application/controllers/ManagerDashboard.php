@@ -20,7 +20,7 @@ class ManagerDashboard extends CI_Controller {
 	 */
 	public function index()
 	{
-		$data['title'] = 'Manager-Dashboard | CAS';
+		$data['title'] = 'Manager Dashboard | CAS';
 		$this->load->view('manager/Manager-Dashboard',$data);
 	}
 }

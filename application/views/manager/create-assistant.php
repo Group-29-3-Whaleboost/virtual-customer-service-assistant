@@ -515,184 +515,145 @@ a:hover {
 
 <body id="page-top">
     <!-- included the navbar -->
-    <?php include(APPPATH . 'views/includes/admin-navbar.php'); ?>
+    <?php include(APPPATH . 'views/includes/manager_navbar.php'); ?>
 
     <div id="wrapper">
 
         <!-- included the menu -->
-        <?php include(APPPATH . 'views/includes/admin_menu.php'); ?>
+        <?php include(APPPATH . 'views/includes/manager_menu.php'); ?>
 
         <div id="content-wrapper">
-            <!-- Code of Create Manager page -->
+            <!-- Code of Assistant page -->
 
-
-            <!-- Add Manager Modal -->
-            <div class="modal fade" id="managerAddModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+            <!-- Add Assistant Modal -->
+            <div class="modal fade" id="assistantAddModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                 aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Add Manager</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">Add Assistant</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <form id="saveManager">
+                        <form id="saveAssistant">
                             <div class="modal-body">
                                 <div id="errorMessage" class="alert alert-warning d-none"></div>
 
                                 <div class="mb-3">
-                                    <label for="">Manager Name</label>
-                                    <input type="text" name="manager_name" class="form-control"
-                                        placeholder="Enter the manager Name" />
+                                    <label for="">Assistant Name</label>
+                                    <input type="text" name="assistant_name" class="form-control"
+                                        placeholder="Enter the assistant name" />
                                 </div>
                                 <div class="mb-3">
                                     <label for="">Email Address</label>
                                     <input type="email" name="email" class="form-control"
-                                        placeholder="Enter the manager email address" />
+                                        placeholder="Enter the assistant email address" />
                                 </div>
                                 <div class="mb-3">
                                     <label for="">Phone No</label>
                                     <input type="number" name="phone_no" class="form-control"
-                                        placeholder="Enter the manager phone number" />
+                                        placeholder="Enter the assistant phone number" />
                                 </div>
                                 <div class="mb-3">
-                                    <label for="">Address</label>
-                                    <input type="text" name="address" class="form-control"
-                                        placeholder="Enter the manager address" />
-                                </div>
-                                <div class="mb-3">
-                                    <label for="">NIC No</label>
-                                    <input type="text" name="nic" class="form-control"
-                                        placeholder="Enter the manager nic no" />
-                                </div>
-                                <div class="mb-3">
-                                    <label for="">Branch Name</label>
-                                    <select name="branch_name" id="branch_name" class="form-select">
-                                        <option value="0" selected hidden> --- Select the Branch --- </option>
-                                        <?php
-                                        $con = mysqli_connect("localhost","root","","customer_service_assistant");
-
-                                        if(!$con){
-                                            die('Connection Failed'. mysqli_connect_error());
-                                        }
-            
-                                        $branch_query = "SELECT branch_id,branch_name FROM branch";
-                                        $query_run = mysqli_query($con, $branch_query);
-            
-                                        if(mysqli_num_rows($query_run) > 0)
-                                        {
-                                            foreach($query_run as $branch)
-                                            {
-                                        ?>
-                                        <option value="<?= $branch['branch_id'] ?>"><?= $branch['branch_name'] ?>
-                                        </option>
-
-                                        <?php
-                                            }
-                                        }
-                                        ?>
-                                    </select>
+                                    <label for="">Gender</label>
+                                    <div class="d-flex justify-content-center">
+                                        <div class="col-sm-6">
+                                            <div class="form-check">
+                                                <input type="radio" class="form-check-input" name="gender" value="Male">
+                                                <label class="form-check-label" for="male">Male</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-check">
+                                                <input type="radio" class="form-check-input" name="gender"
+                                                    value="Female">
+                                                <label class="form-check-label" for="female">Female</label>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                <button type="submit" class="btn btn-primary">Save Manager</button>
+                                <button type="submit" class="btn btn-primary">Save Assistant</button>
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
 
-            <!-- Edit Manager Modal -->
-            <div class="modal fade" id="managerEditModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+            <!-- Edit Assistant Modal -->
+            <div class="modal fade" id="assistantEditModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                 aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Edit Manager</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">Edit Assistant</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <form id="updateManager">
+                        <form id="updateAssistant">
                             <div class="modal-body">
 
                                 <div id="errorMessageUpdate" class="alert alert-warning d-none"></div>
 
-                                <input type="hidden" name="manager_id" id="manager_id">
+                                <input type="hidden" name="assistant_id" id="assistant_id">
 
                                 <div class="mb-3">
-                                    <label for="">Manager Name</label>
-                                    <input type="text" name="manager_name" id="manager_name" class="form-control"
-                                        placeholder="Enter the manager Name" />
+                                    <label for="">Assistant Name</label>
+                                    <input type="text" name="assistant_name" id="assistant_name" class="form-control"
+                                        placeholder="Enter the assistant name" />
                                 </div>
                                 <div class="mb-3">
                                     <label for="">Email Address</label>
                                     <input type="email" name="email" id="email" class="form-control"
-                                        placeholder="Enter the manager email address" />
+                                        placeholder="Enter the assistant email address" />
                                 </div>
                                 <div class="mb-3">
                                     <label for="">Phone No</label>
                                     <input type="number" name="phone_no" id="phone_no" class="form-control"
-                                        placeholder="Enter the manager phone number" />
+                                        placeholder="Enter the assistant phone number" />
                                 </div>
                                 <div class="mb-3">
-                                    <label for="">Address</label>
-                                    <input type="text" name="address" id="address" class="form-control"
-                                        placeholder="Enter the manager address" />
+                                    <label for="">Gender</label>
+                                    <div class="d-flex justify-content-center">
+                                        <div class="col-sm-6">
+                                            <div class="form-check">
+                                                <input type="radio" class="form-check-input" name="gender" value="Male"
+                                                    id="male">
+                                                <label class="form-check-label" for="male">Male</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-check">
+                                                <input type="radio" class="form-check-input" name="gender"
+                                                    value="Female" id="female">
+                                                <label class="form-check-label" for="female">Female</label>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="mb-3">
-                                    <label for="">NIC No</label>
-                                    <input type="text" name="nic" id="nic" class="form-control"
-                                        placeholder="Enter the manager nic" />
-                                </div>
-                                <div class="mb-3">
-                                    <label for="">Branch Name</label>
-                                    <select name="branch_name" id="branch_name_edit" class="form-select">
-                                        <option value="0" selected hidden> --- Select the Branch --- </option>
-                                        <?php
-
-                                        if(!$con){
-                                            die('Connection Failed'. mysqli_connect_error());
-                                        }
-            
-                                        $query_run = mysqli_query($con, $branch_query);
-            
-                                        if(mysqli_num_rows($query_run) > 0)
-                                        {
-                                            foreach($query_run as $branch)
-                                            {
-                                        ?>
-                                        <option value="<?= $branch['branch_id'] ?>"><?= $branch['branch_name'] ?>
-                                        </option>
-
-                                        <?php
-                                            }
-                                        }
-                                        ?>
-                                    </select>
-                                </div>
-
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                <button type="submit" class="btn btn-primary">Update Manager</button>
+                                <button type="submit" class="btn btn-primary">Update Assistant</button>
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
 
-            <!-- View Manager Modal -->
-            <div class="modal fade" id="managerViewModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+            <!-- View Assistant Modal -->
+            <div class="modal fade" id="assistantViewModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                 aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">View Manager</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">View Assistant</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
                             <div class="mb-3">
-                                <label for="">Manager Name</label>
-                                <p id="view_manager_name" class="form-control"></p>
+                                <label for="">Assistant Name</label>
+                                <p id="view_assistant_name" class="form-control"></p>
                             </div>
                             <div class="mb-3">
                                 <label for="">Email Address</label>
@@ -703,16 +664,8 @@ a:hover {
                                 <p id="view_phone_no" class="form-control"></p>
                             </div>
                             <div class="mb-3">
-                                <label for="">Address</label>
-                                <p id="view_address" class="form-control"></p>
-                            </div>
-                            <div class="mb-3">
-                                <label for="">NIC No</label>
-                                <p id="view_nic" class="form-control"></p>
-                            </div>
-                            <div class="mb-3">
-                                <label for="">Branch Name</label>
-                                <p id="view_branch_name" class="form-control"></p>
+                                <label for="">Gender</label>
+                                <p id="view_gender" class="form-control"></p>
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -727,59 +680,55 @@ a:hover {
                 <div class="row">
                     <div class="col-md-12">
                         <div class="mb-4">
-                            <h4 class="text-center">Create a New Manager
+                            <h4 class="text-center">Create a New Assistant
                                 <button type="button" class="btn btn-primary float-end" data-bs-toggle="modal"
-                                    data-bs-target="#managerAddModal">
-                                    Add Manager
+                                    data-bs-target="#assistantAddModal">
+                                    Add Assistant
                                 </button>
                             </h4>
                         </div>
                         <table id="myTable" class="table">
                             <thead>
                                 <tr class="text-center">
-                                    <th>Manager Name</th>
+                                    <th>Assistant Name</th>
                                     <th>Email Address</th>
                                     <th>Phone No</th>
-                                    <th>Address</th>
-                                    <th>NIC No</th>
-                                    <th>Branch Name</th>
+                                    <th>Gender</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php
 
+                                $con = mysqli_connect("localhost","root","","customer_service_assistant");
+
                                 if(!$con){
                                     die('Connection Failed'. mysqli_connect_error());
                                 }
 
-                                $manager_query = "SELECT manager.manager_id,manager.branch_id,manager.name, manager.email, manager.phone_no, manager.address, manager.nic, branch.branch_name 
-                                                FROM manager INNER JOIN branch ON manager.branch_id = branch.branch_id ORDER BY manager.manager_id";
-                                $query_run = mysqli_query($con, $manager_query);
+                                $query = "SELECT * FROM customer_assistant";
+                                $query_run = mysqli_query($con, $query);
 
                                 if(mysqli_num_rows($query_run) > 0)
                                 {
-                                    foreach($query_run as $manager)
+                                    foreach($query_run as $assistant)
                                     {
-                                ?>
+                                        ?>
                                 <tr class="text-center">
-                                    <td><?= $manager['name'] ?></td>
-                                    <td><?= $manager['email'] ?></td>
-                                    <td><?= $manager['phone_no'] ?></td>
-                                    <td><?= $manager['address'] ?></td>
-                                    <td><?= $manager['nic'] ?></td>
-                                    <td><?= $manager['branch_name'] ?></td>
-
+                                    <td><?= $assistant['name'] ?></td>
+                                    <td><?= $assistant['email'] ?></td>
+                                    <td><?= $assistant['phone_no'] ?></td>
+                                    <td><?= $assistant['gender'] ?></td>
 
                                     <td>
-                                        <button type="button" value="<?=$manager['manager_id'];?>"
-                                            class="viewManagerBtn btn btn-info btn-sm"><i
+                                        <button type="button" value="<?=$assistant['assistant_id'];?>"
+                                            class="viewAssistantBtn btn btn-info btn-sm"><i
                                                 class="fa-solid fa-eye fa-beat"></i></button>
-                                        <button type="button" value="<?=$manager['manager_id'];?>"
-                                            class="editManagerBtn btn btn-warning btn-sm"><i
+                                        <button type="button" value="<?=$assistant['assistant_id'];?>"
+                                            class="editAssistantBtn btn btn-warning btn-sm"><i
                                                 class="fa-solid fa-pen-to-square fa-beat"></i></button>
-                                        <button type="button" value="<?=$manager['manager_id'];?>"
-                                            class="deleteManagerBtn btn btn-danger btn-sm"><i
+                                        <button type="button" value="<?=$assistant['assistant_id'];?>"
+                                            class="deleteAssistantBtn btn btn-danger btn-sm"><i
                                                 class="fa-solid fa-trash fa-beat"></i></button>
                                     </td>
                                 </tr>
@@ -800,19 +749,19 @@ a:hover {
             <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 
             <script>
-            $(document).on('submit', '#saveManager', function(e) {
+            $(document).on('submit', '#saveAssistant', function(e) {
                 e.preventDefault();
 
-                // Get the selected value from the branch name select box
-                var selectedBranch = $('#branch_name').val();
+                // Get the selected gender value
+                var gender = $('input[name="gender"]:checked').val();
 
                 var formData = new FormData(this);
-                formData.append("save_manager", true);
-                formData.append("selected_branch", selectedBranch);
+                formData.append("save_assistant", true);
+                formData.append("gender", gender);
 
                 $.ajax({
                     type: "POST",
-                    url: "<?php base_url() ?> assets/js/create-manager-code.php",
+                    url: "<?php base_url() ?> assets/js/create-assistant-code.php",
                     data: formData,
                     processData: false,
                     contentType: false,
@@ -826,8 +775,8 @@ a:hover {
                         } else if (res.status == 200) {
 
                             $('#errorMessage').addClass('d-none');
-                            $('#managerAddModal').modal('hide');
-                            $('#saveManager')[0].reset();
+                            $('#assistantAddModal').modal('hide');
+                            $('#saveAssistant')[0].reset();
 
                             alertify.set('notifier', 'position', 'top-right');
                             alertify.success(res.message);
@@ -842,14 +791,14 @@ a:hover {
 
             });
 
-            $(document).on('click', '.editManagerBtn', function() {
+            $(document).on('click', '.editAssistantBtn', function() {
 
-                var manager_id = $(this).val();
+                var assistant_id = $(this).val();
 
                 $.ajax({
                     type: "GET",
-                    url: "<?php base_url() ?> assets/js/create-manager-code.php?manager_id=" +
-                        manager_id,
+                    url: "<?php base_url() ?> assets/js/create-assistant-code.php?assistant_id=" +
+                        assistant_id,
                     success: function(response) {
 
                         var res = jQuery.parseJSON(response);
@@ -858,15 +807,20 @@ a:hover {
                             alert(res.message);
                         } else if (res.status == 200) {
 
-                            $('#manager_id').val(res.data.manager_id);
-                            $('#manager_name').val(res.data.name);
+                            $('#assistant_id').val(res.data.assistant_id);
+                            $('#assistant_name').val(res.data.name);
                             $('#email').val(res.data.email);
                             $('#phone_no').val(res.data.phone_no);
-                            $('#address').val(res.data.address);
-                            $('#nic').val(res.data.nic);
-                            $('#branch_name_edit').val(res.data.branch_id);
 
-                            $('#managerEditModal').modal('show');
+                            // Corrected selector: #gender instead of gender
+                            var gender = res.data.gender;
+                            if (gender === 'Male') {
+                                $('#male').prop('checked', true);
+                            } else if (gender === 'Female') {
+                                $('#female').prop('checked', true);
+                            }
+
+                            $('#assistantEditModal').modal('show');
                         }
 
                     }
@@ -874,19 +828,19 @@ a:hover {
 
             });
 
-            $(document).on('submit', '#updateManager', function(e) {
+            $(document).on('submit', '#updateAssistant', function(e) {
                 e.preventDefault();
 
-                // Get the selected value from the 'branch_name' select box
-                var selectedBranch = $('#branch_name_edit').val();
+                // Get the selected gender value
+                var gender = $('input[name="gender"]:checked').val();
 
                 var formData = new FormData(this);
-                formData.append("update_manager", true);
-                formData.append("selected_branch", selectedBranch);
+                formData.append("update_assistant", true);
+                formData.append("gender", gender);
 
                 $.ajax({
                     type: "POST",
-                    url: "<?php base_url() ?> assets/js/create-manager-code.php",
+                    url: "<?php base_url() ?> assets/js/create-assistant-code.php",
                     data: formData,
                     processData: false,
                     contentType: false,
@@ -904,8 +858,8 @@ a:hover {
                             alertify.set('notifier', 'position', 'top-right');
                             alertify.success(res.message);
 
-                            $('#managerEditModal').modal('hide');
-                            $('#updateManager')[0].reset();
+                            $('#assistantEditModal').modal('hide');
+                            $('#updateAssistant')[0].reset();
 
                             $('#myTable').load(location.href + " #myTable");
 
@@ -917,13 +871,13 @@ a:hover {
 
             });
 
-            $(document).on('click', '.viewManagerBtn', function() {
+            $(document).on('click', '.viewAssistantBtn', function() {
 
-                var manager_id = $(this).val();
+                var assistant_id = $(this).val();
                 $.ajax({
                     type: "GET",
-                    url: "<?php base_url() ?> assets/js/create-manager-code.php?manager_id=" +
-                        manager_id,
+                    url: "<?php base_url() ?> assets/js/create-assistant-code.php?assistant_id=" +
+                        assistant_id,
                     success: function(response) {
 
                         var res = jQuery.parseJSON(response);
@@ -932,30 +886,28 @@ a:hover {
                             alert(res.message);
                         } else if (res.status == 200) {
 
-                            $('#view_manager_name').text(res.data.name);
+                            $('#view_assistant_name').text(res.data.name);
                             $('#view_email').text(res.data.email);
                             $('#view_phone_no').text(res.data.phone_no);
-                            $('#view_address').text(res.data.address);
-                            $('#view_nic').text(res.data.nic);
-                            $('#view_branch_name').text(res.data.branch_name);
+                            $('#view_gender').text(res.data.gender);
 
-                            $('#managerViewModal').modal('show');
+                            $('#assistantViewModal').modal('show');
                         }
                     }
                 });
             });
 
-            $(document).on('click', '.deleteManagerBtn', function(e) {
+            $(document).on('click', '.deleteAssistantBtn', function(e) {
                 e.preventDefault();
 
-                if (confirm('Are you sure you want to delete this manager?')) {
-                    var manager_id = $(this).val();
+                if (confirm('Are you sure you want to delete this assistant?')) {
+                    var assistant_id = $(this).val();
                     $.ajax({
                         type: "POST",
-                        url: "<?php base_url() ?> assets/js/create-manager-code.php",
+                        url: "<?php base_url() ?> assets/js/create-assistant-code.php",
                         data: {
-                            'delete_manager': true,
-                            'manager_id': manager_id
+                            'delete_assistant': true,
+                            'assistant_id': assistant_id
                         },
                         success: function(response) {
 
@@ -976,9 +928,7 @@ a:hover {
             </script>
 
 
-
-
-            <!-- included the footer -->
+            <!-- Footer area -->
             <footer class="sticky-footer">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">

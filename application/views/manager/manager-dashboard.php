@@ -537,7 +537,7 @@ a:hover {
                     <i class="fa-solid fa-envelope fa-2x"></i>
                     <h2>Push Notification</h2>
                 </a>
-                <a href="#" class="card create-assistant-card">
+                <a href="<?php echo site_url("CreateAssistant") ?>" class="card create-assistant-card">
                     <i class="fa-solid fa-users fa-2x"></i>
                     <h2>Create Assistant</h2>
                 </a>
