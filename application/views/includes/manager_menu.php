@@ -8,19 +8,19 @@
 
     <li class="nav-item active-2">
         <a class="nav-link" href="<?php echo site_url("AddItem") ?>">
-            <i class="fas fa-fw fa-search"></i>
+            <i class="fa-solid fa-carrot"></i>
             <span>Add Items</span></a>
     </li>
 
     <li class="nav-item active-3">
         <a class="nav-link" href="#">
-            <i class="fas fa-fw fa-camera"></i>
+            <i class="fa-solid fa-envelope"></i>
             <span>Push Notification</span></a>
     </li>
 
     <li class="nav-item active-4">
-        <a class="nav-link" href="#">
-            <i class="fas fa-fw fa-question-circle"></i>
-            <span>Create Assisstant</span></a>
+        <a class="nav-link" href="<?php echo site_url("CreateAssistant") ?>">
+            <i class="fa-solid fa-users"></i>
+            <span>Create Assistant</span></a>
     </li>
 </ul>

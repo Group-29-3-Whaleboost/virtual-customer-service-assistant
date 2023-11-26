@@ -109,7 +109,7 @@ body.fixed-nav.sidebar-toggled #content-wrapper {
     width: 100%;
 }
 
-.navbar-nav .nav-item.active-3 .nav-link {
+.navbar-nav .nav-item.active-4 .nav-link {
     color: #fff;
 }
 
@@ -523,136 +523,196 @@ a:hover {
         <?php include(APPPATH . 'views/includes/admin_menu.php'); ?>
 
         <div id="content-wrapper">
-            <!-- Code of Branch page -->
+            <!-- Code of Create Manager page -->
 
-            <!-- Add Branch Modal -->
-            <div class="modal fade" id="branchAddModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+
+            <!-- Add Manager Modal -->
+            <div class="modal fade" id="managerAddModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                 aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Add Branch</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">Add Manager</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <form id="saveBranch">
+                        <form id="saveManager">
                             <div class="modal-body">
                                 <div id="errorMessage" class="alert alert-warning d-none"></div>
 
                                 <div class="mb-3">
-                                    <label for="">Branch Name</label>
-                                    <input type="text" name="branch_name" class="form-control"
-                                        placeholder="Enter the branch name" />
+                                    <label for="">Manager Name</label>
+                                    <input type="text" name="manager_name" class="form-control"
+                                        placeholder="Enter the manager Name" />
                                 </div>
                                 <div class="mb-3">
-                                    <label for="">Address</label>
-                                    <input type="text" name="address" class="form-control"
-                                        placeholder="Enter the branch address" />
+                                    <label for="">Email Address</label>
+                                    <input type="email" name="email" class="form-control"
+                                        placeholder="Enter the manager email address" />
                                 </div>
                                 <div class="mb-3">
                                     <label for="">Phone No</label>
                                     <input type="number" name="phone_no" class="form-control"
-                                        placeholder="Enter the branch phone number" />
+                                        placeholder="Enter the manager phone number" />
                                 </div>
                                 <div class="mb-3">
-                                    <label for="">Latitude</label>
-                                    <input type="text" name="latitude" class="form-control"
-                                        placeholder="Enter the branch latitude" />
+                                    <label for="">Address</label>
+                                    <input type="text" name="address" class="form-control"
+                                        placeholder="Enter the manager address" />
                                 </div>
                                 <div class="mb-3">
-                                    <label for="">Longitude</label>
-                                    <input type="text" name="longitude" class="form-control"
-                                        placeholder="Enter the branch longitude" />
+                                    <label for="">NIC No</label>
+                                    <input type="text" name="nic" class="form-control"
+                                        placeholder="Enter the manager nic no" />
+                                </div>
+                                <div class="mb-3">
+                                    <label for="">Branch Name</label>
+                                    <select name="branch_name" id="branch_name" class="form-select">
+                                        <option value="0" selected hidden> --- Select the Branch --- </option>
+                                        <?php
+                                        $con = mysqli_connect("localhost","root","","customer_service_assistant");
+
+                                        if(!$con){
+                                            die('Connection Failed'. mysqli_connect_error());
+                                        }
+            
+                                        $branch_query = "SELECT branch_id,branch_name FROM branch";
+                                        $query_run = mysqli_query($con, $branch_query);
+            
+                                        if(mysqli_num_rows($query_run) > 0)
+                                        {
+                                            foreach($query_run as $branch)
+                                            {
+                                        ?>
+                                        <option value="<?= $branch['branch_id'] ?>"><?= $branch['branch_name'] ?>
+                                        </option>
+
+                                        <?php
+                                            }
+                                        }
+                                        ?>
+                                    </select>
                                 </div>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                <button type="submit" class="btn btn-primary">Save Branch</button>
+                                <button type="submit" class="btn btn-primary">Save Manager</button>
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
 
-            <!-- Edit Branch Modal -->
-            <div class="modal fade" id="branchEditModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+            <!-- Edit Manager Modal -->
+            <div class="modal fade" id="managerEditModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                 aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Edit Branch</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">Edit Manager</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <form id="updateBranch">
+                        <form id="updateManager">
                             <div class="modal-body">
 
                                 <div id="errorMessageUpdate" class="alert alert-warning d-none"></div>
 
-                                <input type="hidden" name="branch_id" id="branch_id">
+                                <input type="hidden" name="manager_id" id="manager_id">
 
                                 <div class="mb-3">
-                                    <label for="">Branch Name</label>
-                                    <input type="text" name="branch_name" id="branch_name" class="form-control"
-                                        placeholder="Enter the branch name" />
+                                    <label for="">Manager Name</label>
+                                    <input type="text" name="manager_name" id="manager_name" class="form-control"
+                                        placeholder="Enter the manager Name" />
                                 </div>
                                 <div class="mb-3">
-                                    <label for="">Address</label>
-                                    <input type="text" name="address" id="address" class="form-control"
-                                        placeholder="Enter the branch address" />
+                                    <label for="">Email Address</label>
+                                    <input type="email" name="email" id="email" class="form-control"
+                                        placeholder="Enter the manager email address" />
                                 </div>
                                 <div class="mb-3">
                                     <label for="">Phone No</label>
                                     <input type="number" name="phone_no" id="phone_no" class="form-control"
-                                        placeholder="Enter the branch phone number" />
+                                        placeholder="Enter the manager phone number" />
                                 </div>
                                 <div class="mb-3">
-                                    <label for="">Latitude</label>
-                                    <input type="text" name="latitude" id="latitude" class="form-control"
-                                        placeholder="Enter the branch latitude" />
+                                    <label for="">Address</label>
+                                    <input type="text" name="address" id="address" class="form-control"
+                                        placeholder="Enter the manager address" />
                                 </div>
                                 <div class="mb-3">
-                                    <label for="">Longitude</label>
-                                    <input type="text" name="longitude" id="longitude" class="form-control"
-                                        placeholder="Enter the branch longitude" />
+                                    <label for="">NIC No</label>
+                                    <input type="text" name="nic" id="nic" class="form-control"
+                                        placeholder="Enter the manager nic" />
                                 </div>
+                                <div class="mb-3">
+                                    <label for="">Branch Name</label>
+                                    <select name="branch_name" id="branch_name_edit" class="form-select">
+                                        <option value="0" selected hidden> --- Select the Branch --- </option>
+                                        <?php
+
+                                        if(!$con){
+                                            die('Connection Failed'. mysqli_connect_error());
+                                        }
+            
+                                        $query_run = mysqli_query($con, $branch_query);
+            
+                                        if(mysqli_num_rows($query_run) > 0)
+                                        {
+                                            foreach($query_run as $branch)
+                                            {
+                                        ?>
+                                        <option value="<?= $branch['branch_id'] ?>"><?= $branch['branch_name'] ?>
+                                        </option>
+
+                                        <?php
+                                            }
+                                        }
+                                        ?>
+                                    </select>
+                                </div>
+
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                <button type="submit" class="btn btn-primary">Update Branch</button>
+                                <button type="submit" class="btn btn-primary">Update Manager</button>
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
 
-            <!-- View Branch Modal -->
-            <div class="modal fade" id="branchViewModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+            <!-- View Manager Modal -->
+            <div class="modal fade" id="managerViewModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                 aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">View Branch</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">View Manager</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
                             <div class="mb-3">
-                                <label for="">Branch Name</label>
-                                <p id="view_branch_name" class="form-control"></p>
+                                <label for="">Manager Name</label>
+                                <p id="view_manager_name" class="form-control"></p>
                             </div>
                             <div class="mb-3">
-                                <label for="">Address</label>
-                                <p id="view_address" class="form-control"></p>
+                                <label for="">Email Address</label>
+                                <p id="view_email" class="form-control"></p>
                             </div>
                             <div class="mb-3">
                                 <label for="">Phone No</label>
                                 <p id="view_phone_no" class="form-control"></p>
                             </div>
                             <div class="mb-3">
-                                <label for="">Latitude</label>
-                                <p id="view_latitude" class="form-control"></p>
+                                <label for="">Address</label>
+                                <p id="view_address" class="form-control"></p>
                             </div>
                             <div class="mb-3">
-                                <label for="">Longitude</label>
-                                <p id="view_longitude" class="form-control"></p>
+                                <label for="">NIC No</label>
+                                <p id="view_nic" class="form-control"></p>
+                            </div>
+                            <div class="mb-3">
+                                <label for="">Branch Name</label>
+                                <p id="view_branch_name" class="form-control"></p>
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -667,57 +727,59 @@ a:hover {
                 <div class="row">
                     <div class="col-md-12">
                         <div class="mb-4">
-                            <h4 class="text-center">Create a New Branch
+                            <h4 class="text-center">Create a New Manager
                                 <button type="button" class="btn btn-primary float-end" data-bs-toggle="modal"
-                                    data-bs-target="#branchAddModal">
-                                    Add Branch
+                                    data-bs-target="#managerAddModal">
+                                    Add Manager
                                 </button>
                             </h4>
                         </div>
                         <table id="myTable" class="table">
                             <thead>
                                 <tr class="text-center">
-                                    <th>Branch Name</th>
-                                    <th>Address</th>
+                                    <th>Manager Name</th>
+                                    <th>Email Address</th>
                                     <th>Phone No</th>
-                                    <th>Latitude</th>
-                                    <th>Longitude</th>
+                                    <th>Address</th>
+                                    <th>NIC No</th>
+                                    <th>Branch Name</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php
 
-                                $con = mysqli_connect("localhost","root","","customer_service_assistant");
-
                                 if(!$con){
                                     die('Connection Failed'. mysqli_connect_error());
                                 }
 
-                                $query = "SELECT * FROM branch";
-                                $query_run = mysqli_query($con, $query);
+                                $manager_query = "SELECT manager.manager_id,manager.branch_id,manager.name, manager.email, manager.phone_no, manager.address, manager.nic, branch.branch_name 
+                                                FROM manager INNER JOIN branch ON manager.branch_id = branch.branch_id ORDER BY manager.manager_id";
+                                $query_run = mysqli_query($con, $manager_query);
 
                                 if(mysqli_num_rows($query_run) > 0)
                                 {
-                                    foreach($query_run as $branch)
+                                    foreach($query_run as $manager)
                                     {
-                                        ?>
+                                ?>
                                 <tr class="text-center">
-                                    <td><?= $branch['branch_name'] ?></td>
-                                    <td><?= $branch['address'] ?></td>
-                                    <td><?= $branch['phone_no'] ?></td>
-                                    <td><?= $branch['latitude'] ?></td>
-                                    <td><?= $branch['longitude'] ?></td>
+                                    <td><?= $manager['name'] ?></td>
+                                    <td><?= $manager['email'] ?></td>
+                                    <td><?= $manager['phone_no'] ?></td>
+                                    <td><?= $manager['address'] ?></td>
+                                    <td><?= $manager['nic'] ?></td>
+                                    <td><?= $manager['branch_name'] ?></td>
+
 
                                     <td>
-                                        <button type="button" value="<?=$branch['branch_id'];?>"
-                                            class="viewBranchBtn btn btn-info btn-sm"><i
+                                        <button type="button" value="<?=$manager['manager_id'];?>"
+                                            class="viewManagerBtn btn btn-info btn-sm"><i
                                                 class="fa-solid fa-eye fa-beat"></i></button>
-                                        <button type="button" value="<?=$branch['branch_id'];?>"
-                                            class="editBranchBtn btn btn-warning btn-sm"><i
+                                        <button type="button" value="<?=$manager['manager_id'];?>"
+                                            class="editManagerBtn btn btn-warning btn-sm"><i
                                                 class="fa-solid fa-pen-to-square fa-beat"></i></button>
-                                        <button type="button" value="<?=$branch['branch_id'];?>"
-                                            class="deleteBranchBtn btn btn-danger btn-sm"><i
+                                        <button type="button" value="<?=$manager['manager_id'];?>"
+                                            class="deleteManagerBtn btn btn-danger btn-sm"><i
                                                 class="fa-solid fa-trash fa-beat"></i></button>
                                     </td>
                                 </tr>
@@ -738,15 +800,19 @@ a:hover {
             <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 
             <script>
-            $(document).on('submit', '#saveBranch', function(e) {
+            $(document).on('submit', '#saveManager', function(e) {
                 e.preventDefault();
 
+                // Get the selected value from the branch name select box
+                var selectedBranch = $('#branch_name').val();
+
                 var formData = new FormData(this);
-                formData.append("save_branch", true);
+                formData.append("save_manager", true);
+                formData.append("selected_branch", selectedBranch);
 
                 $.ajax({
                     type: "POST",
-                    url: "<?php base_url() ?> assets/js/branch-code.php",
+                    url: "<?php base_url() ?> assets/js/create-manager-code.php",
                     data: formData,
                     processData: false,
                     contentType: false,
@@ -760,8 +826,8 @@ a:hover {
                         } else if (res.status == 200) {
 
                             $('#errorMessage').addClass('d-none');
-                            $('#branchAddModal').modal('hide');
-                            $('#saveBranch')[0].reset();
+                            $('#managerAddModal').modal('hide');
+                            $('#saveManager')[0].reset();
 
                             alertify.set('notifier', 'position', 'top-right');
                             alertify.success(res.message);
@@ -776,14 +842,14 @@ a:hover {
 
             });
 
-            $(document).on('click', '.editBranchBtn', function() {
+            $(document).on('click', '.editManagerBtn', function() {
 
-                var branch_id = $(this).val();
+                var manager_id = $(this).val();
 
                 $.ajax({
                     type: "GET",
-                    url: "<?php base_url() ?> assets/js/branch-code.php?branch_id=" +
-                        branch_id,
+                    url: "<?php base_url() ?> assets/js/create-manager-code.php?manager_id=" +
+                        manager_id,
                     success: function(response) {
 
                         var res = jQuery.parseJSON(response);
@@ -792,14 +858,15 @@ a:hover {
                             alert(res.message);
                         } else if (res.status == 200) {
 
-                            $('#branch_id').val(res.data.branch_id);
-                            $('#branch_name').val(res.data.branch_name);
-                            $('#address').val(res.data.address);
+                            $('#manager_id').val(res.data.manager_id);
+                            $('#manager_name').val(res.data.name);
+                            $('#email').val(res.data.email);
                             $('#phone_no').val(res.data.phone_no);
-                            $('#latitude').val(res.data.latitude);
-                            $('#longitude').val(res.data.longitude);
+                            $('#address').val(res.data.address);
+                            $('#nic').val(res.data.nic);
+                            $('#branch_name_edit').val(res.data.branch_id);
 
-                            $('#branchEditModal').modal('show');
+                            $('#managerEditModal').modal('show');
                         }
 
                     }
@@ -807,15 +874,19 @@ a:hover {
 
             });
 
-            $(document).on('submit', '#updateBranch', function(e) {
+            $(document).on('submit', '#updateManager', function(e) {
                 e.preventDefault();
 
+                // Get the selected value from the 'branch_name' select box
+                var selectedBranch = $('#branch_name_edit').val();
+
                 var formData = new FormData(this);
-                formData.append("update_branch", true);
+                formData.append("update_manager", true);
+                formData.append("selected_branch", selectedBranch);
 
                 $.ajax({
                     type: "POST",
-                    url: "<?php base_url() ?> assets/js/branch-code.php",
+                    url: "<?php base_url() ?> assets/js/create-manager-code.php",
                     data: formData,
                     processData: false,
                     contentType: false,
@@ -833,8 +904,8 @@ a:hover {
                             alertify.set('notifier', 'position', 'top-right');
                             alertify.success(res.message);
 
-                            $('#branchEditModal').modal('hide');
-                            $('#updateBranch')[0].reset();
+                            $('#managerEditModal').modal('hide');
+                            $('#updateManager')[0].reset();
 
                             $('#myTable').load(location.href + " #myTable");
 
@@ -846,13 +917,13 @@ a:hover {
 
             });
 
-            $(document).on('click', '.viewBranchBtn', function() {
+            $(document).on('click', '.viewManagerBtn', function() {
 
-                var branch_id = $(this).val();
+                var manager_id = $(this).val();
                 $.ajax({
                     type: "GET",
-                    url: "<?php base_url() ?> assets/js/branch-code.php?branch_id=" +
-                        branch_id,
+                    url: "<?php base_url() ?> assets/js/create-manager-code.php?manager_id=" +
+                        manager_id,
                     success: function(response) {
 
                         var res = jQuery.parseJSON(response);
@@ -861,29 +932,30 @@ a:hover {
                             alert(res.message);
                         } else if (res.status == 200) {
 
-                            $('#view_branch_name').text(res.data.branch_name);
-                            $('#view_address').text(res.data.address);
+                            $('#view_manager_name').text(res.data.name);
+                            $('#view_email').text(res.data.email);
                             $('#view_phone_no').text(res.data.phone_no);
-                            $('#view_latitude').text(res.data.latitude);
-                            $('#view_longitude').text(res.data.longitude);
+                            $('#view_address').text(res.data.address);
+                            $('#view_nic').text(res.data.nic);
+                            $('#view_branch_name').text(res.data.branch_name);
 
-                            $('#branchViewModal').modal('show');
+                            $('#managerViewModal').modal('show');
                         }
                     }
                 });
             });
 
-            $(document).on('click', '.deleteBranchBtn', function(e) {
+            $(document).on('click', '.deleteManagerBtn', function(e) {
                 e.preventDefault();
 
-                if (confirm('Are you sure you want to delete this branch?')) {
-                    var branch_id = $(this).val();
+                if (confirm('Are you sure you want to delete this manager?')) {
+                    var manager_id = $(this).val();
                     $.ajax({
                         type: "POST",
-                        url: "<?php base_url() ?> assets/js/branch-code.php",
+                        url: "<?php base_url() ?> assets/js/create-manager-code.php",
                         data: {
-                            'delete_branch': true,
-                            'branch_id': branch_id
+                            'delete_manager': true,
+                            'manager_id': manager_id
                         },
                         success: function(response) {
 
@@ -904,7 +976,9 @@ a:hover {
             </script>
 
 
-            <!-- Footer area -->
+
+
+            <!-- included the footer -->
             <footer class="sticky-footer">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">

@@ -1,16 +1,12 @@
 <!-- included the header -->
 <?php include(APPPATH . 'views/includes/header.php'); ?>
 
-<head>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
-</head>
-
 <style>
-#content-wrapper>div>a.card.create-branch-card {
+#content-wrapper>div>a.card.search-card {
     text-decoration: none;
 }
 
-#content-wrapper>div>a.card.create-manager-card {
+#content-wrapper>div>a.card.checkout-card {
     text-decoration: none;
 }
 
@@ -428,16 +424,11 @@ body {
     transition: transform 0.3s ease;
 }
 
-.fa-shopping-basket {
-
-    display: none;
-}
-
-.create-branch-card {
+.search-card {
     background-color: #FFD699;
 }
 
-.create-manager-card {
+.checkout-card {
     background-color: #AED9E0;
 }
 
@@ -466,6 +457,20 @@ h2 {
         /* Adjust the margin to create spacing between the cards */
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 .logo {
     display: flex;
@@ -507,42 +512,68 @@ a:hover {
 
 <body id="page-top">
     <!-- included the navbar -->
-    <?php include(APPPATH . 'views/includes/admin-navbar.php'); ?>
+    <?php include(APPPATH . 'views/includes/manager_navbar.php'); ?>
 
     <div id="wrapper">
-
         <!-- included the menu -->
-        <?php include(APPPATH . 'views/includes/admin_menu.php'); ?>
-
+        <?php include(APPPATH . 'views/includes/manager_menu.php'); ?>
 
         <div id="content-wrapper">
+            <h2>Edit Item</h2>
+            <?php if($item): ?>
+            <form method="post" action="<?= base_url('addItem/update/'.$item->item_id) ?>"
+                enctype="multipart/form-data">
+                <!-- <input type="text" name="item_name" value="<?= $item->item_name ?>" required><br>
+                <input type="number" name="price" value="<?= $item->price ?>" required><br>
+                <textarea name="description"><?= $item->description ?></textarea><br>
+                <input type="number" name="offer" value="<?= $item->offer ?>"><br>
+                <input type="file" name="userfile" accept="image/*"> -->
 
+                <!-- 4-->
+                <!-- Item Name -->
+                <label for="item_name">Item Name:</label>
+                <input type="text" id="item_name" name="item_name" value="<?= $item->item_name ?>" required><br><br>
 
-            <!--dashboard creation-->
+                <!-- Price -->
+                <label for="price">Price:</label>
+                <input type="number" id="price" name="price" value="<?= $item->price ?>" step="0.01" required><br><br>
 
-            <div class="dashboard">
-                <h1>Welcome Again</h1>
-                <a href="<?php echo site_url("Branch") ?>" class="card create-branch-card">
-                    <i class="fa-solid fa-store fa-2x"></i>
-                    <h2>Create Branch</h2>
-                </a>
-                <a href="<?php echo site_url("CreateManager") ?>" class="card create-manager-card">
-                    <i class="fa-solid fa-user-tie fa-2x"></i>
-                    <h2>Create Manager</h2>
-                </a>
-            </div>
+                <!-- Description -->
+                <label for="description">Description:</label><br>
+                <textarea id="description" rows="4" cols="50"
+                    name="description"><?= $item->description ?></textarea><br><br>
 
+                <!-- Discount -->
+                <label for="discount">Discount (%):</label>
+                <input type="number" id="discount" name="offer" value="<?= $item->offer ?>" min="0" max="100"><br><br>
 
+                <!-- Category -->
+                <label for="category">Category:</label>
+                <select id="category" name="category">
+                    <option value="<?= $item->category_name ?>"><?= $item->category_name ?></option>
+                    <option value="Bakery">Bakery</option>
+                    <option value="Fruits">Fruits</option>
+                    <option value="Grocery">Grocery</option>
+                    <option value="Meat, fish & eggs">Meat, fish & eggs</option>
+                    <option value="Vegetables">Vegetables</option>
+                    <!-- Add more categories as needed -->
+                </select><br><br>
+
+                <!-- Image Upload -->
+                <label for="image">Image:</label>
+                <input type="file" id="image" name="userfile" name="image" accept="image/*"><br><br>
+                <br>
+                <input class="btn btn-success" type="submit" value="Update Item">
+            </form>
+            <a class="btn btn-secondary" href="<?php echo site_url("AddItem") ?>">Cancel</a>
+            <?php else: ?>
+            <p>Item not found.</p>
+            <?php endif; ?>
+
+            <!-- included the footer -->
+            <?php include(APPPATH . 'views/includes/footer.php'); ?>
         </div>
-
-
-        <!-- included the footer -->
-        <?php include(APPPATH . 'views/includes/footer.php'); ?>
     </div>
-
-
-    </div>
-
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
@@ -594,7 +625,6 @@ a:hover {
         });
     }(jQuery);
     </script>
-
 </body>
 
 </html>

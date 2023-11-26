@@ -1,16 +1,21 @@
 <!-- included the header -->
 <?php include(APPPATH . 'views/includes/header.php'); ?>
 
-<head>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
-</head>
+<?php
+    $enableButton=false;
+	$base_url = base_url();
+?>
+<script>
+var baseUrl = "<?php echo $base_url; ?>";
+console.log(baseUrl);
+</script>
 
 <style>
-#content-wrapper>div>a.card.create-branch-card {
+#content-wrapper>div>a.card.search-card {
     text-decoration: none;
 }
 
-#content-wrapper>div>a.card.create-manager-card {
+#content-wrapper>div>a.card.checkout-card {
     text-decoration: none;
 }
 
@@ -428,16 +433,11 @@ body {
     transition: transform 0.3s ease;
 }
 
-.fa-shopping-basket {
-
-    display: none;
-}
-
-.create-branch-card {
+.search-card {
     background-color: #FFD699;
 }
 
-.create-manager-card {
+.checkout-card {
     background-color: #AED9E0;
 }
 
@@ -466,6 +466,20 @@ h2 {
         /* Adjust the margin to create spacing between the cards */
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 .logo {
     display: flex;
@@ -503,46 +517,149 @@ a {
 a:hover {
     text-decoration: none;
 }
+
 </style>
 
 <body id="page-top">
     <!-- included the navbar -->
-    <?php include(APPPATH . 'views/includes/admin-navbar.php'); ?>
+    <?php include(APPPATH . 'views/includes/manager_navbar.php'); ?>
 
     <div id="wrapper">
-
         <!-- included the menu -->
-        <?php include(APPPATH . 'views/includes/admin_menu.php'); ?>
-
+        <?php include(APPPATH . 'views/includes/manager_menu.php'); ?>
 
         <div id="content-wrapper">
+            <div class="container">
+                <h1 class="page-header text-center"></h1>
+                <div class="row">
+                    <div class="col-sm-3 col-sm-offset-3">
+                        <form action="" method="POST" enctype="multipart/form-data" id='addItems'>
+                            <!-- Item Name -->
+                            <label for="item_name">Item Name:</label>
+                            <input type="text" id="item_name" name="item_name"><br><br>
 
+                            <!-- Price -->
+                            <label for="price">Price:</label>
+                            <input type="number" id="price" name="price" step="0.01"><br><br>
 
-            <!--dashboard creation-->
+                            <!-- Description -->
+                            <label for="description">Description:</label><br>
+                            <textarea id="description" name="description" rows="4" cols="50"></textarea><br><br>
 
-            <div class="dashboard">
-                <h1>Welcome Again</h1>
-                <a href="<?php echo site_url("Branch") ?>" class="card create-branch-card">
-                    <i class="fa-solid fa-store fa-2x"></i>
-                    <h2>Create Branch</h2>
-                </a>
-                <a href="<?php echo site_url("CreateManager") ?>" class="card create-manager-card">
-                    <i class="fa-solid fa-user-tie fa-2x"></i>
-                    <h2>Create Manager</h2>
-                </a>
+                            <!-- Discount -->
+                            <label for="discount">Discount (%):</label>
+                            <input type="number" id="discount" name="discount" min="0" max="100"><br><br>
+
+                            <!-- Category -->
+                            <label for="category">Category:</label>
+                            <select id="category" name="category">
+                                <option value=null>--Select Category--</option>
+                                <option value="Bakery">Bakery</option>
+                                <option value="Fruits">Fruits</option>
+                                <option value="Grocery">Grocery</option>
+                                <option value="Meat, fish & eggs">Meat, fish & eggs</option>
+                                <option value="Vegetables">Vegetables</option>
+                                <!-- Add more categories as needed -->
+                            </select><br><br>
+
+                            <!-- Image Upload -->
+                            <label for="image">Image:</label>
+                            <input type="file" id="image" name="image" accept="image/*"><br><br>
+
+                            <!-- Submit Button -->
+                            <!-- <input type="submit" value="Submit" name="generate"> -->
+                            <button class="btn btn-secondary" type="submit" name="generate">Generate</button>
+                            <button class="btn btn-success" type="submit" name="submit" id="saveButton" disabled>Save
+                                Data</button>
+                        </form>
+                    </div>
+                    <div class="col-sm-3">
+                        <?php
+				if(isset($_POST['generate'])){
+					// Get all the values from the form
+					$item_name = $_POST['item_name'];
+					$price = $_POST['price'];
+					$description = $_POST['description'];
+					$discount = $_POST['discount'];
+					$category = $_POST['category'];
+					// Assuming you're storing the uploaded image on the server
+					// You can handle image uploads and file paths as needed
+					// $image_path = 'path/to/uploaded/image.jpg'; // Replace with the actual path
+					
+           			// $image_path = 'uploads/' . $data['file_name'];
+					// Create an associative array with the form data
+					$image_path=$_FILES['image']['name'];
+					$data = array(
+						'item_name' => $item_name,
+						'price' => $price,
+						'description' => $description,
+						'discount' => $discount,
+						'category' => $category,
+						'image' => $image_path
+					);
+
+                    $json_data = json_encode($data);
+
+					echo "
+				// 		<a target='_blank' href='https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl=$json_data&choe=UTF-8'><img id='qr' class = 'float-end' src='https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl=$json_data&choe=UTF-8'></a>
+				// ";
+                echo "<script>
+                var saveButton = document.getElementById('saveButton');
+                saveButton.disabled = false;
+                document.querySelector('#addItems').action= baseUrl+'ItemController/save_item?qr=$json_data';
+
+				document.getElementById('item_name').value='".$item_name."';
+				document.querySelector('#price').value='".$price."';
+				document.querySelector('#description').value='".$description."';
+				document.querySelector('#discount').value='".$discount."';
+				document.querySelector('#category').value='".$category."';
+				alert('please add the image again');
+
+                </script>";
+
+            }
+			if(isset($_GET['saved'])){
+				echo 'Item Saved Successfully';
+			}
+				?>
+
+                    </div>
+                </div>
             </div>
 
-
+            <h2>Items List</h2>
+            <table class="table table-striped table-hover" border="1">
+                <tr>
+                    <th>Item Name</th>
+                    <th>Price</th>
+                    <th>Description</th>
+                    <th>Discount</th>
+                    <th>Category</th>
+                    <th>Image</th>
+                    <th>Action</th>
+                </tr>
+                <?php foreach ($items as $item) : ?>
+                <tr>
+                    <td><?= $item->item_name ?></td>
+                    <td><?= $item->price ?></td>
+                    <td><?= $item->description ?></td>
+                    <td><?= $item->offer ?></td>
+                    <td><?= $item->category_name ?></td>
+                    <td><img src="<?php echo base_url()?>uploads/<?= $item->image ?>" alt="Item Image"
+                            style="width: 100px; height: 100px;"></td>
+                    <td>
+                        <a href="<?php echo site_url('AddItem/edit/'.$item->item_id); ?>">Edit</a> |
+                        <a href="<?= base_url('AddItem/delete/'.$item->item_id) ?>"
+                            onclick="return confirm('Are you sure you want to delete this item?')">Delete</a>
+                    </td>
+                </tr>
+                <?php endforeach; ?>
+            </table>
+            <!-- included the footer -->
+            <?php include(APPPATH . 'views/includes/footer.php'); ?>
         </div>
 
-
-        <!-- included the footer -->
-        <?php include(APPPATH . 'views/includes/footer.php'); ?>
     </div>
-
-
-    </div>
-
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">

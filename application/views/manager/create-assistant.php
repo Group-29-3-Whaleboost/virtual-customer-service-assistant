@@ -109,7 +109,7 @@ body.fixed-nav.sidebar-toggled #content-wrapper {
     width: 100%;
 }
 
-.navbar-nav .nav-item.active-3 .nav-link {
+.navbar-nav .nav-item.active-4 .nav-link {
     color: #fff;
 }
 
@@ -515,144 +515,157 @@ a:hover {
 
 <body id="page-top">
     <!-- included the navbar -->
-    <?php include(APPPATH . 'views/includes/admin-navbar.php'); ?>
+    <?php include(APPPATH . 'views/includes/manager_navbar.php'); ?>
 
     <div id="wrapper">
 
         <!-- included the menu -->
-        <?php include(APPPATH . 'views/includes/admin_menu.php'); ?>
+        <?php include(APPPATH . 'views/includes/manager_menu.php'); ?>
 
         <div id="content-wrapper">
-            <!-- Code of Branch page -->
+            <!-- Code of Assistant page -->
 
-            <!-- Add Branch Modal -->
-            <div class="modal fade" id="branchAddModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+            <!-- Add Assistant Modal -->
+            <div class="modal fade" id="assistantAddModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                 aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Add Branch</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">Add Assistant</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <form id="saveBranch">
+                        <form id="saveAssistant">
                             <div class="modal-body">
                                 <div id="errorMessage" class="alert alert-warning d-none"></div>
 
                                 <div class="mb-3">
-                                    <label for="">Branch Name</label>
-                                    <input type="text" name="branch_name" class="form-control"
-                                        placeholder="Enter the branch name" />
+                                    <label for="">Assistant Name</label>
+                                    <input type="text" name="assistant_name" class="form-control"
+                                        placeholder="Enter the assistant name" />
                                 </div>
                                 <div class="mb-3">
-                                    <label for="">Address</label>
-                                    <input type="text" name="address" class="form-control"
-                                        placeholder="Enter the branch address" />
+                                    <label for="">Email Address</label>
+                                    <input type="email" name="email" class="form-control"
+                                        placeholder="Enter the assistant email address" />
                                 </div>
                                 <div class="mb-3">
                                     <label for="">Phone No</label>
                                     <input type="number" name="phone_no" class="form-control"
-                                        placeholder="Enter the branch phone number" />
+                                        placeholder="Enter the assistant phone number" />
                                 </div>
                                 <div class="mb-3">
-                                    <label for="">Latitude</label>
-                                    <input type="text" name="latitude" class="form-control"
-                                        placeholder="Enter the branch latitude" />
-                                </div>
-                                <div class="mb-3">
-                                    <label for="">Longitude</label>
-                                    <input type="text" name="longitude" class="form-control"
-                                        placeholder="Enter the branch longitude" />
+                                    <label for="">Gender</label>
+                                    <div class="d-flex justify-content-center">
+                                        <div class="col-sm-6">
+                                            <div class="form-check">
+                                                <input type="radio" class="form-check-input" name="gender" value="Male">
+                                                <label class="form-check-label" for="male">Male</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-check">
+                                                <input type="radio" class="form-check-input" name="gender"
+                                                    value="Female">
+                                                <label class="form-check-label" for="female">Female</label>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                <button type="submit" class="btn btn-primary">Save Branch</button>
+                                <button type="submit" class="btn btn-primary">Save Assistant</button>
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
 
-            <!-- Edit Branch Modal -->
-            <div class="modal fade" id="branchEditModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+            <!-- Edit Assistant Modal -->
+            <div class="modal fade" id="assistantEditModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                 aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Edit Branch</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">Edit Assistant</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <form id="updateBranch">
+                        <form id="updateAssistant">
                             <div class="modal-body">
 
                                 <div id="errorMessageUpdate" class="alert alert-warning d-none"></div>
 
-                                <input type="hidden" name="branch_id" id="branch_id">
+                                <input type="hidden" name="assistant_id" id="assistant_id">
 
                                 <div class="mb-3">
-                                    <label for="">Branch Name</label>
-                                    <input type="text" name="branch_name" id="branch_name" class="form-control"
-                                        placeholder="Enter the branch name" />
+                                    <label for="">Assistant Name</label>
+                                    <input type="text" name="assistant_name" id="assistant_name" class="form-control"
+                                        placeholder="Enter the assistant name" />
                                 </div>
                                 <div class="mb-3">
-                                    <label for="">Address</label>
-                                    <input type="text" name="address" id="address" class="form-control"
-                                        placeholder="Enter the branch address" />
+                                    <label for="">Email Address</label>
+                                    <input type="email" name="email" id="email" class="form-control"
+                                        placeholder="Enter the assistant email address" />
                                 </div>
                                 <div class="mb-3">
                                     <label for="">Phone No</label>
                                     <input type="number" name="phone_no" id="phone_no" class="form-control"
-                                        placeholder="Enter the branch phone number" />
+                                        placeholder="Enter the assistant phone number" />
                                 </div>
                                 <div class="mb-3">
-                                    <label for="">Latitude</label>
-                                    <input type="text" name="latitude" id="latitude" class="form-control"
-                                        placeholder="Enter the branch latitude" />
-                                </div>
-                                <div class="mb-3">
-                                    <label for="">Longitude</label>
-                                    <input type="text" name="longitude" id="longitude" class="form-control"
-                                        placeholder="Enter the branch longitude" />
+                                    <label for="">Gender</label>
+                                    <div class="d-flex justify-content-center">
+                                        <div class="col-sm-6">
+                                            <div class="form-check">
+                                                <input type="radio" class="form-check-input" name="gender" value="Male"
+                                                    id="male">
+                                                <label class="form-check-label" for="male">Male</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-check">
+                                                <input type="radio" class="form-check-input" name="gender"
+                                                    value="Female" id="female">
+                                                <label class="form-check-label" for="female">Female</label>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                <button type="submit" class="btn btn-primary">Update Branch</button>
+                                <button type="submit" class="btn btn-primary">Update Assistant</button>
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
 
-            <!-- View Branch Modal -->
-            <div class="modal fade" id="branchViewModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+            <!-- View Assistant Modal -->
+            <div class="modal fade" id="assistantViewModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                 aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">View Branch</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">View Assistant</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
                             <div class="mb-3">
-                                <label for="">Branch Name</label>
-                                <p id="view_branch_name" class="form-control"></p>
+                                <label for="">Assistant Name</label>
+                                <p id="view_assistant_name" class="form-control"></p>
                             </div>
                             <div class="mb-3">
-                                <label for="">Address</label>
-                                <p id="view_address" class="form-control"></p>
+                                <label for="">Email Address</label>
+                                <p id="view_email" class="form-control"></p>
                             </div>
                             <div class="mb-3">
                                 <label for="">Phone No</label>
                                 <p id="view_phone_no" class="form-control"></p>
                             </div>
                             <div class="mb-3">
-                                <label for="">Latitude</label>
-                                <p id="view_latitude" class="form-control"></p>
-                            </div>
-                            <div class="mb-3">
-                                <label for="">Longitude</label>
-                                <p id="view_longitude" class="form-control"></p>
+                                <label for="">Gender</label>
+                                <p id="view_gender" class="form-control"></p>
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -667,21 +680,20 @@ a:hover {
                 <div class="row">
                     <div class="col-md-12">
                         <div class="mb-4">
-                            <h4 class="text-center">Create a New Branch
+                            <h4 class="text-center">Create a New Assistant
                                 <button type="button" class="btn btn-primary float-end" data-bs-toggle="modal"
-                                    data-bs-target="#branchAddModal">
-                                    Add Branch
+                                    data-bs-target="#assistantAddModal">
+                                    Add Assistant
                                 </button>
                             </h4>
                         </div>
                         <table id="myTable" class="table">
                             <thead>
                                 <tr class="text-center">
-                                    <th>Branch Name</th>
-                                    <th>Address</th>
+                                    <th>Assistant Name</th>
+                                    <th>Email Address</th>
                                     <th>Phone No</th>
-                                    <th>Latitude</th>
-                                    <th>Longitude</th>
+                                    <th>Gender</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -694,30 +706,29 @@ a:hover {
                                     die('Connection Failed'. mysqli_connect_error());
                                 }
 
-                                $query = "SELECT * FROM branch";
+                                $query = "SELECT * FROM customer_assistant";
                                 $query_run = mysqli_query($con, $query);
 
                                 if(mysqli_num_rows($query_run) > 0)
                                 {
-                                    foreach($query_run as $branch)
+                                    foreach($query_run as $assistant)
                                     {
                                         ?>
                                 <tr class="text-center">
-                                    <td><?= $branch['branch_name'] ?></td>
-                                    <td><?= $branch['address'] ?></td>
-                                    <td><?= $branch['phone_no'] ?></td>
-                                    <td><?= $branch['latitude'] ?></td>
-                                    <td><?= $branch['longitude'] ?></td>
+                                    <td><?= $assistant['name'] ?></td>
+                                    <td><?= $assistant['email'] ?></td>
+                                    <td><?= $assistant['phone_no'] ?></td>
+                                    <td><?= $assistant['gender'] ?></td>
 
                                     <td>
-                                        <button type="button" value="<?=$branch['branch_id'];?>"
-                                            class="viewBranchBtn btn btn-info btn-sm"><i
+                                        <button type="button" value="<?=$assistant['assistant_id'];?>"
+                                            class="viewAssistantBtn btn btn-info btn-sm"><i
                                                 class="fa-solid fa-eye fa-beat"></i></button>
-                                        <button type="button" value="<?=$branch['branch_id'];?>"
-                                            class="editBranchBtn btn btn-warning btn-sm"><i
+                                        <button type="button" value="<?=$assistant['assistant_id'];?>"
+                                            class="editAssistantBtn btn btn-warning btn-sm"><i
                                                 class="fa-solid fa-pen-to-square fa-beat"></i></button>
-                                        <button type="button" value="<?=$branch['branch_id'];?>"
-                                            class="deleteBranchBtn btn btn-danger btn-sm"><i
+                                        <button type="button" value="<?=$assistant['assistant_id'];?>"
+                                            class="deleteAssistantBtn btn btn-danger btn-sm"><i
                                                 class="fa-solid fa-trash fa-beat"></i></button>
                                     </td>
                                 </tr>
@@ -738,15 +749,19 @@ a:hover {
             <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 
             <script>
-            $(document).on('submit', '#saveBranch', function(e) {
+            $(document).on('submit', '#saveAssistant', function(e) {
                 e.preventDefault();
 
+                // Get the selected gender value
+                var gender = $('input[name="gender"]:checked').val();
+
                 var formData = new FormData(this);
-                formData.append("save_branch", true);
+                formData.append("save_assistant", true);
+                formData.append("gender", gender);
 
                 $.ajax({
                     type: "POST",
-                    url: "<?php base_url() ?> assets/js/branch-code.php",
+                    url: "<?php base_url() ?> assets/js/create-assistant-code.php",
                     data: formData,
                     processData: false,
                     contentType: false,
@@ -760,8 +775,8 @@ a:hover {
                         } else if (res.status == 200) {
 
                             $('#errorMessage').addClass('d-none');
-                            $('#branchAddModal').modal('hide');
-                            $('#saveBranch')[0].reset();
+                            $('#assistantAddModal').modal('hide');
+                            $('#saveAssistant')[0].reset();
 
                             alertify.set('notifier', 'position', 'top-right');
                             alertify.success(res.message);
@@ -776,14 +791,14 @@ a:hover {
 
             });
 
-            $(document).on('click', '.editBranchBtn', function() {
+            $(document).on('click', '.editAssistantBtn', function() {
 
-                var branch_id = $(this).val();
+                var assistant_id = $(this).val();
 
                 $.ajax({
                     type: "GET",
-                    url: "<?php base_url() ?> assets/js/branch-code.php?branch_id=" +
-                        branch_id,
+                    url: "<?php base_url() ?> assets/js/create-assistant-code.php?assistant_id=" +
+                        assistant_id,
                     success: function(response) {
 
                         var res = jQuery.parseJSON(response);
@@ -792,14 +807,20 @@ a:hover {
                             alert(res.message);
                         } else if (res.status == 200) {
 
-                            $('#branch_id').val(res.data.branch_id);
-                            $('#branch_name').val(res.data.branch_name);
-                            $('#address').val(res.data.address);
+                            $('#assistant_id').val(res.data.assistant_id);
+                            $('#assistant_name').val(res.data.name);
+                            $('#email').val(res.data.email);
                             $('#phone_no').val(res.data.phone_no);
-                            $('#latitude').val(res.data.latitude);
-                            $('#longitude').val(res.data.longitude);
 
-                            $('#branchEditModal').modal('show');
+                            // Corrected selector: #gender instead of gender
+                            var gender = res.data.gender;
+                            if (gender === 'Male') {
+                                $('#male').prop('checked', true);
+                            } else if (gender === 'Female') {
+                                $('#female').prop('checked', true);
+                            }
+
+                            $('#assistantEditModal').modal('show');
                         }
 
                     }
@@ -807,15 +828,19 @@ a:hover {
 
             });
 
-            $(document).on('submit', '#updateBranch', function(e) {
+            $(document).on('submit', '#updateAssistant', function(e) {
                 e.preventDefault();
 
+                // Get the selected gender value
+                var gender = $('input[name="gender"]:checked').val();
+
                 var formData = new FormData(this);
-                formData.append("update_branch", true);
+                formData.append("update_assistant", true);
+                formData.append("gender", gender);
 
                 $.ajax({
                     type: "POST",
-                    url: "<?php base_url() ?> assets/js/branch-code.php",
+                    url: "<?php base_url() ?> assets/js/create-assistant-code.php",
                     data: formData,
                     processData: false,
                     contentType: false,
@@ -833,8 +858,8 @@ a:hover {
                             alertify.set('notifier', 'position', 'top-right');
                             alertify.success(res.message);
 
-                            $('#branchEditModal').modal('hide');
-                            $('#updateBranch')[0].reset();
+                            $('#assistantEditModal').modal('hide');
+                            $('#updateAssistant')[0].reset();
 
                             $('#myTable').load(location.href + " #myTable");
 
@@ -846,13 +871,13 @@ a:hover {
 
             });
 
-            $(document).on('click', '.viewBranchBtn', function() {
+            $(document).on('click', '.viewAssistantBtn', function() {
 
-                var branch_id = $(this).val();
+                var assistant_id = $(this).val();
                 $.ajax({
                     type: "GET",
-                    url: "<?php base_url() ?> assets/js/branch-code.php?branch_id=" +
-                        branch_id,
+                    url: "<?php base_url() ?> assets/js/create-assistant-code.php?assistant_id=" +
+                        assistant_id,
                     success: function(response) {
 
                         var res = jQuery.parseJSON(response);
@@ -861,29 +886,28 @@ a:hover {
                             alert(res.message);
                         } else if (res.status == 200) {
 
-                            $('#view_branch_name').text(res.data.branch_name);
-                            $('#view_address').text(res.data.address);
+                            $('#view_assistant_name').text(res.data.name);
+                            $('#view_email').text(res.data.email);
                             $('#view_phone_no').text(res.data.phone_no);
-                            $('#view_latitude').text(res.data.latitude);
-                            $('#view_longitude').text(res.data.longitude);
+                            $('#view_gender').text(res.data.gender);
 
-                            $('#branchViewModal').modal('show');
+                            $('#assistantViewModal').modal('show');
                         }
                     }
                 });
             });
 
-            $(document).on('click', '.deleteBranchBtn', function(e) {
+            $(document).on('click', '.deleteAssistantBtn', function(e) {
                 e.preventDefault();
 
-                if (confirm('Are you sure you want to delete this branch?')) {
-                    var branch_id = $(this).val();
+                if (confirm('Are you sure you want to delete this assistant?')) {
+                    var assistant_id = $(this).val();
                     $.ajax({
                         type: "POST",
-                        url: "<?php base_url() ?> assets/js/branch-code.php",
+                        url: "<?php base_url() ?> assets/js/create-assistant-code.php",
                         data: {
-                            'delete_branch': true,
-                            'branch_id': branch_id
+                            'delete_assistant': true,
+                            'assistant_id': assistant_id
                         },
                         success: function(response) {
 
