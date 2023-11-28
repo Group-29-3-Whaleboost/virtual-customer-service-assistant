@@ -615,40 +615,35 @@ select {
                                 </div>
 
                             </div>
+                          <?php
+                                        $con = mysqli_connect("localhost","root","","branch");
+
+                                        if(!$con){
+                                            die('Connection Failed'. mysqli_connect_error());
+                                        }
+            
+                                        $branch_query = "SELECT branch_id,branch_name FROM branch";
+                                        $query_run = mysqli_query($con, $branch_query);
+            
+                                        if(mysqli_num_rows($query_run) > 0)
+                                        {
+                                            foreach($query_run as $branch)
+                                            {
+                                        ?>
+                                        <option value="<?= $branch['branch_id'] ?>"><?= $branch['branch_name'] ?>
+                                        </option>
+
+                                        <?php
+                                            }
+                                        }
+                                        ?>
+                          
+
                         </form>
 
                     </div>
                 </div>
             </div>
-
-
-            <!-- 
-
-    This is used to insert button navigation
-    
-<       script>
-
-                
-            const button1 = document.getElementById("button1");
-            //    const button2 = document.getElementById("button2");
-
-
-            button1.addEventListener("click", function() {
-
-                window.location.href = "navigate-map.php";
-            });
-
-            /  button2.addEventListener("click", function() {
-
-            //    window.location.href = "page2.html";
-
-            //  });
-
-            
-
-            </script>
-
-            -->
 
 
 
