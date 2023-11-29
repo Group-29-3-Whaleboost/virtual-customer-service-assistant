@@ -9,7 +9,7 @@ $connectDB = mysqli_connect("localhost","root","","customer_service_assistant");
 
 // here useed item table and store_item table
 // take all the data from item table
-$query = "SELECT item.item_id,item.item_name,item.category_name,item.description,item.offer,item.image,item.price,store_item.availability,store_item.branch_id,store_item.quantity FROM item JOIN store_item 
+$query = "SELECT item.item_id,item.item_name,item.category_name,item.description,item.offer,item.image,item.price,store_item.branch_id,store_item.quantity FROM item JOIN store_item 
 ON item.item_id = store_item.item_id WHERE store_item.branch_id = $branchId";
 
 // included the header
@@ -21,6 +21,12 @@ include(APPPATH . 'views/includes/header.php');
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
 </head>
 <style>
+
+/* activate the navbar page link */
+.navbar-nav .nav-item.active-2 .nav-link {
+    color: #fff;
+}
+
 #content-wrapper>div>a.card.search-card {
     text-decoration: none;
 }
@@ -116,9 +122,7 @@ body.fixed-nav.sidebar-toggled #content-wrapper {
     width: 100%;
 }
 
-.navbar-nav .nav-item.active-2 .nav-link {
-    color: #fff;
-}
+
 
 .navbar-nav .nav-item.dropdown .dropdown-toggle::after {
     width: 1rem;
@@ -733,10 +737,10 @@ a:hover {
 
                             itemPrice.textContent = "Price : LKR " + item.price;
 
-                            if (item.availability == "In Stock") {
-                                itemAvailabilityTrue.textContent = item.availability + " # " + item.quantity;
+                            if (item.quantity > 0 ) {
+                                itemAvailabilityTrue.textContent = "In Stock" + " # " + item.quantity;
                             } else {
-                                itemAvailabilityFalse.textContent = item.availability;
+                                itemAvailabilityFalse.textContent = "Out of Stock";
                             }
 
                             // put data into the card container
