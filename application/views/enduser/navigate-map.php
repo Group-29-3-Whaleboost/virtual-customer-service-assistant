@@ -1,12 +1,39 @@
 <!DOCTYPE html>
 <html>
 
+<?php
+// Retrieve the selected branch ID from the cookie
+if (isset($_COOKIE['selectedBranchName'])) {
+    $selectedBranchName = $_COOKIE['selectedBranchName'];
+    // Use $selectedBranchName as needed
+    // Replace with the actual branch ID you want to display using session variable any method
+    $branchId = 1;
+
+    // connect the database
+    $con = mysqli_connect("localhost", "root", "", "customer_service_assistant");
+
+    // here used item table and store_item table
+    // take all the data from item table
+    $query = "SELECT branch_id, branch_name, latitude, longitude FROM branch WHERE branch_name = '$selectedBranchName'";
+
+    $query_run = mysqli_query($con, $query);
+
+    if ($query_run) {
+        $branch = mysqli_fetch_assoc($query_run);
+    }
+} else {
+    // Handle the case when branch_id is not present in the URL
+    echo "Branch ID not provided";
+}
+
+?>
+
 <head>
     <title><?php echo $title ?></title>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="<?php base_url(); ?>assets\css\bootstrap.min.css"/>
+    <link rel="stylesheet" href="<?php base_url(); ?>assets\css\bootstrap.min.css" />
     <style>
     .custom-map-control-button {
         width: 40px;
@@ -16,8 +43,9 @@
         background-position: center;
 
     }
-    .btn-success{
-        font-size:20px;
+
+    .btn-success {
+        font-size: 20px;
         margin-left: 10px;
         margin-bottom: 10px;
     }
@@ -36,11 +64,12 @@
 
 <body>
     <div id="map" style="width: 100%; height: 100vh;"></div>
+
     <?php
-    //Moratuwa
-    $Latitude = 6.791294089286248; 
-    $Longitude = 79.88630358871042; 
-    // 6.791294089286248, 79.88630358871042
+    if (isset($branch)) {
+        $Latitude = $branch['latitude'];
+        $Longitude = $branch['longitude'];
+    }
     ?>
 
     <script>
@@ -61,7 +90,7 @@
         new google.maps.Marker({
             position: myLatLng,
             map,
-            title: "Moratuwa Branch",
+            title: "<?= $branch['branch_name'] ?> Branch",
         });
 
         //get current user location
@@ -73,7 +102,7 @@
         const locationButton = document.createElement("button");
 
         // locationButton.innerText = "Pan to Current Location";
-        locationButton.classList.add("btn","btn-light","custom-map-control-button");
+        locationButton.classList.add("btn", "btn-light", "custom-map-control-button");
         map.controls[google.maps.ControlPosition.RIGHT_CENTER].push(locationButton);
 
         // locationButton event
@@ -111,7 +140,7 @@
                             map: map,
                             title: "You are in here",
                         });
-                        
+
 
                     },
                     () => {
@@ -134,11 +163,22 @@
 
         // directionButton event
         directionButton.addEventListener("click", () => {
-
             // call function to get direction
-            getDirection(myLatLng);
-            
+            getDirection(myLatLng.lat, myLatLng.lng);
         });
+
+        // Show road path of the target location
+        function getDirection(latitude, longitude) {
+            try {
+                var uri = "https://www.google.com/maps/dir//" + "'" + latitude + "," + longitude + "'";
+                window.open(uri);
+            } catch (e) {
+                var uri =
+                "https://play.google.com/store/apps/details?id=com.google.android.apps.maps&hl=en&gl=US&pli=1";
+                window.open(uri);
+            }
+        }
+
 
 
         // Go to the Dashboad
@@ -154,11 +194,13 @@
         goDashboard.addEventListener("click", () => {
 
             // .
+            // Redirect to Dashboard
+            window.location.href = "Dashboard";
 
         });
     }
 
-    
+
     function handleLocationError(browserHasGeolocation, infoWindow, pos) {
         infoWindow.setPosition(pos);
         infoWindow.setContent(
@@ -172,10 +214,10 @@
     // Show road path of the target location
     function getDirection(endLocation) {
         try {
-            var uri = "https://www.google.com/maps/dir//" +"'"+ endLocation.lat+","+endLocation.lng+"'";
+            var uri = "https://www.google.com/maps/dir//" + "'" + endLocation.lat + "," + endLocation.lng + "'";
             window.open(uri);
 
-        }catch (e){
+        } catch (e) {
             var uri = "https://play.google.com/store/apps/details?id=com.google.android.apps.maps&hl=en&gl=US&pli=1";
             window.open(uri);
 
