@@ -368,7 +368,7 @@ footer.sticky-footer {
     position: absolute;
     right: 0;
     bottom: 0;
-    width: calc(100% - 90px);
+    width: 100%;
     height: 80px;
     background-color: #e9ecef;
 }
@@ -380,19 +380,11 @@ footer.sticky-footer .copyright {
 
 @media (min-width: 768px) {
     footer.sticky-footer {
-        width: calc(100% - 225px);
+        width: 100%;
     }
 }
 
-body.sidebar-toggled footer.sticky-footer {
-    width: 100%;
-}
 
-@media (min-width: 768px) {
-    body.sidebar-toggled footer.sticky-footer {
-        width: calc(100% - 90px);
-    }
-}
 
 body {
     font-family: Arial, sans-serif;
@@ -462,20 +454,6 @@ h2 {
     }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 .logo {
     display: flex;
     /* Set the container to use flex display */
@@ -516,152 +494,123 @@ a:hover {
 
 /*stylesheet of select branch*/
 
-
-.back {
-    width: 100%;
-    min-height: 90vh;
-    margin: 0;
-    padding: 0;
-    overflow: auto;
-    background-color: #2d7af7;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+#selectBranch {
+    background-color: #ffffff;
+    margin: 0px auto;
+    padding: 40px;
+    width: 50%;
+    border-radius: 15px;
+    box-shadow: 0 60px 40px -30px rgba(0, 0, 0, 0.27);
 }
 
-h1 {
-
-    text-align: center;
-
-}
-
-.up-bar {
-
-    width: 100%;
-    height: 400px;
-    margin: auto;
-    border-radius: 5px;
-    background: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-}
-
-select {
-
-    margin: auto;
-    width: 100%;
-    height: 45px;
-    font-size: 100%;
-    border: #2d7af7 solid 3px;
-
-}
-
-
-
-.button01 {
-    display: flex;
-    justify-content: space-around;
-    margin-top: 10%;
-    flex-wrap: wrap;
-
-}
-
-.button01 div button {
-
-    width: 150px;
-    margin-bottom: 10px;
+/* Media query for small screen sizes */
+@media (max-width: 600px) {
+    body {
+        margin-top: 50%;
+    }
+    #selectBranch {
+        width: 100%;
+    }
 }
 </style>
 
 <body id="page-top">
-    <!-- included the navbar -->
-
-    <?php include(APPPATH . 'views/includes/navbar.php'); ?>
-    <div id="wrapper">
-
-        <?php include(APPPATH . 'views/includes/menu.php'); ?>
 
 
-        <div id="content-wrapper">
+    <div id="content-wrapper">
 
-            <!--your code is here -->
+        <!--your code is here -->
 
-            <div class="back">
-
-                <div class="up">
-                    <div class="up-bar px-5">
-
-                        <h1>Select the Branch</h1>
-
-                        <form>
-
-                            <select name="branch">
-                                <option value="" disabled selected>Select Your Branch </option>
-                                <option value="colombo">Colombo</option>
-                                <option value="kandy">Kandy</option>
-                                <option value="Galle">Galle</option>
-                                <option value="panadura">Panadura</option>
-                            </select>
-
-                            <div class="button01 mx-auto">
-                                <div>
-                                    <button type="submit" class=" btn btn-outline-primary" id="button1">Navigate
-                                        Me</button>
-                                </div>
-                                <div>
-                                    <button type="submit" class=" btn btn-outline-primary">Let's Shop</button>
-                                </div>
-
+        <div class="container mt-5">
+            <div class="row d-flex justify-content-center align-items-center">
+                <div class="col-md-12">
+                    <form id="selectBranch" method="post" action="#">
+                        <h1 class="my-2 text-center">Select the Branch</h1>
+                        <div>
+                            <div style="text-align: center;">
+                                <img src="<?php base_url() ?>assets/images/auth-image-2.png" style="width: 50%"
+                                    alt="" class="mb-2">
                             </div>
-                        </form>
+                            <h6 class="text-muted">Select Your Nearest Branch!</h6>
+                            <select name="selectedBranch" class="form-select form-select-lg mb-3 mt-4 text-center"
+                                aria-label=".form-select-lg example">
+                                <option selected hidden value="0"> --- Select the Branch --- </option>
+                                <?php
+                                    $con = mysqli_connect("localhost", "root", "", "customer_service_assistant");
 
-                    </div>
+                                    if (!$con) {
+                                        die('Connection Failed' . mysqli_connect_error());
+                                    }
+
+                                    $branch_query = "SELECT branch_id, branch_name FROM branch";
+                                    $query_run = mysqli_query($con, $branch_query);
+
+                                    if (mysqli_num_rows($query_run) > 0) {
+                                        foreach ($query_run as $branch) {
+                                            ?>
+                                <option value="<?= $branch['branch_name']; ?>"><?= $branch['branch_name'] ?></option>
+                                <?php
+                                        }
+                                    }
+                                ?>
+                            </select>
+                        </div>
+                        <div class="row d-flex justify-content-center align-items-center">
+                            <input class="btn btn-primary col-sm-5 m-2" type="submit" name="navigate"
+                                value="Navigate Me">
+                            <input class="btn btn-dark col-sm-5 m-2" type="submit" name="shop" value="Let's Shop"
+                                id="shop">
+                        </div>
+                    </form>
+
                 </div>
             </div>
+        </div>
 
 
-            <!-- 
+        <!-- Add jQuery library -->
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
-    This is used to insert button navigation
-    
-<       script>
+        <script>
+        $(document).ready(function() {
+            $("#selectBranch").submit(function(e) {
+                e.preventDefault();
 
-                
-            const button1 = document.getElementById("button1");
-            //    const button2 = document.getElementById("button2");
+                // Check which button is clicked
+                var clickedButton = $("input[type=submit][clicked=true]").val();
 
+                // Get the selected branch ID
+                var selectedBranchName = $("select[name='selectedBranch']").val();
 
-            button1.addEventListener("click", function() {
+                // Set a cookie with the selected branch ID
+                document.cookie = "selectedBranchName=" + selectedBranchName;
 
-                window.location.href = "navigate-map.php";
+                if (selectedBranchName != 0) {
+                    // Redirect based on the clicked button
+                    if (clickedButton === "Navigate Me") {
+                        window.location.href = "NavigateMap";
+                    } else if (clickedButton === "Let's Shop") {
+                        window.location.href = "Dashboard";
+                    }
+                }
             });
 
-            /  button2.addEventListener("click", function() {
-
-            //    window.location.href = "page2.html";
-
-            //  });
-
-            
-
-            </script>
-
-            -->
+            // Add a click event listener to track which button is clicked
+            $("input[type=submit]").click(function() {
+                $("input[type=submit]").removeAttr("clicked");
+                $(this).attr("clicked", "true");
+            });
+        });
+        </script>
 
 
 
 
 
 
-
-
-
-
-            <!-- included the footer -->
-            <?php include(APPPATH . 'views/includes/footer.php'); ?>
-        </div>
+        <!-- included the footer -->
+        <?php include(APPPATH . 'views/includes/footer.php'); ?>
+    </div>
 
 
     </div>
@@ -675,48 +624,9 @@ select {
     </script>
 
 
-    <script>
-    ! function(t) {
-        "use strict";
 
 
-        t("#sidebarToggle").click(function(e) {
-            e.preventDefault();
-            t("body").toggleClass("sidebar-toggled");
-            t(".sidebar").toggleClass("toggled");
-        });
 
-
-        t("body.fixed-nav .sidebar").on("mousewheel DOMMouseScroll wheel", function(e) {
-            if (768 < t(window).width()) {
-                var o = e.originalEvent;
-                var delta = o.wheelDelta || -o.detail;
-                this.scrollTop += 30 * (delta < 0 ? 1 : -1);
-                e.preventDefault();
-            }
-        });
-
-
-        t(document).scroll(function() {
-            if (100 < t(this).scrollTop()) {
-                t(".scroll-to-top").fadeIn();
-            } else {
-                t(".scroll-to-top").fadeOut();
-            }
-        });
-
-        t(document).on("click", "a.scroll-to-top", function(e) {
-            var target = t(this);
-            t("html, body").stop().animate({
-                    scrollTop: t(target.attr("href")).offset().top
-                },
-                1000,
-                "easeInOutExpo"
-            );
-            e.preventDefault();
-        });
-    }(jQuery);
-    </script>
 
 </body>
 

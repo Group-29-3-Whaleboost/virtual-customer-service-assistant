@@ -12,8 +12,6 @@
 
     <!-- CSS -->
     <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap');
-
     *,
     *::before,
     *::after {
@@ -24,14 +22,16 @@
 
     body,
     input {
-        font-family: "Poppins", sans-serif;
+        font-family: Arial, sans-serif;
+
     }
+
 
     main {
         width: 100%;
         min-height: 100vh;
         overflow: hidden;
-        background-color: #2d7af7;
+        background-color: #f7f7f7;
         padding: 2rem;
         display: flex;
         align-items: center;
@@ -280,7 +280,7 @@
     }
 
     .text-group h2 {
-        line-height: 2.2rem;
+        line-height: 1.9rem;
         font-weight: 600;
         font-size: 1.6rem;
     }
@@ -413,14 +413,28 @@
         }
     }
 
-    footer span {
+    footer.sticky-footer {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        height: 25px;
+        background-color: #e9ecef;
+    }
+
+    footer.sticky-footer .copyright {
         line-height: 1;
         font-size: 0.8rem;
     }
 
-    footer {
-        background-color: #e9ecef;
-        text-align: center;
+    @media (max-width: 530px) {
+        footer.sticky-footer {
+            width: 100%;
+            height: 80px;
+        }
     }
     </style>
 
@@ -489,7 +503,7 @@
 
                             <div class="input-wrap">
                                 <input type="password" id="password" name="password" minlength="8" class="input-field"
-                                    autocomplete="off" required />
+                                    title="Use at least 8 characters" autocomplete="off" required />
                                 <label>Password</label>
                             </div>
 
@@ -533,6 +547,9 @@
             </div>
         </div>
     </main>
+
+    <!-- included the footer -->
+    <?php include(APPPATH . 'views/includes/footer.php'); ?>
 
 
     <!-- User Login Section -->
@@ -617,41 +634,41 @@
 
 
     <!-- Display Success or Error Messages for Login and Registration -->
-    <?php if (isset($loginSuccessMessage)): ?>
-    <div class="alert alert-success text-center m-0">
-        <strong>
-            <?php echo $loginSuccessMessage; ?>
-        </strong>
+    <?php if (isset($loginSuccessMessage) || isset($loginErrorMessage) || isset($registrationSuccessMessage) || isset($registrationErrorMessage)): ?>
+    <div style="position: fixed; top: 10px; right: 10px; z-index: 1000; width: 400px;">
+        <?php if (isset($loginSuccessMessage)): ?>
+        <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
+            <strong><?php echo $loginSuccessMessage; ?></strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <?php elseif (isset($loginErrorMessage)): ?>
+        <div class="alert alert-warning alert-dismissible fade show text-center" role="alert">
+            <strong><?php echo $loginErrorMessage; ?></strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <?php endif; ?>
+
+        <?php if (isset($registrationSuccessMessage)): ?>
+        <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
+            <strong><?php echo $registrationSuccessMessage; ?></strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <?php elseif (isset($registrationErrorMessage)): ?>
+        <div class="alert alert-warning alert-dismissible fade show text-center" role="alert">
+            <strong><?php echo $registrationErrorMessage; ?></strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <?php endif; ?>
     </div>
-    <?php elseif (isset($loginErrorMessage)): ?>
-    <div class="alert alert-danger text-center m-0">
-        <strong>
-            <?php echo $loginErrorMessage; ?>
-        </strong>
-    </div>
+
+    <script>
+    // Close the alert after a delay (adjust the timeout value as needed)
+    window.setTimeout(function() {
+        $(".alert").alert("close");
+    }, 5000);
+    </script>
     <?php endif; ?>
 
-    <?php if (isset($registrationSuccessMessage)): ?>
-    <div class="alert alert-success text-center m-0">
-        <strong>
-            <?php echo $registrationSuccessMessage; ?>
-        </strong>
-    </div>
-    <?php elseif (isset($registrationErrorMessage)): ?>
-    <div class="alert alert-danger text-center m-0">
-        <strong>
-            <?php echo $registrationErrorMessage; ?>
-        </strong>
-    </div>
-    <?php endif; ?>
-
-
-
-
-
-    <footer>
-        <span>Copyright © <a href="#" target="_blank">Whaleboost</a> 2023</span>
-    </footer>
 
     <!-- JavaScript -->
     <script>
@@ -660,6 +677,33 @@
     const main = document.querySelector("main");
     const bullets = document.querySelectorAll(".bullets span");
     const images = document.querySelectorAll(".image");
+
+    let currentIndex = 1; // Starting index for the slide
+    const slideInterval = 10000; // Change slide every 10000 milliseconds (10 seconds)
+
+    function changeSlide() {
+        currentIndex = (currentIndex % bullets.length) + 1;
+
+        let currentImage = document.querySelector('.img-' + currentIndex);
+        images.forEach((img) => img.classList.remove("show"));
+        currentImage.classList.add("show");
+
+        const textSlider = document.querySelector(".text-group");
+        textSlider.style.transform = "translateY(" + (-(currentIndex - 1) * 2.2) + "rem)";
+
+        bullets.forEach((bull) => bull.classList.remove("active"));
+        bullets[currentIndex - 1].classList.add("active");
+    }
+
+    // Set an interval to change the slide
+    const slideTimer = setInterval(changeSlide, slideInterval);
+
+    // Stop the timer when the user interacts with the slider
+    main.addEventListener("mouseenter", () => clearInterval(slideTimer));
+    main.addEventListener("mouseleave", () => {
+        // Restart the timer when the user stops interacting with the slider
+        slideTimer = setInterval(changeSlide, slideInterval);
+    });
 
     inputs.forEach(inp => {
         inp.addEventListener("focus", () => {
@@ -676,25 +720,9 @@
             main.classList.toggle("user-register-mode");
         });
     });
-
-    function moveSlider() {
-        let index = this.dataset.value;
-
-        let currentImage = document.querySelector('.img-' + index);
-        images.forEach((img) => img.classList.remove("show"));
-        currentImage.classList.add("show");
-
-        const textSlider = document.querySelector(".text-group");
-        textSlider.style.transform = "translateY(" + (-(index - 1) * 2.2) + "rem)";
-
-        bullets.forEach((bull) => bull.classList.remove("active"));
-        this.classList.add("active");
-    }
-
-    bullets.forEach(bullet => {
-        bullet.addEventListener("click", moveSlider);
-    });
     </script>
+
+
 
 
 
