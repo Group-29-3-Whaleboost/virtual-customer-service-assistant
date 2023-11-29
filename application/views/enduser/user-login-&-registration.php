@@ -678,33 +678,6 @@
     const bullets = document.querySelectorAll(".bullets span");
     const images = document.querySelectorAll(".image");
 
-    let currentIndex = 1; // Starting index for the slide
-    const slideInterval = 10000; // Change slide every 10000 milliseconds (10 seconds)
-
-    function changeSlide() {
-        currentIndex = (currentIndex % bullets.length) + 1;
-
-        let currentImage = document.querySelector('.img-' + currentIndex);
-        images.forEach((img) => img.classList.remove("show"));
-        currentImage.classList.add("show");
-
-        const textSlider = document.querySelector(".text-group");
-        textSlider.style.transform = "translateY(" + (-(currentIndex - 1) * 2.2) + "rem)";
-
-        bullets.forEach((bull) => bull.classList.remove("active"));
-        bullets[currentIndex - 1].classList.add("active");
-    }
-
-    // Set an interval to change the slide
-    const slideTimer = setInterval(changeSlide, slideInterval);
-
-    // Stop the timer when the user interacts with the slider
-    main.addEventListener("mouseenter", () => clearInterval(slideTimer));
-    main.addEventListener("mouseleave", () => {
-        // Restart the timer when the user stops interacting with the slider
-        slideTimer = setInterval(changeSlide, slideInterval);
-    });
-
     inputs.forEach(inp => {
         inp.addEventListener("focus", () => {
             inp.classList.add("active");
@@ -719,6 +692,24 @@
         btn.addEventListener("click", () => {
             main.classList.toggle("user-register-mode");
         });
+    });
+
+    function moveSlider() {
+        let index = this.dataset.value;
+
+        let currentImage = document.querySelector('.img-' + index);
+        images.forEach((img) => img.classList.remove("show"));
+        currentImage.classList.add("show");
+
+        const textSlider = document.querySelector(".text-group");
+        textSlider.style.transform = "translateY(" + (-(index - 1) * 2.2) + "rem)";
+
+        bullets.forEach((bull) => bull.classList.remove("active"));
+        this.classList.add("active");
+    }
+
+    bullets.forEach(bullet => {
+        bullet.addEventListener("click", moveSlider);
     });
     </script>
 
