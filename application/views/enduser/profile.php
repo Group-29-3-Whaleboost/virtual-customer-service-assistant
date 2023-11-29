@@ -1,5 +1,17 @@
 <!-- included the header -->
-<?php include(APPPATH . 'views/includes/header.php'); ?>
+<?php include(APPPATH . 'views/includes/header.php'); 
+
+// Add code to retrieve customer details from the database
+$user_id = 1; // Replace with the actual customer ID you want to display
+
+// database conection credentials 
+$DBhost = "localhost";
+$DBusername = "root";
+$DBpassword = "";
+$DBname = "customer_service_assistant";
+
+?>
+
 
 <head>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
@@ -548,12 +560,10 @@ a:hover {
                     <div class="col-md-10 mt-2 mb-4 pt-5">
 
                         <?php
-                            // Add code to retrieve customer details from the database
-                            $user_id = 1; // Replace with the actual customer ID you want to display
                             
                             try {
                                 // Create a PDO connection to your database
-                                $pdo = new PDO("mysql:host=localhost;dbname=customer_service_assistant", "root", "");
+                                $pdo = new PDO("mysql:host=$DBhost;dbname=$DBname", "$DBusername", "$DBpassword");
 
                                 // Prepare an SQL SELECT statement to retrieve customer details
                                 $stmt = $pdo->prepare("SELECT name, email, gender, phoneNo, address, password, profile_image FROM user WHERE user_id = ?");
@@ -745,7 +755,7 @@ a:hover {
 
             <?php
                 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
-                    $user_id = 1; // Replace with the actual customer ID you want to update
+                    
                     $name = $_POST['name'];
                     $email = $_POST['email'];
                     $gender = $_POST['gender'];                
@@ -769,7 +779,7 @@ a:hover {
                                 if (move_uploaded_file($_FILES['image']['tmp_name'], $target)) {
                                     try {
                                         // Create a PDO connection to your database
-                                        $pdo = new PDO("mysql:host=localhost;dbname=customer_service_assistant", "root", "");
+                                        $pdo = new PDO("mysql:host=$DBhost;dbname=$DBname", "$DBusername", "$DBpassword");
                                 
                                         // Prepare an SQL UPDATE statement
                                         $stmt = $pdo->prepare("UPDATE user SET name = ?, email = ?, gender = ?, phoneNo = ?, address = ?, password = ?, profile_image = ? WHERE user_id = ?");
@@ -804,7 +814,7 @@ a:hover {
                                 
                             try {
                                 // Create a PDO connection to your database
-                                $pdo = new PDO("mysql:host=localhost;dbname=customer_service_assistant", "root", "");
+                                $pdo = new PDO("mysql:host=$DBhost;dbname=$DBname", "$DBusername", "$DBpassword");
                         
                                 // Prepare an SQL UPDATE statement
                                 $stmt = $pdo->prepare("UPDATE user SET name = ?, email = ?, gender = ?, phoneNo = ?, address = ?, password = ?, profile_image = ? WHERE user_id = ?");
