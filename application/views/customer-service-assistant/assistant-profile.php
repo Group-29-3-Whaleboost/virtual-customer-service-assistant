@@ -1,8 +1,8 @@
 <!-- included the header -->
 <?php include(APPPATH . 'views/includes/header.php'); 
 
-// Add code to retrieve customer details from the database
-$user_id = 1; // Replace with the actual customer ID you want to display
+// Add code to retrieve user details from the database
+$user_id = 3; // Replace with the actual user ID you want to display
 
 // database conection credentials 
 $DBhost = "localhost";
@@ -541,16 +541,20 @@ a:hover {
     background-color: white;
     box-shadow: 2px 4px 4px rgb(0, 0, 0, 0.644);
 }
+.fa-shopping-basket {
+
+display: none;
+}
 </style>
 
 <body id="page-top">
     <!-- included the navbar -->
-    <?php include(APPPATH . 'views/includes/navbar.php'); ?>
+    <?php include(APPPATH . 'views/includes/assistant_navbar.php'); ?>
 
     <div id="wrapper">
 
         <!-- included the menu -->
-        <?php include(APPPATH . 'views/includes/menu.php'); ?>
+        <?php include(APPPATH . 'views/includes/assistant_menu.php'); ?>
 
 
         <!-- Code of Profile page  -->
@@ -790,7 +794,7 @@ a:hover {
                                         // Check for successful update
                                         if ($stmt->rowCount() > 0) {
                                             $successMessage = "Account details updated successfully!!!";
-                                            header("Location: profile");
+                                            header("Location: CustomerServiceAssistantProfile");
                                             exit();
                 
                                         } else {
@@ -825,7 +829,7 @@ a:hover {
                                 // Check for successful update
                                 if ($stmt->rowCount() > 0) {
                                     $successMessage = "Account details updated successfully!!!";
-                                    header("Location: profile");
+                                    header("Location: CustomerServiceAssistantProfile");
                                     exit();
         
                                 } else {
@@ -887,10 +891,6 @@ a:hover {
 
             <!-- included the footer -->
             <?php include(APPPATH . 'views/includes/footer.php'); ?>
-            <!-- included the notification -->
-            <?php include(APPPATH . 'views/includes/notification-component.php'); ?>
-            <!-- included the cart -->
-            <?php include(APPPATH . 'views/includes/cart-component.php'); ?>
 
 
             <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
