@@ -25,6 +25,12 @@
     </li>
 
     <li class="nav-item active-5">
+        <a class="nav-link" href="<?php echo site_url("CustomerComplaint") ?>">
+            <i class="fas fa-person-harassing"></i>
+            <span>Make a Complaint</span></a>
+    </li>
+
+    <li class="nav-item active-5">
         <a class="nav-link" href="<?php echo site_url("SelectBranch") ?>">
             <i class="fas fa-building-circle-arrow-right"></i>
             <span>Change Branch</span></a>
