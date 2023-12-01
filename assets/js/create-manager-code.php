@@ -10,7 +10,8 @@ if(isset($_POST['save_manager']))
 {
     // Generate a unique manager ID
     $prefix = 'MA';
-    $manager_id = $prefix . sprintf('%03d', rand(1, 999));
+    $user_id = sprintf('%03d', rand(1, 999)); // Replace actual user id
+    $manager_id = $prefix . $user_id;
 
     $manager_name = mysqli_real_escape_string($con, $_POST['manager_name']);
     $email = mysqli_real_escape_string($con, $_POST['email']);
@@ -20,6 +21,9 @@ if(isset($_POST['save_manager']))
     $selected_branch = mysqli_real_escape_string($con, $_POST['selected_branch']);
 
     $session_admin = 'SA001';
+
+    $password = "Manager@123"; // Default Password
+    $role = "Manager"; // user table role column
 
     if($manager_name == NULL || $email == NULL || $phone_no == NULL || $address == NULL || $nic == NULL || $selected_branch == 0)
     {
@@ -31,10 +35,16 @@ if(isset($_POST['save_manager']))
         return;
     }
 
-    $query = "INSERT INTO manager (manager_id,name,email,phone_no,address,nic,branch_id,admin_id) VALUES ('$manager_id','$manager_name','$email','$phone_no','$address','$nic','$selected_branch','$session_admin')";
+    // Insert Manager table
+    $query = "INSERT INTO manager (manager_id,name,email,phone_no,address,nic,password,branch_id,admin_id) VALUES ('$manager_id','$manager_name','$email','$phone_no','$address','$nic','$password','$selected_branch','$session_admin')";
     $query_run = mysqli_query($con, $query);
 
-    if($query_run)
+    // Insert User table
+    $user_query = "INSERT INTO user (user_id,name,email,phoneNo,address,password,role) VALUES 
+            ('$user_id','$manager_name','$email','$phone_no','$address','$password','$role')";
+    $user_query_run = mysqli_query($con, $user_query);
+
+    if($query_run && $user_query_run)
     {
         $res = [
             'status' => 200,
@@ -59,6 +69,8 @@ if(isset($_POST['update_manager']))
 {
     $manager_id = mysqli_real_escape_string($con, $_POST['manager_id']);
 
+    $filtered_manager_id = substr($manager_id, 2); // Assuming the numeric part always starts at position 2
+
     $manager_name = mysqli_real_escape_string($con, $_POST['manager_name']);
     $email = mysqli_real_escape_string($con, $_POST['email']);
     $phone_no = mysqli_real_escape_string($con, $_POST['phone_no']);
@@ -76,11 +88,17 @@ if(isset($_POST['update_manager']))
         return;
     }
 
+    // Update Manager table
     $query = "UPDATE manager SET name='$manager_name', email='$email', phone_no='$phone_no', address='$address', nic='$nic', branch_id='$selected_branch' 
                 WHERE manager_id='$manager_id'";
     $query_run = mysqli_query($con, $query);
 
-    if($query_run)
+    // Update User table
+    $user_query = "UPDATE user SET name='$manager_name', email='$email', phoneNo='$phone_no', address='$address'
+                WHERE user_id='$filtered_manager_id'";
+    $user_query_run = mysqli_query($con, $user_query);
+
+    if($query_run && $user_query_run)
     {
         $res = [
             'status' => 200,
@@ -136,10 +154,17 @@ if(isset($_POST['delete_manager']))
 {
     $manager_id = mysqli_real_escape_string($con, $_POST['manager_id']);
 
+    $filtered_manager_id = substr($manager_id, 2); // Assuming the numeric part always starts at position 2
+
+    // Delete Manager in manager table
     $query = "DELETE FROM manager WHERE manager_id='$manager_id'";
     $query_run = mysqli_query($con, $query);
 
-    if($query_run)
+    // Delete User in user table
+    $user_query = "DELETE FROM user WHERE user_id='$filtered_manager_id'";
+    $user_query_run = mysqli_query($con, $user_query);
+
+    if($query_run && $user_query_run)
     {
         $res = [
             'status' => 200,

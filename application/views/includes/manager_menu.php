@@ -23,4 +23,9 @@
             <i class="fa-solid fa-users"></i>
             <span>Create Assistant</span></a>
     </li>
+    <li class="nav-item active-5">
+        <a class="nav-link" href="<?php echo site_url("ManagerComplaint") ?>">
+            <i class="fa-solid fa-flag"></i>
+            <span>View Complaints</span></a>
+    </li>
 </ul>
