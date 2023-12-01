@@ -106,7 +106,7 @@ body.fixed-nav.sidebar-toggled #content-wrapper {
     width: 100%;
 }
 
-.navbar-nav .nav-item.active-1 .nav-link {
+.navbar-nav .nav-item.active-2 .nav-link {
     color: #fff;
 }
 
