@@ -6,13 +6,13 @@
         </a>
     </li>
 
-    <li class="nav-item active-3">
+    <li class="nav-item active-2">
         <a class="nav-link" href="#">
             <i class="fa-solid fa-qrcode"></i>
             <span>Scan QR</span></a>
     </li>
 
-    <li class="nav-item active-4">
+    <li class="nav-item active-3">
         <a class="nav-link" href="#">
             <i class="fa-solid fa-headset"></i>
             <span>Help Customer</span></a>

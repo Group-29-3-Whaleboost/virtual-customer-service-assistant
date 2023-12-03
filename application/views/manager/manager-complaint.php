@@ -1,14 +1,22 @@
+<?php
+    $selected_branch_name = "Colombo"; //Replace the branch name
+?>
+
+
 <!-- included the header -->
 <?php include(APPPATH . 'views/includes/header.php'); ?>
 
-<?php
-    $enableButton=false;
-	$base_url = base_url();
-?>
-<script>
-var baseUrl = "<?php echo $base_url; ?>";
-console.log(baseUrl);
-</script>
+<head>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css" />
+</head>
 
 <style>
 #content-wrapper>div>a.card.search-card {
@@ -106,7 +114,7 @@ body.fixed-nav.sidebar-toggled #content-wrapper {
     width: 100%;
 }
 
-.navbar-nav .nav-item.active-2 .nav-link {
+.navbar-nav .nav-item.active-5 .nav-link {
     color: #fff;
 }
 
@@ -433,6 +441,11 @@ body {
     transition: transform 0.3s ease;
 }
 
+.fa-shopping-basket {
+
+    display: none;
+}
+
 .search-card {
     background-color: #FFD699;
 }
@@ -466,20 +479,6 @@ h2 {
         /* Adjust the margin to create spacing between the cards */
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 .logo {
     display: flex;
@@ -518,6 +517,21 @@ a:hover {
     text-decoration: none;
 }
 
+/* Complaint */
+.borderless td,
+.borderless th {
+    border: none;
+}
+
+.card-img-top {
+    width: 200px;
+    height: 200px;
+    align-self: center;
+}
+
+h1 {
+    margin-bottom: 50px;
+}
 </style>
 
 <body id="page-top">
@@ -525,141 +539,155 @@ a:hover {
     <?php include(APPPATH . 'views/includes/manager_navbar.php'); ?>
 
     <div id="wrapper">
+
         <!-- included the menu -->
         <?php include(APPPATH . 'views/includes/manager_menu.php'); ?>
 
         <div id="content-wrapper">
-            <div class="container">
-                <h1 class="page-header text-center"></h1>
-                <div class="row">
-                    <div class="col-sm-3 col-sm-offset-3">
-                        <form action="" method="POST" enctype="multipart/form-data" id='addItems'>
-                            <!-- Item Name -->
-                            <label for="item_name">Item Name:</label>
-                            <input type="text" id="item_name" name="item_name"><br><br>
+            <!-- Code of Complaint page -->
 
-                            <!-- Price -->
-                            <label for="price">Price:</label>
-                            <input type="number" id="price" name="price" step="0.01"><br><br>
-
-                            <!-- Description -->
-                            <label for="description">Description:</label><br>
-                            <textarea id="description" name="description" rows="4" cols="50"></textarea><br><br>
-
-                            <!-- Discount -->
-                            <label for="discount">Discount (%):</label>
-                            <input type="number" id="discount" name="discount" min="0" max="100"><br><br>
-
-                            <!-- Category -->
-                            <label for="category">Category:</label>
-                            <select id="category" name="category">
-                                <option value=null>--Select Category--</option>
-                                <option value="Bakery">Bakery</option>
-                                <option value="Fruits">Fruits</option>
-                                <option value="Grocery">Grocery</option>
-                                <option value="Meat, fish & eggs">Meat, fish & eggs</option>
-                                <option value="Vegetables">Vegetables</option>
-                                <!-- Add more categories as needed -->
-                            </select><br><br>
-
-                            <!-- Image Upload -->
-                            <label for="image">Image:</label>
-                            <input type="file" id="image" name="image" accept="image/*"><br><br>
-
-                            <!-- Submit Button -->
-                            <!-- <input type="submit" value="Submit" name="generate"> -->
-                            <button class="btn btn-secondary" type="submit" name="generate">Generate</button>
-                            <button class="btn btn-success" type="submit" name="submit" id="saveButton" disabled>Save
-                                Data</button>
-                        </form>
-                    </div>
-                    <div class="col-sm-3">
-                        <?php
-				if(isset($_POST['generate'])){
-					// Get all the values from the form
-					$item_name = $_POST['item_name'];
-					$price = $_POST['price'];
-					$description = $_POST['description'];
-					$discount = $_POST['discount'];
-					$category = $_POST['category'];
-					// Assuming you're storing the uploaded image on the server
-					// You can handle image uploads and file paths as needed
-					// $image_path = 'path/to/uploaded/image.jpg'; // Replace with the actual path
-					
-           			// $image_path = 'uploads/' . $data['file_name'];
-					// Create an associative array with the form data
-					$image_path=$_FILES['image']['name'];
-					$data = array(
-						'item_name' => $item_name,
-						'price' => $price,
-						'description' => $description,
-						'discount' => $discount,
-						'category' => $category,
-						'image' => $image_path
-					);
-
-                    $json_data = json_encode($data);
-
-					echo "
-				// 		<a target='_blank' href='https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl=$json_data&choe=UTF-8'><img id='qr' class = 'float-end' src='https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl=$json_data&choe=UTF-8'></a>
-				// ";
-                echo "<script>
-                var saveButton = document.getElementById('saveButton');
-                saveButton.disabled = false;
-                document.querySelector('#addItems').action= baseUrl+'ItemController/save_item?qr=$json_data';
-
-				document.getElementById('item_name').value='".$item_name."';
-				document.querySelector('#price').value='".$price."';
-				document.querySelector('#description').value='".$description."';
-				document.querySelector('#discount').value='".$discount."';
-				document.querySelector('#category').value='".$category."';
-				alert('please add the image again');
-
-                </script>";
-
-            }
-			if(isset($_GET['saved'])){
-				echo 'Item Saved Successfully';
-			}
-				?>
-
+            <!-- View Complaint Modal -->
+            <div class="modal fade" id="complaintViewModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">View Complaint</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="mb-3">
+                                <label for="">Name</label>
+                                <p id="view_name" class="form-control"></p>
+                            </div>
+                            <div class="mb-3">
+                                <label for="">Date</label>
+                                <p id="view_date" class="form-control"></p>
+                            </div>
+                            <div class="mb-3">
+                                <label for="">Branch Name</label>
+                                <p id="view_branch_name" class="form-control"></p>
+                            </div>
+                            <div class="mb-3">
+                                <label for="">Description</label>
+                                <p id="view_description" class="form-control" style="height: 120px"></p>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <h2>Items List</h2>
-            <table class="table table-striped table-hover" border="1">
-                <tr>
-                    <th>Item Name</th>
-                    <th>Price</th>
-                    <th>Description</th>
-                    <th>Discount</th>
-                    <th>Category</th>
-                    <th>Image</th>
-                    <th>Action</th>
-                </tr>
-                <?php foreach ($items as $item) : ?>
-                <tr>
-                    <td><?= $item->item_name ?></td>
-                    <td><?= $item->price ?></td>
-                    <td><?= $item->description ?></td>
-                    <td><?= $item->offer ?></td>
-                    <td><?= $item->category_name ?></td>
-                    <td><img src="<?php echo base_url()?>uploads/<?= $item->image ?>" alt="Item Image"
-                            style="width: 100px; height: 100px;"></td>
-                    <td>
-                        <a href="<?php echo site_url('AddItem/edit/'.$item->item_id); ?>">Edit</a> |
-                        <a href="<?= base_url('AddItem/delete/'.$item->item_id) ?>"
-                            onclick="return confirm('Are you sure you want to delete this item?')">Delete</a>
-                    </td>
-                </tr>
-                <?php endforeach; ?>
-            </table>
-            <!-- included the footer -->
-            <?php include(APPPATH . 'views/includes/footer.php'); ?>
+            <!-- Table -->
+            <div class="container p-4">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="mb-5">
+                            <h4 class="text-center">Customer Complaints
+
+                            </h4>
+                        </div>
+                        <div class="shadow-lg mb-5 bg-body-tertiary rounded">
+                            <table id="myTable" class="table borderless">
+
+                                <tbody>
+                                    <?php
+
+                                    $con = mysqli_connect("localhost","root","","customer_service_assistant");
+
+                                    if(!$con){
+                                        die('Connection Failed'. mysqli_connect_error());
+                                    }
+
+                                    $query = "SELECT * FROM complaint JOIN customer ON complaint.customer_id = customer.customer_id JOIN branch ON complaint.branch_id = branch.branch_id WHERE branch.branch_name = '$selected_branch_name' ORDER BY complaint.complaint_id DESC";
+                                    $query_run = mysqli_query($con, $query);
+
+                                    if(mysqli_num_rows($query_run) > 0)
+                                    {
+                                        foreach($query_run as $complaint)
+                                        {
+                                            ?>
+                                    <tr class="text-center">
+                                        <td>
+                                            <img src="<?php base_url() ?> assets\images\user-image\<?= $complaint['profile_picture'] ?>"
+                                                style="border-radius: 50%; width: 30px; height: 30px;">
+                                        </td>
+                                        <td><?= $complaint['name'] ?></td>
+                                        <td><?= $complaint['branch_name'] ?></td>
+                                        <td><?= $complaint['date'] ?></td>
+                                        <td>
+                                            <button type="button" value="<?=$complaint['complaint_id'];?>"
+                                                class="viewcomplaintBtn btn btn-info btn-sm"><i
+                                                    class="fa-solid fa-eye fa-beat"></i></button>
+
+                                        </td>
+
+
+                                    </tr>
+                                    <?php
+                                        }
+                                    }
+                                    ?>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
+            <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+
+            <script>
+            $(document).on('click', '.viewcomplaintBtn', function() {
+
+                var complaint_id = $(this).val();
+                $.ajax({
+                    type: "GET",
+                    url: "<?php base_url() ?> assets/js/complaint-code.php?complaint_id=" +
+                        complaint_id,
+                    success: function(response) {
+
+                        var res = jQuery.parseJSON(response);
+                        if (res.status == 404) {
+
+                            alert(res.message);
+                        } else if (res.status == 200) {
+
+                            $('#view_description').text(res.data.description);
+                            $('#view_date').text(res.data.date);
+                            $('#view_branch_name').text(res.data.branch_name);
+                            $('#view_name').text(res.data.name);
+
+                            $('#complaintViewModal').modal('show');
+                        }
+                    }
+                });
+            });
+            </script>
+
+
+            <!-- Footer area -->
+            <footer class="sticky-footer">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright © <a href="#" target="_blank">Whaleboost</a> 2023</span>
+                    </div>
+                </div>
+            </footer>
+
+
+
         </div>
 
+
     </div>
+
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
@@ -667,7 +695,7 @@ a:hover {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous">
     </script>
-
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <script>
     ! function(t) {
@@ -711,6 +739,7 @@ a:hover {
         });
     }(jQuery);
     </script>
+
 
 </body>
 

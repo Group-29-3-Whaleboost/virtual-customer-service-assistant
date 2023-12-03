@@ -12,7 +12,8 @@ if(isset($_POST['save_assistant']))
 {
     // Generate a unique assistant ID
     $prefix = 'CA';
-    $assistant_id = $prefix . sprintf('%03d', rand(1, 999));
+    $user_id = sprintf('%03d', rand(1, 999)); // Replace actual user id
+    $assistant_id = $prefix . $user_id;
 
     $assistant_name = mysqli_real_escape_string($con, $_POST['assistant_name']);
     $email = mysqli_real_escape_string($con, $_POST['email']);
@@ -21,6 +22,9 @@ if(isset($_POST['save_assistant']))
 
     $branch_id = 1;
     $session_manager = 'MA001';
+
+    $password = "Assistant@123"; // Default Password
+    $role = "Assistant"; // user table role column
 
     if($assistant_name == NULL || $email == NULL || $phone_no == NULL || $gender == 'undefined')
     {
@@ -32,11 +36,17 @@ if(isset($_POST['save_assistant']))
         return;
     }
 
-    $query = "INSERT INTO customer_assistant (assistant_id,name,email,phone_no,gender,branch_id,manager_id) VALUES 
-            ('$assistant_id','$assistant_name','$email','$phone_no','$gender','$branch_id','$session_manager')";
+    // Insert Customer Assistant table
+    $query = "INSERT INTO customer_assistant (assistant_id,name,email,phone_no,gender,password,branch_id,manager_id) VALUES 
+            ('$assistant_id','$assistant_name','$email','$phone_no','$gender','$password','$branch_id','$session_manager')";
     $query_run = mysqli_query($con, $query);
 
-    if($query_run)
+    // Insert User table
+    $user_query = "INSERT INTO user (user_id,name,email,phoneNo,gender,password,role) VALUES 
+            ('$user_id','$assistant_name','$email','$phone_no','$gender','$password','$role')";
+    $user_query_run = mysqli_query($con, $user_query);
+
+    if($query_run && $user_query_run)
     {
         $res = [
             'status' => 200,
@@ -66,6 +76,8 @@ if(isset($_POST['update_assistant']))
     $phone_no = mysqli_real_escape_string($con, $_POST['phone_no']);
     $gender = mysqli_real_escape_string($con, $_POST['gender']);
 
+    $filtered_assistant_id = substr($assistant_id, 2); // Assuming the numeric part always starts at position 2
+
     if($assistant_name == NULL || $email == NULL || $phone_no == NULL || $gender == 'undefined')
     {
         $res = [
@@ -76,11 +88,17 @@ if(isset($_POST['update_assistant']))
         return;
     }
 
+    // Update Customer Assistant table
     $query = "UPDATE customer_assistant SET name='$assistant_name', email='$email', phone_no='$phone_no', gender='$gender'
                 WHERE assistant_id='$assistant_id'";
     $query_run = mysqli_query($con, $query);
 
-    if($query_run)
+    // Update User table
+    $user_query = "UPDATE user SET name='$assistant_name', email='$email', phoneNo='$phone_no', gender='$gender'
+                WHERE user_id='$filtered_assistant_id'";
+    $user_query_run = mysqli_query($con, $user_query);
+
+    if($query_run && $user_query_run)
     {
         $res = [
             'status' => 200,
@@ -135,10 +153,17 @@ if(isset($_POST['delete_assistant']))
 {
     $assistant_id = mysqli_real_escape_string($con, $_POST['assistant_id']);
 
+    $filtered_assistant_id = substr($assistant_id, 2); // Assuming the numeric part always starts at position 2
+
+    // Delete Customer assistant in customer assistant table
     $query = "DELETE FROM customer_assistant WHERE assistant_id='$assistant_id'";
     $query_run = mysqli_query($con, $query);
 
-    if($query_run)
+    // Delete User in user table
+    $user_query = "DELETE FROM user WHERE user_id='$filtered_assistant_id'";
+    $user_query_run = mysqli_query($con, $user_query);
+
+    if($query_run && $user_query_run)
     {
         $res = [
             'status' => 200,

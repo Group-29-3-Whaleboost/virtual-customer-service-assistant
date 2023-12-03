@@ -13,7 +13,7 @@
     </li>
 
     <li class="nav-item active-3">
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="<?php echo site_url("PushNotification") ?>">
             <i class="fa-solid fa-envelope"></i>
             <span>Push Notification</span></a>
     </li>
@@ -22,5 +22,10 @@
         <a class="nav-link" href="<?php echo site_url("CreateAssistant") ?>">
             <i class="fa-solid fa-users"></i>
             <span>Create Assistant</span></a>
+    </li>
+    <li class="nav-item active-5">
+        <a class="nav-link" href="<?php echo site_url("ManagerComplaint") ?>">
+            <i class="fa-solid fa-flag"></i>
+            <span>View Complaints</span></a>
     </li>
 </ul>

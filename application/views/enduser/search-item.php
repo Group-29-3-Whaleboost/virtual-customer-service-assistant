@@ -1,7 +1,32 @@
-<!-- included the header -->
-<?php include(APPPATH . 'views/includes/header.php'); ?>
+<!-- Changable variables -->
+<?php 
+// Retrieve the selected branch ID from the cookie
+if (isset($_COOKIE['selectedBranchName'])) {
+    $selectedBranchName = $_COOKIE['selectedBranchName'];
+    // Use $selectedBranchName as needed
+    // Replace with the actual branch ID you want to display using session variable any method
+    $branchId = 1;
+
+    // connect the database
+    $connectDB = mysqli_connect("localhost","root","","customer_service_assistant");
+
+    // here useed item table and store_item table
+    // take all the data from item table
+    $query = "SELECT item.item_id,item.item_name,item.category_name,item.description,item.offer,item.image,item.price,store_item.availability,store_item.branch_id,store_item.quantity FROM item JOIN store_item 
+    ON item.item_id = store_item.item_id JOIN branch ON store_item.branch_id = branch.branch_id WHERE branch.branch_name = '$selectedBranchName'";
+
+} else {
+    // Handle the case when branch_id is not present in the URL
+    echo "Branch ID not provided";
+}
+
+// included the header
+include(APPPATH . 'views/includes/header.php');
+
+?>
 
 <head>
+    <title><?php echo $title ?></title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
 </head>
 <style>
@@ -568,17 +593,7 @@ a:hover {
 
                     <div>
                         <?php 
-                        // connect the database
-                        $connectDB = mysqli_connect("localhost","root","","customer_service_assistant");
-
-                        // Replace with the actual branch ID you want to display
-                        $branchId = 1;
-
-                        
-                            // take all the data from item table
-                            $query = "SELECT item.item_id,item.item_name,item.category_name,item.description,item.offer,item.image,item.price,store_item.availability,store_item.branch_id,store_item.quantity FROM item JOIN store_item 
-                                        ON item.item_id = store_item.item_id WHERE store_item.branch_id = $branchId";
-
+                                                    
                             //take results into result vaiable
                             $result = mysqli_query($connectDB, $query);
 
@@ -596,12 +611,15 @@ a:hover {
 
                         <div class="col-md-12">
                             <div class="card-body">
-                                
+
                                 <!-- To display the message img -->
                                 <div id="no-items-found-img" class="hide text-center"><img
-                                        src="<?php base_url() ?> assets\images\no-items-found-prawn.gif" width="200px"></div>
+                                        src="<?php base_url() ?> assets\images\no-items-found-prawn.gif" width="200px">
+                                </div>
                                 <!-- To display the message -->
-                                <div id="no-items-found" class="hide text-center"><h2>Sorry! No items found</h2></div>
+                                <div id="no-items-found" class="hide text-center">
+                                    <h2>Sorry! No items found</h2>
+                                </div>
 
 
                                 <!-- cards -->
@@ -625,7 +643,9 @@ a:hover {
 
                                             </p>
                                             <div class="card-footer text-center ">
-                                                <button type="button" class="btn btn-primary">Add to Cart</button>
+                                                <button
+                                                    onclick="window.location.href='<?php echo site_url('Checkout') ?>'"
+                                                    type="button" class="btn btn-primary">Add to Cart</button>
                                             </div>
                                         </div>
                                     </div>

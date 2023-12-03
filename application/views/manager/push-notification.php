@@ -109,7 +109,7 @@ body.fixed-nav.sidebar-toggled #content-wrapper {
     width: 100%;
 }
 
-.navbar-nav .nav-item.active-2 .nav-link {
+.navbar-nav .nav-item.active-3 .nav-link {
     color: #fff;
 }
 
@@ -515,144 +515,120 @@ a:hover {
 
 <body id="page-top">
     <!-- included the navbar -->
-    <?php include(APPPATH . 'views/includes/admin-navbar.php'); ?>
+    <?php include(APPPATH . 'views/includes/manager_navbar.php'); ?>
 
     <div id="wrapper">
 
         <!-- included the menu -->
-        <?php include(APPPATH . 'views/includes/admin_menu.php'); ?>
+        <?php include(APPPATH . 'views/includes/manager_menu.php'); ?>
 
         <div id="content-wrapper">
-            <!-- Code of Branch page -->
+            <!-- Code of Push Notification page -->
 
-            <!-- Add Branch Modal -->
-            <div class="modal fade" id="branchAddModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+            <!-- Add Push Notification Modal -->
+            <div class="modal fade" id="notificationAddModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                 aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Add Branch</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">Add Notification</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <form id="saveBranch">
+                        <form id="saveNotification">
                             <div class="modal-body">
                                 <div id="errorMessage" class="alert alert-warning d-none"></div>
 
                                 <div class="mb-3">
-                                    <label for="">Branch Name</label>
-                                    <input type="text" name="branch_name" class="form-control"
-                                        placeholder="Enter the branch name" />
+                                    <label for="">Notification Title</label>
+                                    <input type="text" name="notification_name" class="form-control"
+                                        placeholder="Enter the notification name" />
                                 </div>
                                 <div class="mb-3">
-                                    <label for="">Address</label>
-                                    <input type="text" name="address" class="form-control"
-                                        placeholder="Enter the branch address" />
+                                    <label for="">Add a Description</label>
+                                    <textarea type="text" name="description" class="form-control"
+                                        placeholder="Enter the notification description" style="height: 100px"></textarea>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="">Phone No</label>
-                                    <input type="number" name="phone_no" class="form-control"
-                                        placeholder="Enter the branch phone number" />
-                                </div>
-                                <div class="mb-3">
-                                    <label for="">Latitude</label>
-                                    <input type="text" name="latitude" class="form-control"
-                                        placeholder="Enter the branch latitude" />
-                                </div>
-                                <div class="mb-3">
-                                    <label for="">Longitude</label>
-                                    <input type="text" name="longitude" class="form-control"
-                                        placeholder="Enter the branch longitude" />
+                                    <label for="">Expire Date</label>
+                                    <input type="date" name="expire_date" class="form-control"
+                                        placeholder="Enter the notification expire date" />
                                 </div>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                <button type="submit" class="btn btn-primary">Save Branch</button>
+                                <button type="submit" class="btn btn-primary">Save Notification</button>
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
 
-            <!-- Edit Branch Modal -->
-            <div class="modal fade" id="branchEditModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+            <!-- Edit Push Notification Modal -->
+            <div class="modal fade" id="notificationEditModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                 aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Edit Branch</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">Edit Notification</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <form id="updateBranch">
+                        <form id="updateNotification">
                             <div class="modal-body">
 
                                 <div id="errorMessageUpdate" class="alert alert-warning d-none"></div>
 
-                                <input type="hidden" name="branch_id" id="branch_id">
+                                <input type="hidden" name="notification_id" id="notification_id">
 
                                 <div class="mb-3">
-                                    <label for="">Branch Name</label>
-                                    <input type="text" name="branch_name" id="branch_name" class="form-control"
-                                        placeholder="Enter the branch name" />
+                                    <label for="">Notification Title</label>
+                                    <input type="text" name="notification_name" id="notification_name" class="form-control"
+                                        placeholder="Enter the notification name" />
                                 </div>
                                 <div class="mb-3">
-                                    <label for="">Address</label>
-                                    <input type="text" name="address" id="address" class="form-control"
-                                        placeholder="Enter the branch address" />
+                                    <label for="">Add a Description</label>
+                                    <textarea type="text" name="description" id="description" class="form-control"
+                                        placeholder="Enter the notification description" style="height: 100px"></textarea>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="">Phone No</label>
-                                    <input type="number" name="phone_no" id="phone_no" class="form-control"
-                                        placeholder="Enter the branch phone number" />
-                                </div>
-                                <div class="mb-3">
-                                    <label for="">Latitude</label>
-                                    <input type="text" name="latitude" id="latitude" class="form-control"
-                                        placeholder="Enter the branch latitude" />
-                                </div>
-                                <div class="mb-3">
-                                    <label for="">Longitude</label>
-                                    <input type="text" name="longitude" id="longitude" class="form-control"
-                                        placeholder="Enter the branch longitude" />
+                                    <label for="">Expire Date</label>
+                                    <input type="date" name="expire_date" id="expire_date" class="form-control"
+                                        placeholder="Enter the notification expire date" />
                                 </div>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                <button type="submit" class="btn btn-primary">Update Branch</button>
+                                <button type="submit" class="btn btn-primary">Update Notification</button>
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
 
-            <!-- View Branch Modal -->
-            <div class="modal fade" id="branchViewModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+            <!-- View Push Notification Modal -->
+            <div class="modal fade" id="notificationViewModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                 aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">View Branch</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">View Notification</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
                             <div class="mb-3">
-                                <label for="">Branch Name</label>
-                                <p id="view_branch_name" class="form-control"></p>
+                                <label for="">Notification Title</label>
+                                <p id="view_notification_name" class="form-control"></p>
                             </div>
                             <div class="mb-3">
-                                <label for="">Address</label>
-                                <p id="view_address" class="form-control"></p>
+                                <label for="">Add a Description</label>
+                                <p id="view_description" class="form-control" style="height: 100px"></p>
                             </div>
                             <div class="mb-3">
-                                <label for="">Phone No</label>
-                                <p id="view_phone_no" class="form-control"></p>
+                                <label for="">Expire Date</label>
+                                <p id="view_expire_date" class="form-control"></p>
                             </div>
                             <div class="mb-3">
-                                <label for="">Latitude</label>
-                                <p id="view_latitude" class="form-control"></p>
-                            </div>
-                            <div class="mb-3">
-                                <label for="">Longitude</label>
-                                <p id="view_longitude" class="form-control"></p>
+                                <label for="">Issue Date</label>
+                                <p id="view_issue_date" class="form-control"></p>
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -667,21 +643,20 @@ a:hover {
                 <div class="row">
                     <div class="col-md-12">
                         <div class="mb-4">
-                            <h4 class="text-center">Create a New Branch
+                            <h4 class="text-center">Create a New Notification
                                 <button type="button" class="btn btn-primary float-end" data-bs-toggle="modal"
-                                    data-bs-target="#branchAddModal">
-                                    Add Branch
+                                    data-bs-target="#notificationAddModal">
+                                    Add Notification
                                 </button>
                             </h4>
                         </div>
                         <table id="myTable" class="table">
                             <thead>
                                 <tr class="text-center">
-                                    <th>Branch Name</th>
-                                    <th>Address</th>
-                                    <th>Phone No</th>
-                                    <th>Latitude</th>
-                                    <th>Longitude</th>
+                                    <th>Notification Title</th>
+                                    <th>Add a Description</th>
+                                    <th>Expire Date</th>
+                                    <th>Issue Date</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -694,30 +669,29 @@ a:hover {
                                     die('Connection Failed'. mysqli_connect_error());
                                 }
 
-                                $query = "SELECT * FROM branch";
+                                $query = "SELECT * FROM notification";
                                 $query_run = mysqli_query($con, $query);
 
                                 if(mysqli_num_rows($query_run) > 0)
                                 {
-                                    foreach($query_run as $branch)
+                                    foreach($query_run as $notification)
                                     {
                                         ?>
                                 <tr class="text-center">
-                                    <td><?= $branch['branch_name'] ?></td>
-                                    <td><?= $branch['address'] ?></td>
-                                    <td><?= $branch['phone_no'] ?></td>
-                                    <td><?= $branch['latitude'] ?></td>
-                                    <td><?= $branch['longitude'] ?></td>
+                                    <td><?= $notification['name'] ?></td>
+                                    <td><?= $notification['description'] ?></td>
+                                    <td><?= $notification['expire_date'] ?></td>
+                                    <td><?= $notification['issue_date'] ?></td>
 
                                     <td>
-                                        <button type="button" value="<?=$branch['branch_id'];?>"
-                                            class="viewBranchBtn btn btn-info btn-sm"><i
+                                        <button type="button" value="<?=$notification['notification_id'];?>"
+                                            class="viewNotificationBtn btn btn-info btn-sm"><i
                                                 class="fa-solid fa-eye fa-beat"></i></button>
-                                        <button type="button" value="<?=$branch['branch_id'];?>"
-                                            class="editBranchBtn btn btn-warning btn-sm"><i
+                                        <button type="button" value="<?=$notification['notification_id'];?>"
+                                            class="editNotificationBtn btn btn-warning btn-sm"><i
                                                 class="fa-solid fa-pen-to-square fa-beat"></i></button>
-                                        <button type="button" value="<?=$branch['branch_id'];?>"
-                                            class="deleteBranchBtn btn btn-danger btn-sm"><i
+                                        <button type="button" value="<?=$notification['notification_id'];?>"
+                                            class="deleteNotificationBtn btn btn-danger btn-sm"><i
                                                 class="fa-solid fa-trash fa-beat"></i></button>
                                     </td>
                                 </tr>
@@ -738,15 +712,15 @@ a:hover {
             <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 
             <script>
-            $(document).on('submit', '#saveBranch', function(e) {
+            $(document).on('submit', '#saveNotification', function(e) {
                 e.preventDefault();
 
                 var formData = new FormData(this);
-                formData.append("save_branch", true);
+                formData.append("save_notification", true);
 
                 $.ajax({
                     type: "POST",
-                    url: "<?php base_url() ?> assets/js/branch-code.php",
+                    url: "<?php base_url() ?> assets/js/push-notification-code.php",
                     data: formData,
                     processData: false,
                     contentType: false,
@@ -760,8 +734,8 @@ a:hover {
                         } else if (res.status == 200) {
 
                             $('#errorMessage').addClass('d-none');
-                            $('#branchAddModal').modal('hide');
-                            $('#saveBranch')[0].reset();
+                            $('#notificationAddModal').modal('hide');
+                            $('#saveNotification')[0].reset();
 
                             alertify.set('notifier', 'position', 'top-right');
                             alertify.success(res.message);
@@ -776,14 +750,14 @@ a:hover {
 
             });
 
-            $(document).on('click', '.editBranchBtn', function() {
+            $(document).on('click', '.editNotificationBtn', function() {
 
-                var branch_id = $(this).val();
+                var notification_id = $(this).val();
 
                 $.ajax({
                     type: "GET",
-                    url: "<?php base_url() ?> assets/js/branch-code.php?branch_id=" +
-                        branch_id,
+                    url: "<?php base_url() ?> assets/js/push-notification-code.php?notification_id=" +
+                        notification_id,
                     success: function(response) {
 
                         var res = jQuery.parseJSON(response);
@@ -792,14 +766,12 @@ a:hover {
                             alert(res.message);
                         } else if (res.status == 200) {
 
-                            $('#branch_id').val(res.data.branch_id);
-                            $('#branch_name').val(res.data.branch_name);
-                            $('#address').val(res.data.address);
-                            $('#phone_no').val(res.data.phone_no);
-                            $('#latitude').val(res.data.latitude);
-                            $('#longitude').val(res.data.longitude);
+                            $('#notification_id').val(res.data.notification_id);
+                            $('#notification_name').val(res.data.name);
+                            $('#description').val(res.data.description);
+                            $('#expire_date').val(res.data.expire_date);
 
-                            $('#branchEditModal').modal('show');
+                            $('#notificationEditModal').modal('show');
                         }
 
                     }
@@ -807,15 +779,15 @@ a:hover {
 
             });
 
-            $(document).on('submit', '#updateBranch', function(e) {
+            $(document).on('submit', '#updateNotification', function(e) {
                 e.preventDefault();
 
                 var formData = new FormData(this);
-                formData.append("update_branch", true);
+                formData.append("update_notification", true);
 
                 $.ajax({
                     type: "POST",
-                    url: "<?php base_url() ?> assets/js/branch-code.php",
+                    url: "<?php base_url() ?> assets/js/push-notification-code.php",
                     data: formData,
                     processData: false,
                     contentType: false,
@@ -833,8 +805,8 @@ a:hover {
                             alertify.set('notifier', 'position', 'top-right');
                             alertify.success(res.message);
 
-                            $('#branchEditModal').modal('hide');
-                            $('#updateBranch')[0].reset();
+                            $('#notificationEditModal').modal('hide');
+                            $('#updateNotification')[0].reset();
 
                             $('#myTable').load(location.href + " #myTable");
 
@@ -846,13 +818,13 @@ a:hover {
 
             });
 
-            $(document).on('click', '.viewBranchBtn', function() {
+            $(document).on('click', '.viewNotificationBtn', function() {
 
-                var branch_id = $(this).val();
+                var notification_id = $(this).val();
                 $.ajax({
                     type: "GET",
-                    url: "<?php base_url() ?> assets/js/branch-code.php?branch_id=" +
-                        branch_id,
+                    url: "<?php base_url() ?> assets/js/push-notification-code.php?notification_id=" +
+                        notification_id,
                     success: function(response) {
 
                         var res = jQuery.parseJSON(response);
@@ -861,29 +833,28 @@ a:hover {
                             alert(res.message);
                         } else if (res.status == 200) {
 
-                            $('#view_branch_name').text(res.data.branch_name);
-                            $('#view_address').text(res.data.address);
-                            $('#view_phone_no').text(res.data.phone_no);
-                            $('#view_latitude').text(res.data.latitude);
-                            $('#view_longitude').text(res.data.longitude);
+                            $('#view_notification_name').text(res.data.name);
+                            $('#view_description').text(res.data.description);
+                            $('#view_expire_date').text(res.data.expire_date);
+                            $('#view_issue_date').text(res.data.issue_date);
 
-                            $('#branchViewModal').modal('show');
+                            $('#notificationViewModal').modal('show');
                         }
                     }
                 });
             });
 
-            $(document).on('click', '.deleteBranchBtn', function(e) {
+            $(document).on('click', '.deleteNotificationBtn', function(e) {
                 e.preventDefault();
 
-                if (confirm('Are you sure you want to delete this branch?')) {
-                    var branch_id = $(this).val();
+                if (confirm('Are you sure you want to delete this notification?')) {
+                    var notification_id = $(this).val();
                     $.ajax({
                         type: "POST",
-                        url: "<?php base_url() ?> assets/js/branch-code.php",
+                        url: "<?php base_url() ?> assets/js/push-notification-code.php",
                         data: {
-                            'delete_branch': true,
-                            'branch_id': branch_id
+                            'delete_notification': true,
+                            'notification_id': notification_id
                         },
                         success: function(response) {
 

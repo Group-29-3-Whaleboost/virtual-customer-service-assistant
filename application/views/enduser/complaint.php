@@ -1,3 +1,25 @@
+<?php
+    // Retrieve the selected branch ID from the cookie
+    if (isset($_COOKIE['selectedBranchName'])) {
+        $selectedBranchName = $_COOKIE['selectedBranchName'];
+        // Use $selectedBranchName as needed
+        // Replace with the actual branch ID you want to display using session variable any method
+        $branchId = 1;
+
+        // connect the database
+        $connectDB = mysqli_connect("localhost","root","","customer_service_assistant");
+
+        // here useed item table and store_item table
+        // take all the data from item table
+        $query = "SELECT item.item_id,item.item_name,item.category_name,item.description,item.offer,item.image,item.price,store_item.availability,store_item.branch_id,store_item.quantity FROM item JOIN store_item 
+        ON item.item_id = store_item.item_id JOIN branch ON store_item.branch_id = branch.branch_id WHERE branch.branch_name = '$selectedBranchName'";
+
+    } else {
+        // Handle the case when branch_id is not present in the URL
+        echo "Branch ID not provided";
+    }
+?>
+
 <!-- included the header -->
 <?php include(APPPATH . 'views/includes/header.php'); ?>
 
@@ -109,7 +131,7 @@ body.fixed-nav.sidebar-toggled #content-wrapper {
     width: 100%;
 }
 
-.navbar-nav .nav-item.active-2 .nav-link {
+.navbar-nav .nav-item.active .nav-link {
     color: #fff;
 }
 
@@ -436,10 +458,7 @@ body {
     transition: transform 0.3s ease;
 }
 
-.fa-shopping-basket {
 
-    display: none;
-}
 
 .search-card {
     background-color: #FFD699;
@@ -511,148 +530,81 @@ a {
 a:hover {
     text-decoration: none;
 }
+
+/* Complaint */
+.borderless td,
+.borderless th {
+    border: none;
+}
+
+.card-img-top {
+    width: 200px;
+    height: 200px;
+    align-self: center;
+}
+
+h1 {
+    margin-bottom: 50px;
+}
 </style>
 
 <body id="page-top">
     <!-- included the navbar -->
-    <?php include(APPPATH . 'views/includes/admin-navbar.php'); ?>
+    <?php include(APPPATH . 'views/includes/navbar.php'); ?>
 
     <div id="wrapper">
 
         <!-- included the menu -->
-        <?php include(APPPATH . 'views/includes/admin_menu.php'); ?>
+        <?php include(APPPATH . 'views/includes/menu.php'); ?>
 
         <div id="content-wrapper">
-            <!-- Code of Branch page -->
+            <!-- Code of Complaint page -->
 
-            <!-- Add Branch Modal -->
-            <div class="modal fade" id="branchAddModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+            <!-- Add Complaint Modal -->
+            <div class="modal fade" id="complaintAddModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                 aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Add Branch</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">Make a Complaint</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <form id="saveBranch">
+                        <form id="savecomplaint">
                             <div class="modal-body">
                                 <div id="errorMessage" class="alert alert-warning d-none"></div>
 
                                 <div class="mb-3">
-                                    <label for="">Branch Name</label>
-                                    <input type="text" name="branch_name" class="form-control"
-                                        placeholder="Enter the branch name" />
-                                </div>
-                                <div class="mb-3">
-                                    <label for="">Address</label>
-                                    <input type="text" name="address" class="form-control"
-                                        placeholder="Enter the branch address" />
-                                </div>
-                                <div class="mb-3">
-                                    <label for="">Phone No</label>
-                                    <input type="number" name="phone_no" class="form-control"
-                                        placeholder="Enter the branch phone number" />
-                                </div>
-                                <div class="mb-3">
-                                    <label for="">Latitude</label>
-                                    <input type="text" name="latitude" class="form-control"
-                                        placeholder="Enter the branch latitude" />
-                                </div>
-                                <div class="mb-3">
-                                    <label for="">Longitude</label>
-                                    <input type="text" name="longitude" class="form-control"
-                                        placeholder="Enter the branch longitude" />
+                                    <label for="">Description</label>
+                                    <textarea type="text" name="description" class="form-control" style="height: 120px"
+                                        placeholder="Enter the complaint"></textarea>
                                 </div>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                <button type="submit" class="btn btn-primary">Save Branch</button>
+                                <button type="submit" class="btn btn-primary">Send Complaint</button>
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
 
-            <!-- Edit Branch Modal -->
-            <div class="modal fade" id="branchEditModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+            <!-- View Complaint Modal -->
+            <div class="modal fade" id="complaintViewModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                 aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Edit Branch</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <form id="updateBranch">
-                            <div class="modal-body">
-
-                                <div id="errorMessageUpdate" class="alert alert-warning d-none"></div>
-
-                                <input type="hidden" name="branch_id" id="branch_id">
-
-                                <div class="mb-3">
-                                    <label for="">Branch Name</label>
-                                    <input type="text" name="branch_name" id="branch_name" class="form-control"
-                                        placeholder="Enter the branch name" />
-                                </div>
-                                <div class="mb-3">
-                                    <label for="">Address</label>
-                                    <input type="text" name="address" id="address" class="form-control"
-                                        placeholder="Enter the branch address" />
-                                </div>
-                                <div class="mb-3">
-                                    <label for="">Phone No</label>
-                                    <input type="number" name="phone_no" id="phone_no" class="form-control"
-                                        placeholder="Enter the branch phone number" />
-                                </div>
-                                <div class="mb-3">
-                                    <label for="">Latitude</label>
-                                    <input type="text" name="latitude" id="latitude" class="form-control"
-                                        placeholder="Enter the branch latitude" />
-                                </div>
-                                <div class="mb-3">
-                                    <label for="">Longitude</label>
-                                    <input type="text" name="longitude" id="longitude" class="form-control"
-                                        placeholder="Enter the branch longitude" />
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                <button type="submit" class="btn btn-primary">Update Branch</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-
-            <!-- View Branch Modal -->
-            <div class="modal fade" id="branchViewModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">View Branch</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">View Complaint</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
                             <div class="mb-3">
-                                <label for="">Branch Name</label>
-                                <p id="view_branch_name" class="form-control"></p>
+                                <label for="">Date</label>
+                                <p id="view_date" class="form-control"></p>
                             </div>
                             <div class="mb-3">
-                                <label for="">Address</label>
-                                <p id="view_address" class="form-control"></p>
-                            </div>
-                            <div class="mb-3">
-                                <label for="">Phone No</label>
-                                <p id="view_phone_no" class="form-control"></p>
-                            </div>
-                            <div class="mb-3">
-                                <label for="">Latitude</label>
-                                <p id="view_latitude" class="form-control"></p>
-                            </div>
-                            <div class="mb-3">
-                                <label for="">Longitude</label>
-                                <p id="view_longitude" class="form-control"></p>
+                                <label for="">Description</label>
+                                <p id="view_description" class="form-control" style="height: 120px"></p>
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -665,69 +617,63 @@ a:hover {
             <!-- Table -->
             <div class="container p-4">
                 <div class="row">
-                    <div class="col-md-12">
-                        <div class="mb-4">
-                            <h4 class="text-center">Create a New Branch
-                                <button type="button" class="btn btn-primary float-end" data-bs-toggle="modal"
-                                    data-bs-target="#branchAddModal">
-                                    Add Branch
-                                </button>
+                    <div class="col-sm-12">
+                        <div class="mb-5">
+                            <h4 class="text-center">Make a Complaint
+
                             </h4>
                         </div>
-                        <table id="myTable" class="table">
-                            <thead>
-                                <tr class="text-center">
-                                    <th>Branch Name</th>
-                                    <th>Address</th>
-                                    <th>Phone No</th>
-                                    <th>Latitude</th>
-                                    <th>Longitude</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
+                        <div class="shadow-lg mb-5 bg-body-tertiary rounded">
+                            <table id="myTable" class="table borderless">
 
-                                $con = mysqli_connect("localhost","root","","customer_service_assistant");
+                                <tbody>
+                                    <?php
 
-                                if(!$con){
-                                    die('Connection Failed'. mysqli_connect_error());
-                                }
+                                    $con = mysqli_connect("localhost","root","","customer_service_assistant");
 
-                                $query = "SELECT * FROM branch";
-                                $query_run = mysqli_query($con, $query);
-
-                                if(mysqli_num_rows($query_run) > 0)
-                                {
-                                    foreach($query_run as $branch)
-                                    {
-                                        ?>
-                                <tr class="text-center">
-                                    <td><?= $branch['branch_name'] ?></td>
-                                    <td><?= $branch['address'] ?></td>
-                                    <td><?= $branch['phone_no'] ?></td>
-                                    <td><?= $branch['latitude'] ?></td>
-                                    <td><?= $branch['longitude'] ?></td>
-
-                                    <td>
-                                        <button type="button" value="<?=$branch['branch_id'];?>"
-                                            class="viewBranchBtn btn btn-info btn-sm"><i
-                                                class="fa-solid fa-eye fa-beat"></i></button>
-                                        <button type="button" value="<?=$branch['branch_id'];?>"
-                                            class="editBranchBtn btn btn-warning btn-sm"><i
-                                                class="fa-solid fa-pen-to-square fa-beat"></i></button>
-                                        <button type="button" value="<?=$branch['branch_id'];?>"
-                                            class="deleteBranchBtn btn btn-danger btn-sm"><i
-                                                class="fa-solid fa-trash fa-beat"></i></button>
-                                    </td>
-                                </tr>
-                                <?php
+                                    if(!$con){
+                                        die('Connection Failed'. mysqli_connect_error());
                                     }
-                                }
-                                ?>
 
-                            </tbody>
-                        </table>
+                                    $query = "SELECT * FROM complaint JOIN customer ON complaint.customer_id = customer.customer_id JOIN branch ON complaint.branch_id = branch.branch_id WHERE branch.branch_name = '$selectedBranchName' ORDER BY complaint.complaint_id DESC";
+                                    $query_run = mysqli_query($con, $query);
+
+                                    if(mysqli_num_rows($query_run) > 0)
+                                    {
+                                        foreach($query_run as $complaint)
+                                        {
+                                            ?>
+                                    <tr class="text-center">
+                                        <td>
+                                            <img src="<?php base_url() ?> assets\images\user-image\<?= $complaint['profile_picture'] ?>"
+                                                style="border-radius: 50%; width: 30px; height: 30px;">
+                                        </td>
+                                        <td><?= $complaint['name'] ?></td>
+                                        <td><?= $complaint['date'] ?></td>
+                                        <td>
+                                            <button type="button" value="<?=$complaint['complaint_id'];?>"
+                                                class="viewcomplaintBtn btn btn-info btn-sm"><i
+                                                    class="fa-solid fa-eye fa-beat"></i></button>
+
+                                        </td>
+
+
+                                    </tr>
+                                    <?php
+                                        }
+                                    }
+                                    ?>
+
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="mt-4">
+                            <button type="button" class="btn btn-primary float-end" data-bs-toggle="modal"
+                                data-bs-target="#complaintAddModal">
+                                Add Complaint
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -738,15 +684,15 @@ a:hover {
             <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 
             <script>
-            $(document).on('submit', '#saveBranch', function(e) {
+            $(document).on('submit', '#savecomplaint', function(e) {
                 e.preventDefault();
 
                 var formData = new FormData(this);
-                formData.append("save_branch", true);
+                formData.append("save_complaint", true);
 
                 $.ajax({
                     type: "POST",
-                    url: "<?php base_url() ?> assets/js/branch-code.php",
+                    url: "<?php base_url() ?> assets/js/complaint-code.php",
                     data: formData,
                     processData: false,
                     contentType: false,
@@ -760,8 +706,8 @@ a:hover {
                         } else if (res.status == 200) {
 
                             $('#errorMessage').addClass('d-none');
-                            $('#branchAddModal').modal('hide');
-                            $('#saveBranch')[0].reset();
+                            $('#complaintAddModal').modal('hide');
+                            $('#savecomplaint')[0].reset();
 
                             alertify.set('notifier', 'position', 'top-right');
                             alertify.success(res.message);
@@ -776,14 +722,13 @@ a:hover {
 
             });
 
-            $(document).on('click', '.editBranchBtn', function() {
+            $(document).on('click', '.viewcomplaintBtn', function() {
 
-                var branch_id = $(this).val();
-
+                var complaint_id = $(this).val();
                 $.ajax({
                     type: "GET",
-                    url: "<?php base_url() ?> assets/js/branch-code.php?branch_id=" +
-                        branch_id,
+                    url: "<?php base_url() ?> assets/js/complaint-code.php?complaint_id=" +
+                        complaint_id,
                     success: function(response) {
 
                         var res = jQuery.parseJSON(response);
@@ -792,114 +737,13 @@ a:hover {
                             alert(res.message);
                         } else if (res.status == 200) {
 
-                            $('#branch_id').val(res.data.branch_id);
-                            $('#branch_name').val(res.data.branch_name);
-                            $('#address').val(res.data.address);
-                            $('#phone_no').val(res.data.phone_no);
-                            $('#latitude').val(res.data.latitude);
-                            $('#longitude').val(res.data.longitude);
+                            $('#view_description').text(res.data.description);
+                            $('#view_date').text(res.data.date);
 
-                            $('#branchEditModal').modal('show');
-                        }
-
-                    }
-                });
-
-            });
-
-            $(document).on('submit', '#updateBranch', function(e) {
-                e.preventDefault();
-
-                var formData = new FormData(this);
-                formData.append("update_branch", true);
-
-                $.ajax({
-                    type: "POST",
-                    url: "<?php base_url() ?> assets/js/branch-code.php",
-                    data: formData,
-                    processData: false,
-                    contentType: false,
-                    success: function(response) {
-
-                        var res = jQuery.parseJSON(response);
-                        if (res.status == 422) {
-                            $('#errorMessageUpdate').removeClass('d-none');
-                            $('#errorMessageUpdate').text(res.message);
-
-                        } else if (res.status == 200) {
-
-                            $('#errorMessageUpdate').addClass('d-none');
-
-                            alertify.set('notifier', 'position', 'top-right');
-                            alertify.success(res.message);
-
-                            $('#branchEditModal').modal('hide');
-                            $('#updateBranch')[0].reset();
-
-                            $('#myTable').load(location.href + " #myTable");
-
-                        } else if (res.status == 500) {
-                            alert(res.message);
+                            $('#complaintViewModal').modal('show');
                         }
                     }
                 });
-
-            });
-
-            $(document).on('click', '.viewBranchBtn', function() {
-
-                var branch_id = $(this).val();
-                $.ajax({
-                    type: "GET",
-                    url: "<?php base_url() ?> assets/js/branch-code.php?branch_id=" +
-                        branch_id,
-                    success: function(response) {
-
-                        var res = jQuery.parseJSON(response);
-                        if (res.status == 404) {
-
-                            alert(res.message);
-                        } else if (res.status == 200) {
-
-                            $('#view_branch_name').text(res.data.branch_name);
-                            $('#view_address').text(res.data.address);
-                            $('#view_phone_no').text(res.data.phone_no);
-                            $('#view_latitude').text(res.data.latitude);
-                            $('#view_longitude').text(res.data.longitude);
-
-                            $('#branchViewModal').modal('show');
-                        }
-                    }
-                });
-            });
-
-            $(document).on('click', '.deleteBranchBtn', function(e) {
-                e.preventDefault();
-
-                if (confirm('Are you sure you want to delete this branch?')) {
-                    var branch_id = $(this).val();
-                    $.ajax({
-                        type: "POST",
-                        url: "<?php base_url() ?> assets/js/branch-code.php",
-                        data: {
-                            'delete_branch': true,
-                            'branch_id': branch_id
-                        },
-                        success: function(response) {
-
-                            var res = jQuery.parseJSON(response);
-                            if (res.status == 500) {
-
-                                alert(res.message);
-                            } else {
-                                alertify.set('notifier', 'position', 'top-right');
-                                alertify.success(res.message);
-
-                                $('#myTable').load(location.href + " #myTable");
-                            }
-                        }
-                    });
-                }
             });
             </script>
 
@@ -912,6 +756,240 @@ a:hover {
                     </div>
                 </div>
             </footer>
+
+            <!-- included the notification -->
+            <?php include(APPPATH . 'views/includes/notification-component.php'); ?>
+            <!-- included the cart -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Cart</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                                id="close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <table class="table" style="margin-bottom: 10px;">
+                                <thead>
+                                    <td>Item</td>
+                                    <td>Price</td>
+                                    <td>Quentity</td>
+                                    <td></td>
+                                    <td>Total</td>
+                                </thead>
+                                <tbody class="show-cart">
+
+                                </tbody>
+                            </table>
+                            <div>Total price: LKR<span class="total-cart"></span></div>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="clear-cart btn btn-danger">Clear Cart</button>
+                            <button type="button" class="btn btn-primary">Proceed</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <script>
+            // var myModal;
+            var myModal = new bootstrap.Modal(document.getElementById('exampleModal'));
+            document.getElementById('cartIcon').addEventListener('click', function() {
+                myModal.show();
+            });
+
+            document.getElementById('close').addEventListener('click', function() {
+                myModal.hide();
+            });
+            </script>
+
+            <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+
+            <script>
+            var shoppingCart = (function() {
+                cart = [];
+
+                function Item(name, price, count) {
+                    this.name = name;
+                    this.price = price;
+                    this.count = count;
+                }
+
+                function saveCart() {
+                    sessionStorage.setItem('shoppingCart', JSON.stringify(cart));
+                }
+
+                function loadCart() {
+                    cart = JSON.parse(sessionStorage.getItem('shoppingCart'));
+                }
+                if (sessionStorage.getItem("shoppingCart") != null) {
+                    loadCart();
+                }
+
+                var obj = {};
+
+                obj.addItemToCart = function(name, price, count) {
+                    for (var item in cart) {
+                        if (cart[item].name === name) {
+                            cart[item].count++;
+                            saveCart();
+                            return;
+                        }
+                    }
+                    var item = new Item(name, price, count);
+                    cart.push(item);
+                    saveCart();
+                }
+
+                obj.setCountForItem = function(name, count) {
+                    for (var i in cart) {
+                        if (cart[i].name === name) {
+                            cart[i].count = count;
+                            break;
+                        }
+                    }
+                };
+
+                obj.removeItemFromCart = function(name) {
+                    for (var item in cart) {
+                        if (cart[item].name === name) {
+                            cart[item].count--;
+                            if (cart[item].count === 0) {
+                                cart.splice(item, 1);
+                            }
+                            break;
+                        }
+                    }
+                    saveCart();
+                }
+
+                obj.removeItemFromCartAll = function(name) {
+                    for (var item in cart) {
+                        if (cart[item].name === name) {
+                            cart.splice(item, 1);
+                            break;
+                        }
+                    }
+                    saveCart();
+                }
+
+
+                obj.clearCart = function() {
+                    cart = [];
+                    saveCart();
+                }
+
+
+                obj.totalCount = function() {
+                    var totalCount = 0;
+                    for (var item in cart) {
+                        totalCount += cart[item].count;
+                    }
+                    return totalCount;
+                }
+
+
+                obj.totalCart = function() {
+                    var totalCart = 0;
+                    for (var item in cart) {
+                        totalCart += cart[item].price * cart[item].count;
+                    }
+                    return Number(totalCart.toFixed(2));
+                }
+
+
+                obj.listCart = function() {
+                    var cartCopy = [];
+                    for (i in cart) {
+                        item = cart[i];
+                        itemCopy = {};
+                        for (p in item) {
+                            itemCopy[p] = item[p];
+
+                        }
+                        itemCopy.total = Number(item.price * item.count).toFixed(2);
+                        cartCopy.push(itemCopy)
+                    }
+                    return cartCopy;
+                }
+                return obj;
+            })();
+
+
+            $('.add-to-cart').click(function(event) {
+                event.preventDefault();
+                var name = $(this).data('name');
+                var price = Number($(this).data('price'));
+                shoppingCart.addItemToCart(name, price, 1);
+                displayCart();
+            });
+
+
+            $('.clear-cart').click(function() {
+                shoppingCart.clearCart();
+                displayCart();
+            });
+
+
+            function displayCart() {
+                var cartArray = shoppingCart.listCart();
+                var output = "";
+                for (var i in cartArray) {
+                    output += "<tr class='custom-row'>" +
+                        "<td>" + cartArray[i].name + "</td>" +
+                        "<td>(" + cartArray[i].price + ")</td>" +
+                        "<td><div class='input-group' style='display: flex;'><button class='minus-item input-group-addon btn btn-primary' data-name=" +
+                        cartArray[i].name + ">-</button>" +
+                        "<input style='width: 80px;'type='number' class='item-count form-control' data-name='" +
+                        cartArray[i].name + "' value='" + cartArray[i].count + "'>" +
+                        "<button class='plus-item btn btn-primary input-group-addon' data-name=" + cartArray[i].name +
+                        ">+</button></div></td>" +
+                        "<td><button class='delete-item btn btn-danger' data-name=" + cartArray[i].name +
+                        ">X</button></td>" +
+                        " = " +
+                        "<td>" + cartArray[i].total + "</td>" +
+                        "</tr>";
+                }
+                $('.show-cart').html(output);
+                $('.total-cart').html(shoppingCart.totalCart());
+                $('.total-count').html(shoppingCart.totalCount());
+            }
+
+
+
+            $('.show-cart').on("click", ".delete-item", function(event) {
+                var name = $(this).data('name')
+                shoppingCart.removeItemFromCartAll(name);
+                displayCart();
+            })
+
+            $('.show-cart').on("click", ".minus-item", function(event) {
+                var name = $(this).data('name')
+                shoppingCart.removeItemFromCart(name);
+                displayCart();
+            })
+
+            $('.show-cart').on("click", ".plus-item", function(event) {
+                var name = $(this).data('name')
+                shoppingCart.addItemToCart(name);
+                displayCart();
+            })
+
+            $('.show-cart').on("change", ".item-count", function(event) {
+                var name = $(this).data('name');
+                var count = Number($(this).val());
+                shoppingCart.setCountForItem(name, count);
+                displayCart();
+            });
+
+            displayCart();
+            </script>
+
         </div>
 
 

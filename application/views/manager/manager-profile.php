@@ -1,8 +1,8 @@
 <!-- included the header -->
 <?php include(APPPATH . 'views/includes/header.php'); 
 
-// Add code to retrieve customer details from the database
-$user_id = 1; // Replace with the actual customer ID you want to display
+// Add code to retrieve user details from the database
+$user_id = 4; // Replace with the actual user ID you want to display
 
 // database conection credentials 
 $DBhost = "localhost";
@@ -514,15 +514,7 @@ a:hover {
     text-decoration: none;
 }
 
-
-.profile-img {
-    height: 150px;
-    width: 150px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 3px solid white;
-    background: white;
-}
+/* Profile */
 
 .file-input-label {
     display: none;
@@ -541,16 +533,21 @@ a:hover {
     background-color: white;
     box-shadow: 2px 4px 4px rgb(0, 0, 0, 0.644);
 }
+
+.fa-shopping-basket {
+
+    display: none;
+}
 </style>
 
 <body id="page-top">
     <!-- included the navbar -->
-    <?php include(APPPATH . 'views/includes/navbar.php'); ?>
+    <?php include(APPPATH . 'views/includes/manager_navbar.php'); ?>
 
     <div id="wrapper">
 
         <!-- included the menu -->
-        <?php include(APPPATH . 'views/includes/menu.php'); ?>
+        <?php include(APPPATH . 'views/includes/manager_menu.php'); ?>
 
 
         <!-- Code of Profile page  -->
@@ -566,7 +563,7 @@ a:hover {
                                 $pdo = new PDO("mysql:host=$DBhost;dbname=$DBname", "$DBusername", "$DBpassword");
 
                                 // Prepare an SQL SELECT statement to retrieve customer details
-                                $stmt = $pdo->prepare("SELECT name, email, gender, phoneNo, address, password, profile_image FROM user WHERE user_id = ?");
+                                $stmt = $pdo->prepare("SELECT name, email, gender, phoneNo, address, password FROM user WHERE user_id = ?");
                                 $stmt->execute([$user_id]);
 
                                 // Fetch the customer details
@@ -579,7 +576,7 @@ a:hover {
                                 $phoneNo = $customerDetails['phoneNo'];
                                 $address = $customerDetails['address'];
                                 $password = $customerDetails['password'];
-                                $profile_image = $customerDetails['profile_image'];
+                                
                             } catch (PDOException $e) {
                                 echo "Error: " . $e->getMessage();
                             }
@@ -587,25 +584,7 @@ a:hover {
 
                         <form action="#" autocomplete="off" method="post" enctype="multipart/form-data">
                             <div class="row z-depth-3">
-                                <div class="col-sm-4 bg-primary rounded-left">
-                                    <div class="card-block text-center text-white mt-5">
-                                        <img id="profilePic"
-                                            src="<?php base_url() ?> assets\images\user-image\<?php echo $profile_image; ?>"
-                                            class="profile-img mt-5">
-                                        <!-- A button that triggers the file input -->
-                                        <button type="button" id="uploadBtn" class="file-input-button"
-                                            onclick="document.getElementById('fileInput').click()">
-                                            <i class="fa-solid fa-camera"></i>
-                                        </button>
-                                        <h3 class="font-weight-bold mt-4"><?php echo $name; ?></h3>
-                                        <p><?php echo $email; ?></p>
-                                        <!-- Hidden file input text -->
-                                        <label class="file-input-label" for="fileInput">Choose a file:</label>
-                                        <!-- Actual file input -->
-                                        <input type="file" id="fileInput" name="image" style="display: none;">
-                                    </div>
-                                </div>
-                                <div class="col-sm-8 bg-white rounded-right">
+                                <div class="col-sm-12 bg-white rounded-right">
                                     <h3 class="mt-3 text-center text-primary">Profile Settings</h3>
                                     <hr class="badge-primary mt-0 w-22">
 
@@ -663,8 +642,8 @@ a:hover {
                                                 value="<?php echo $phoneNo; ?>" placeholder="Your Phone No">
                                         </div>
                                     </div>
-                                    <div class="row justify-content-center">
-                                        <div class="col-sm-11 mt-0 m-4">
+                                    <div class="row justify-content-center mt-0 m-4">
+                                        <div class="col-sm-11">
                                             <p class="text-center mb-2 text-muted">Address</p>
                                             <input type="text" class="form-control" id="address" name="address"
                                                 value="<?php echo $address; ?>" placeholder="Your Address">
@@ -765,82 +744,34 @@ a:hover {
                     $confirmPW = $_POST['confirmPW'];
 
                     if($password == $confirmPW){ 
-                        // Check if a new image is uploaded
-                        if (!empty($_FILES['image']['name'])) {
-                            $profile_image = time() . '_' . $_FILES['image']['name'];
-                            $target = 'assets/images/user-image/' . $profile_image;
-    
-                            // Image validation
-                            $validImageExtension = ['jpg', 'jpeg', 'png'];
-                            $imageExtension = explode('.', $_FILES['image']['name']);
-                            $imageExtension = strtolower(end($imageExtension));
-    
-                            if (in_array($imageExtension, $validImageExtension)) {
-                                if (move_uploaded_file($_FILES['image']['tmp_name'], $target)) {
-                                    try {
-                                        // Create a PDO connection to your database
-                                        $pdo = new PDO("mysql:host=$DBhost;dbname=$DBname", "$DBusername", "$DBpassword");
-                                
-                                        // Prepare an SQL UPDATE statement
-                                        $stmt = $pdo->prepare("UPDATE user SET name = ?, email = ?, gender = ?, phoneNo = ?, address = ?, password = ?, profile_image = ? WHERE user_id = ?");
-                                
-                                        // Bind parameters and execute the query
-                                        $stmt->execute([$name, $email, $gender, $phoneNo, $address, $password, $profile_image, $user_id]);
-                                
-                                        // Check for successful update
-                                        if ($stmt->rowCount() > 0) {
-                                            $successMessage = "Account details updated successfully!!!";
-                                            header("Location: profile");
-                                            exit();
-                
-                                        } else {
-                                            $errorMessage = "Failed to update account details!!!";
-                                        }
-                                    } catch (PDOException $e) {
-                                        $errorMessage = "Error: " . $e->getMessage();
-                                    }
-        
-                                } else {
-                                    $errorMessage = "Failed to upload your image!!!";
-                                }
+                        try {
+                            // Create a PDO connection to your database
+                            $pdo = new PDO("mysql:host=$DBhost;dbname=$DBname", "$DBusername", "$DBpassword");
+                    
+                            // Prepare an SQL UPDATE statement
+                            $stmt = $pdo->prepare("UPDATE user SET name = ?, email = ?, gender = ?, phoneNo = ?, address = ?, password = ? WHERE user_id = ?");
+                    
+                            // Bind parameters and execute the query
+                            $stmt->execute([$name, $email, $gender, $phoneNo, $address, $password, $user_id]);
+                    
+                            // Check for successful update
+                            if ($stmt->rowCount() > 0) {
+                                $successMessage = "Account details updated successfully!!!";
+                                header("Location: ManagerProfile");
+                                exit();
     
                             } else {
-                                $errorMessage = "Invalid image extension!!!";
+                                $errorMessage = "Failed to update account details!!!";
                             }
-    
-                        } else {
-                            // Update user without image or existing image
-                            $profile_image = $customerDetails['profile_image'];
-                                
-                            try {
-                                // Create a PDO connection to your database
-                                $pdo = new PDO("mysql:host=$DBhost;dbname=$DBname", "$DBusername", "$DBpassword");
-                        
-                                // Prepare an SQL UPDATE statement
-                                $stmt = $pdo->prepare("UPDATE user SET name = ?, email = ?, gender = ?, phoneNo = ?, address = ?, password = ?, profile_image = ? WHERE user_id = ?");
-                        
-                                // Bind parameters and execute the query
-                                $stmt->execute([$name, $email, $gender, $phoneNo, $address, $password, $profile_image, $user_id]);
-                        
-                                // Check for successful update
-                                if ($stmt->rowCount() > 0) {
-                                    $successMessage = "Account details updated successfully!!!";
-                                    header("Location: profile");
-                                    exit();
-        
-                                } else {
-                                    $errorMessage = "Failed to update account details!!!";
-                                }
-                            } catch (PDOException $e) {
-                                $errorMessage = "Error: " . $e->getMessage();
-                            }    
+                        } catch (PDOException $e) {
+                            $errorMessage = "Error: " . $e->getMessage();
+                        }  
                              
-                        }
-
-                    } else {
+                    }
+                    else {
                         $errorMessage = "Passwords are not match, try again!!!";
                     } 
-                }            
+                }           
  
             ?>
 
@@ -872,26 +803,8 @@ a:hover {
             <?php endif; ?>
 
 
-
-
-            <script>
-            // Add an event listener to the file input
-            const image = document.getElementById("profilePic");
-            const input = document.getElementById("fileInput");
-
-            input.addEventListener("change", () => {
-                image.src = URL.createObjectURL(input.files[0]);
-            })
-            </script>
-
-
             <!-- included the footer -->
             <?php include(APPPATH . 'views/includes/footer.php'); ?>
-            <!-- included the notification -->
-            <?php include(APPPATH . 'views/includes/notification-component.php'); ?>
-            <!-- included the cart -->
-            <?php include(APPPATH . 'views/includes/cart-component.php'); ?>
-
 
             <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
             <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
@@ -949,6 +862,9 @@ a:hover {
                 });
             }(jQuery);
             </script>
+
+
+
 </body>
 
 </html>
